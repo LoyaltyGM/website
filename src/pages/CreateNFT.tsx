@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Layout, {
     BackButton,
     Button,
@@ -9,8 +9,6 @@ import Layout, {
     InputText,
     InputTextArea,
 } from "components";
-// import { Signer } from "ethers";
-// import { useSigner, useSwitchNetwork } from "wagmi";
 import { NextPage } from "next";
 import { ICreateNFT } from "types";
 import {
@@ -23,6 +21,7 @@ import {
     validateForm,
 } from "utils";
 import { useDialogState } from "ariakit";
+import { ethos } from "ethos-connect";
 
 import { useCounter } from "usehooks-ts";
 import ASSETS from "assets";
@@ -37,9 +36,42 @@ const CreateNFT: NextPage = () => {
         ipfsAddress: "",
         numberOfNFT: null,
     });
+    const contractAddress = "0x0000000000000000000000000000000000000002";
+
+    const { wallet } = ethos.useWallet();
+    const [nftObjectId, setNftObjectId] = useState(null);
 
     const confirmDialog = useDialogState();
     const { count: activeStep, increment: incrementActiveStep, reset: resetActiveStep } = useCounter(0);
+
+    const mint = useCallback(
+        async (name: String, desciprtion: String, urlLink: String) => {
+            if (!wallet) return;
+
+            try {
+                const signableTransaction = {
+                    kind: "moveCall" as const,
+                    data: {
+                        packageObjectId: contractAddress,
+                        module: "devnet_nft",
+                        function: "mint",
+                        typeArguments: [],
+                        arguments: [name, desciprtion, urlLink],
+                        gasBudget: 10000,
+                    },
+                };
+
+                const response = await wallet.signAndExecuteTransaction(signableTransaction);
+                if (response?.effects?.events) {
+                    const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
+                    setNftObjectId(moveEvent.fields.object_id);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        [wallet]
+    );
 
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -58,18 +90,8 @@ const CreateNFT: NextPage = () => {
             console.log("path " + path);
             handleChangeBasic(path, setFormData, "ipfsAddress");
 
-            // const contract = await deployNFTContract(signerData as Signer, {
-            //     name: formData.name,
-            //     symbol: formData.symbol,
-            //     baseURI: path,
-            //     price: formData.price ? formData.price.toString() : "0",
-            //     layerzeroEndpoint: endpoint,
-            //     //todo: need to calculate when few blockchains
-            //     startMintId: 0,
-            //     endMintId: calculateSupply(),
-            // });
             incrementActiveStep();
-
+            mint(formData.name, formData.description, path);
             incrementActiveStep();
             incrementActiveStep();
             // handleChangeBasic(contract.address, setFormData, "contractAddress");
@@ -140,6 +162,7 @@ const CreateNFT: NextPage = () => {
                             />
                         </div>
                         <Button className="mt-5 w-2/3 self-center">Create Contract</Button>
+                        <div>NFT Object ID: {nftObjectId}</div>
                     </form>
                 </section>
 
