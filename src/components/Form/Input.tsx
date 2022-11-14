@@ -135,9 +135,6 @@ export const InputSupplyOfNFT = ({
 }: InputAmountProps) => {
     return (
         <div className={classNames(className, "form-control w-full max-w-xs")}>
-            <label className="label">
-                <span className="input-label">{label}</span>
-            </label>
             <div className="relative flex">
                 <input
                     className={"input-field w-full mb-0"}

@@ -14,7 +14,7 @@ export const CreateNftDialog = ({ dialog, formData, activeStep }: ICreateNftDial
             </div>
             <Link
                 href={{
-                    pathname: "create-dao",
+                    pathname: "ShowNFT",
                     query: {
                         tokenAddress: formData.contractAddress,
                         enabledBlockchains: "",
@@ -27,7 +27,7 @@ export const CreateNftDialog = ({ dialog, formData, activeStep }: ICreateNftDial
                         dialog.toggle();
                     }}
                 >
-                    Go to DAO creation page
+                    Show my NFT-loyalty card
                 </button>
             </Link>
         </StepperDialog>

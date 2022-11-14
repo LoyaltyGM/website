@@ -9,9 +9,8 @@ export interface ICreateNFT extends ICreate {
     governorUrl?: string;
     file: object;
     symbol: string;
-    blockchain: string;
     governorAddress?: string;
-    // numberOfNFT: { [blockchainName: string]: number };
+    numberOfNFT: number;
     contractAddress?: string;
     ipfsAddress?: string;
 }

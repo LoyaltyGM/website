@@ -25,6 +25,7 @@ import {
 import { useDialogState } from "ariakit";
 
 import { useCounter } from "usehooks-ts";
+import ASSETS from "assets";
 
 const CreateNFT: NextPage = () => {
     const [formData, setFormData] = useState<ICreateNFT>({
@@ -34,7 +35,7 @@ const CreateNFT: NextPage = () => {
         symbol: "",
         contractAddress: "",
         ipfsAddress: "",
-        blockchain: "",
+        numberOfNFT: null,
     });
 
     const confirmDialog = useDialogState();
@@ -43,7 +44,7 @@ const CreateNFT: NextPage = () => {
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        if (!validateForm(formData, ["ipfsAddress", "contractAddress", "price"])) {
+        if (!validateForm(formData, ["ipfsAddress", "contractAddress"])) {
             return;
         }
 
@@ -78,6 +79,8 @@ const CreateNFT: NextPage = () => {
         }
     }
 
+    const chain = "1";
+
     return (
         <div>
             <Layout className="layout-base">
@@ -101,18 +104,15 @@ const CreateNFT: NextPage = () => {
                                     maxLength={2000}
                                     handleChange={(event) => handleTextChange(event, setFormData)}
                                 />
-                                <div className="grid grid-cols-2 gap-10">
-                                    <InputText
-                                        label="Symbol"
-                                        name="symbol"
-                                        placeholder="Short NFT name"
-                                        className={"max-w-sm"}
-                                        handleChange={(event) => {
-                                            handleTextChange(event, setFormData);
-                                        }}
-                                        // className="w-1/2"
-                                    />
-                                </div>
+                                <InputText
+                                    label="Symbol"
+                                    name="symbol"
+                                    placeholder="Short NFT name"
+                                    className={"w-full"}
+                                    handleChange={(event) => {
+                                        handleTextChange(event, setFormData);
+                                    }}
+                                />
                             </div>
                             <div className={"flex"}>
                                 <div className="divider divider-horizontal" />
@@ -128,17 +128,16 @@ const CreateNFT: NextPage = () => {
                         <label className="label">
                             <span className="input-label">NFT Supply</span>
                         </label>
-                        <div className="grid w-full grid-cols-3 gap-4">
-                            {/* <InputSupplyOfNFT
+                        <div className="w-full">
+                            <InputSupplyOfNFT
                                 key={chain}
                                 label={chain}
-                                name={chain}
-                                image={getLogoURI(chain)}
+                                name="numberOfNFT"
+                                image={ASSETS.defaultToken}
                                 handleChange={(event) => {
-                                    handleNftSupplyChange(event, setFormData, chain, "blockchain");
+                                    handleTextChange(event, setFormData);
                                 }}
-                                isDisabled={chain !== formData.blockchain && formData.blockchain !== ""}
-                            /> */}
+                            />
                         </div>
                         <Button className="mt-5 w-2/3 self-center">Create Contract</Button>
                     </form>
