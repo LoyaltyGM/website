@@ -1,0 +1,63 @@
+{
+  "name": "loyaltygm",
+  "version": "0.1.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@heroicons/react": "^2.0.12",
+    "@next/bundle-analyzer": "^12.3.1",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/line-clamp": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.7",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-router": "^5.1.19",
+    "ariakit": "^2.0.0-next.41",
+    "autoprefixer": "^10.4.12",
+    "classnames": "^2.3.2",
+    "daisyui": "^2.31.0",
+    "eslint": "^8.25.0",
+    "esm": "^3.2.25",
+    "firebase": "^9.12.1",
+    "heroicons": "^2.0.12",
+    "ipfs-http-client": "^58.0.1",
+    "lodash.merge": "^4.6.2",
+    "next": "^12.3.1",
+    "node-fetch": "^3.2.10",
+    "postcss": "^8.4.17",
+    "prettier": "^2.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-drag-drop-files": "^2.3.7",
+    "react-hot-toast": "^2.4.0",
+    "react-query": "^3.39.2",
+    "react-scripts": "^5.0.1",
+    "react-spinners": "^0.13.6",
+    "tailwindcss": "^3.1.8",
+    "typescript": "^4.8.4",
+    "usehooks-ts": "^2.9.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
