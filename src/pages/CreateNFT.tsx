@@ -10,6 +10,7 @@ import Layout, {
     InputTextArea,
 } from "components";
 import { NextPage } from "next";
+import { JsonRpcProvider, Network } from "@mysten/sui.js";
 import { ICreateNFT } from "types";
 import {
     handleChangeBasic,
@@ -36,35 +37,73 @@ const CreateNFT: NextPage = () => {
         ipfsAddress: "",
         numberOfNFT: null,
     });
-    const contractAddress = "0x0000000000000000000000000000000000000002";
 
+    const contractLoyaltyAddress = "0x19b6899300823149a5f4916d6ec00418f91f4302";
+    // connect to local RPC server
+    const provider = new JsonRpcProvider(Network.DEVNET);
     const { wallet } = ethos.useWallet();
     const [nftObjectId, setNftObjectId] = useState(null);
+    const [collectionName, setCollectionName] = useState(null);
 
     const confirmDialog = useDialogState();
     const { count: activeStep, increment: incrementActiveStep, reset: resetActiveStep } = useCounter(0);
 
-    const mint = useCallback(
-        async (name: String, desciprtion: String, urlLink: String) => {
+    const createCollection = useCallback(
+        async (name: String, desciprtion: String, urlLink: String, maxSupply: Number) => {
             if (!wallet) return;
 
             try {
                 const signableTransaction = {
                     kind: "moveCall" as const,
                     data: {
-                        packageObjectId: contractAddress,
-                        module: "devnet_nft",
-                        function: "mint",
+                        packageObjectId: contractLoyaltyAddress,
+                        module: "loyalty_nft",
+                        function: "create_loyalty_system",
                         typeArguments: [],
-                        arguments: [name, desciprtion, urlLink],
+                        arguments: [name, desciprtion, urlLink, maxSupply],
                         gasBudget: 10000,
                     },
                 };
 
                 const response = await wallet.signAndExecuteTransaction(signableTransaction);
+                //setNftObjectId(response.effects.created[1].reference.objectId);
                 if (response?.effects?.events) {
                     const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
                     setNftObjectId(moveEvent.fields.object_id);
+                    handleChangeBasic(moveEvent.fields.object_id, setFormData, "contractAddress");
+                    return moveEvent.fields.object_id;
+                }
+                return "";
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        [wallet]
+    );
+
+    const mintButton = useCallback(
+        async (collectionObjectID: String) => {
+            if (!wallet) return;
+
+            try {
+                const signableTransaction = {
+                    kind: "moveCall" as const,
+                    data: {
+                        packageObjectId: contractLoyaltyAddress,
+                        module: "loyalty_nft",
+                        function: "mint",
+                        typeArguments: [],
+                        arguments: [collectionObjectID],
+                        gasBudget: 10000,
+                    },
+                };
+
+                const response = await wallet.signAndExecuteTransaction(signableTransaction);
+                console.log(response);
+
+                if (response?.effects?.events) {
+                    const { newObject } = response.effects.events.find((e) => e.newObject);
+                    console.log("Object NFT", newObject.objectId);
                 }
             } catch (error) {
                 console.log(error);
@@ -89,12 +128,15 @@ const CreateNFT: NextPage = () => {
             const path = await storeNFT(formData.file as File);
             console.log("path " + path);
             handleChangeBasic(path, setFormData, "ipfsAddress");
+            console.log(formData.name, formData.description, path, formData.numberOfNFT);
+            incrementActiveStep();
+            const objectID = await createCollection(formData.name, formData.description, path, formData.numberOfNFT);
+            console.log("OBJECT ID", objectID);
+            incrementActiveStep();
 
+            const tx = await provider.getObject(String(objectID));
+            setCollectionName(tx.details!.data.fields.name);
             incrementActiveStep();
-            mint(formData.name, formData.description, path);
-            incrementActiveStep();
-            incrementActiveStep();
-            // handleChangeBasic(contract.address, setFormData, "contractAddress");
         } catch (error) {
             handleContractError(error, { dialog: confirmDialog });
             resetActiveStep();
@@ -163,8 +205,16 @@ const CreateNFT: NextPage = () => {
                         </div>
                         <Button className="mt-5 w-2/3 self-center">Create Contract</Button>
                         <div>NFT Object ID: {nftObjectId}</div>
+                        <div>Collection Name: {collectionName}</div>
                     </form>
                 </section>
+                <Button
+                    className="mt-5 w-2/3 bg-purple-500 self-center"
+                    type="button"
+                    onClick={() => mintButton(nftObjectId)}
+                >
+                    Mint Button
+                </Button>
 
                 <CreateNftDialog formData={formData} activeStep={activeStep} dialog={confirmDialog} />
             </Layout>
