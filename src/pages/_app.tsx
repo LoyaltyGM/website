@@ -6,6 +6,7 @@ import { AppProps } from "next/app";
 import "styles/globals.css";
 import { useBoolean, useDarkMode } from "usehooks-ts";
 import { DARK_THEME, LIGHT_THEME } from "utils";
+import { EthosConnectProvider } from "ethos-connect";
 
 function App({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(() => new QueryClient());
@@ -33,10 +34,15 @@ function App({ Component, pageProps }: AppProps) {
                     });
                 `}
             </Script>
-
-            <QueryClientProvider client={queryClient}>
-                <Component {...pageProps} />
-            </QueryClientProvider>
+            <EthosConnectProvider
+                ethosConfiguration={{
+                    hideEmailSignIn: true, // defaults to false
+                }}
+            >
+                <QueryClientProvider client={queryClient}>
+                    <Component {...pageProps} />
+                </QueryClientProvider>
+            </EthosConnectProvider>
 
             <CustomToast />
         </div>
