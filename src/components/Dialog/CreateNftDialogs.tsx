@@ -12,7 +12,7 @@ export const CreateNftDialog = ({ dialog, formData, activeStep }: ICreateNftDial
                 <div className={"mr-4"}>Contract Address:</div>
                 <CopyTextButton copyText={formData.contractAddress} />
             </div>
-            <Link
+            {/* <Link
                 href={{
                     pathname: "ShowNFT",
                     query: {
@@ -20,16 +20,16 @@ export const CreateNftDialog = ({ dialog, formData, activeStep }: ICreateNftDial
                         enabledBlockchains: "",
                     },
                 }}
+            > */}
+            <button
+                className="dialog-button"
+                onClick={() => {
+                    dialog.toggle();
+                }}
             >
-                <button
-                    className="dialog-button"
-                    onClick={() => {
-                        dialog.toggle();
-                    }}
-                >
-                    Show my NFT-loyalty card
-                </button>
-            </Link>
+                Show my NFT-loyalty card
+            </button>
+            {/* </Link> */}
         </StepperDialog>
     );
 };
