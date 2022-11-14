@@ -1,0 +1,193 @@
+@import url("https://rsms.me/inter/inter.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        font-family: "Inter", sans-serif;
+    }
+
+    html,
+    body {
+        @apply bg-base-100 text-base-content h-full;
+    }
+
+    .font-exo {
+        font-family: "Exo 2", sans-serif;
+    }
+
+    #__next {
+        @apply isolate flex min-h-full flex-col slashed-zero;
+    }
+}
+
+@layer components {
+    /* MAIN COMPONETS */
+    .app-section {
+        @apply px-2 md:px-[30px] lg:px-[60px] xl:px-[120px];
+    }
+
+    .app-section > * {
+        @apply mx-auto w-full max-w-7xl;
+    }
+
+    .layout-base {
+        @apply app-section mx-auto mt-14 flex w-full flex-col items-center space-y-6 pb-8 bg-base-100;
+    }
+
+    .header {
+        @apply flex top-0 z-50 fixed w-full rounded-b-2xl items-center justify-between gap-10 text-base-content backdrop-blur-md;
+        padding-inline: clamp(0.5rem, 2.5vw, 2rem);
+        padding-block: clamp(1rem, 2.5vh, 2rem);
+    }
+
+    .shadow-1 {
+        @apply shadow-[0px_3px_7px_rgba(0,0,0,0.12)];
+    }
+
+    .shadow-2 {
+        @apply shadow-[0px_0px_9px_-2px_rgba(0,0,0,0.16)];
+    }
+
+    .nav-button {
+        @apply rounded-full border py-2 px-4 font-medium btn-primary;
+    }
+
+    /* BADGE */
+    .badge-active {
+        @apply font-normal text-sm bg-success text-white rounded-full mr-4 px-[4.0erm] py-1;
+    }
+
+    .badge-non-active {
+        @apply font-normal text-sm bg-base-200 text-white rounded-full mr-4 px-[4.0erm] py-1;
+    }
+
+    /* BUTTONS */
+    .main-button {
+        @apply btn btn-primary flex items-center gap-2 whitespace-nowrap font-medium h-10 rounded-full py-2 px-8 text-sm normal-case text-white disabled:bg-base-300;
+    }
+
+    .secondary-button {
+        @apply btn btn-ghost border-primary normal-case rounded-full border-2 hover:bg-primary hover:text-white;
+    }
+
+    .dialog-button {
+        @apply btn btn-primary text-white rounded-full py-2 px-6 font-normal;
+    }
+
+    .badge-button {
+        @apply flex text-base px-[16px] py-[6px] h-[32px] bg-base-200 gap-1 rounded-full;
+    }
+
+    .social-button {
+        @apply bg-base-200 rounded-full h-9 w-9 grid place-items-center;
+    }
+
+    .view-all-button {
+        @apply flex gap-2 btn-link text-gray-500 mt-8 hover:text-primary;
+    }
+
+    /* DIALOGS */
+    .dialog {
+        @apply shadow-2 absolute top-8 bottom-8 z-50 m-auto mt-auto flex h-fit max-h-[80vh] max-w-lg flex-col overflow-auto rounded-2xl border border-base-200 bg-base-100 sm:left-8 sm:right-8;
+    }
+
+    [data-backdrop] {
+        background-color: rgb(0 0 0 / 80%);
+    }
+
+    /* TEXT */
+    .text-highlighter {
+        @apply font-normal my-2 lg:text-5xl text-3xl text-base-content;
+    }
+
+    .input-label {
+        @apply label-text text-base;
+    }
+
+    .dao-label {
+        @apply font-normal text-base-content lg:text-5xl md:text-4xl text-2xl;
+    }
+
+    /* NFT CARDS */
+    .nft-cards-grid {
+        @apply place-items-center mt-8 gap-5 grid md:grid-cols-2 lg:grid-cols-3;
+    }
+
+    .nft-card {
+        @apply flex flex-col overflow-hidden w-72 rounded-lg border border-base-200;
+    }
+
+    .nft-card-mockup {
+        @apply border-solid shadow-1 border-base-200 border-2 lg:w-1/4 w-1/2 rounded-md;
+    }
+
+    /* INPUTS */
+    .input-selector {
+        @apply w-full rounded border-2 bg-base-200 border-base-200 px-3 py-[7px] slashed-zero outline-none placeholder:text-sm placeholder:text-base-content/20;
+    }
+
+    .input-field {
+        @apply input bg-base-200 mb-4 placeholder:text-base-content/50;
+    }
+
+    .checkbox-field {
+        @apply flex h-12 w-48 cursor-pointer items-center justify-center gap-1 bg-base-200 rounded px-4 hover:bg-primary-focus hover:text-base-100;
+    }
+
+    .checkbox-field:checked,
+    .checkbox-field[checked="true"],
+    .checkbox-field[aria-checked="true"] {
+        @apply bg-primary text-base-100;
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -1000px 0;
+        }
+        100% {
+            background-position: 1000px 0;
+        }
+    }
+}
+
+/* BUTTON ANIMATION */
+
+.btn-gradient {
+    background: linear-gradient(-45deg, #a143df, #7343df, #4374df, #4399df);
+    background-size: 600%;
+    animation: anime 6s linear infinite;
+}
+
+@keyframes anime {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+/* Web3AUTH in rainbowkit max z-index: 2147483646 */
+#w3a-modal {
+    z-index: 2147483647;
+}
+
+/* RainbowKit Wallet */
+/* [data-rk] .iekbcc0 {
+    z-index: 50;
+} */
+
+@layer utilities {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}

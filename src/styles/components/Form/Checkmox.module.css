@@ -1,0 +1,36 @@
+.checkbox {
+    display: flex;
+    height: 3rem;
+    width: 13rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    color: #aaaaaa;
+    background: #f2f4f4;
+    border-radius: 0.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.checkbox:hover {
+    background-color: #7343df;
+    color: #ffffff;
+}
+
+.checkbox[aria-disabled="true"] {
+    opacity: 0.5;
+    background-color: #f2f3f4;
+    cursor: not-allowed;
+}
+
+.checkbox[aria-checked="true"] {
+    background-color: #7343df;
+    color: white;
+}
+
+.checkbox:hover[aria-checked="true"] {
+    background-color: #7343df;
+}
