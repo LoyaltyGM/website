@@ -1,5 +1,7 @@
-<h1 align="center"> LoyaltyGM.com (ex. [NewConnection.xyz](https://github.com/New-Connection/newconnection-web) ) </h1>
+<h1 align="center">LoyaltyGM.com</h1>
+
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-<h3 align="center"> NFT loyalty reward program for web3 </h3>  
 
+LoyaltyGM - We're NFT loyalty reward platfrom for web3
+(ex. [NewConnection.xyz](https://github.com/New-Connection/))
