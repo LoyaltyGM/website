@@ -31,7 +31,7 @@ const Navbar = () => {
                         </div>
                     ) : (
                         // status is EthosConnectStatus.Connected
-                        <div>Wallet connected {wallet.address}</div>
+                        <div>{wallet.address}</div>
                     )}
                 </>
                 <label className="swap swap-rotate text-xs text-neutral">

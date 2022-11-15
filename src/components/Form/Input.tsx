@@ -134,7 +134,7 @@ export const InputSupplyOfNFT = ({
     ...props
 }: InputAmountProps) => {
     return (
-        <div className={classNames(className, "form-control w-full max-w-xs")}>
+        <div className={classNames(className, "form-control w-full")}>
             <div className="relative flex">
                 <input
                     className={"input-field w-full mb-0"}
@@ -151,7 +151,7 @@ export const InputSupplyOfNFT = ({
                     inputMode="decimal"
                     title="Enter numbers only."
                     min={min === 0 ? 0 : min || 1}
-                    max={max || 100} //Max number of NFT
+                    max={max || 100000} //Max number of NFT
                     step={step || 1}
                     disabled={isDisabled}
                     onChange={handleChange}
