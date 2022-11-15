@@ -150,22 +150,22 @@ const CreateNFT: NextPage = () => {
             <Layout className="layout-base">
                 <section className="relative w-full">
                     <form className="mx-auto flex max-w-4xl flex-col gap-4" onSubmit={onSubmit}>
-                        <h1 className="text-highlighter">Add NFT</h1>
+                        <h1 className="text-highlighter">Create NFT Loyalty Reward Collection</h1>
                         <div className={"grid grid-cols-2"}>
                             <div className={"grid grid-flow-row"}>
                                 <InputText
                                     label="Name"
                                     name="name"
                                     className={"max-w-2xl"}
-                                    placeholder="NFT Name"
+                                    placeholder="Collection Name"
                                     handleChange={(event) => handleTextChange(event, setFormData)}
                                 />
                                 <InputTextArea
                                     label="Description"
                                     name="description"
                                     className={"max-w-2xl"}
-                                    placeholder="A short description about NFT collection(Max. 250 words)"
-                                    maxLength={2000}
+                                    placeholder="A short description(Max. 250 characters or less)"
+                                    maxLength={250}
                                     handleChange={(event) => handleTextChange(event, setFormData)}
                                 />
                                 <InputText
@@ -177,11 +177,25 @@ const CreateNFT: NextPage = () => {
                                         handleTextChange(event, setFormData);
                                     }}
                                 />
+                                <label className="label">
+                                    <span className="input-label">Collection Supply</span>
+                                </label>
+                                <div className="w-full">
+                                    <InputSupplyOfNFT
+                                        key={chain}
+                                        label={chain}
+                                        name="numberOfNFT"
+                                        image={ASSETS.defaultToken}
+                                        handleChange={(event) => {
+                                            handleTextChange(event, setFormData);
+                                        }}
+                                    />
+                                </div>
                             </div>
                             <div className={"flex"}>
                                 <div className="divider divider-horizontal" />
                                 <DragAndDropImage
-                                    height={"h-full"}
+                                    height={"h-full w-3/4"}
                                     label="Image"
                                     name="file"
                                     handleChange={(file) => handleImageChange(file, setFormData, "file")}
@@ -189,20 +203,6 @@ const CreateNFT: NextPage = () => {
                             </div>
                         </div>
 
-                        <label className="label">
-                            <span className="input-label">NFT Supply</span>
-                        </label>
-                        <div className="w-full">
-                            <InputSupplyOfNFT
-                                key={chain}
-                                label={chain}
-                                name="numberOfNFT"
-                                image={ASSETS.defaultToken}
-                                handleChange={(event) => {
-                                    handleTextChange(event, setFormData);
-                                }}
-                            />
-                        </div>
                         <Button className="mt-5 w-2/3 self-center">Create Contract</Button>
                         <div>NFT Object ID: {nftObjectId}</div>
                         <div>Collection Name: {collectionName}</div>
