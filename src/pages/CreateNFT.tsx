@@ -1,10 +1,8 @@
 import React, { useState, useCallback } from "react";
 import Layout, {
-    BackButton,
     Button,
     CreateNftDialog,
     DragAndDropImage,
-    InputAmount,
     InputSupplyOfNFT,
     InputText,
     InputTextArea,
@@ -16,14 +14,12 @@ import {
     handleChangeBasic,
     handleContractError,
     handleImageChange,
-    handleNftSupplyChange,
     handleTextChange,
     storeNFT,
     validateForm,
 } from "utils";
 import { useDialogState } from "ariakit";
 import { ethos } from "ethos-connect";
-
 import { useCounter } from "usehooks-ts";
 import ASSETS from "assets";
 
