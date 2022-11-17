@@ -23,7 +23,8 @@ const Navbar = () => {
             <div className={"flex gap-3"}>
                 <>
                     {status === EthosConnectStatus.Loading ? (
-                        <div>Loading...</div>
+                        // <div>Loading...</div>
+                        <SignInButton />
                     ) : status === EthosConnectStatus.NoConnection ? (
                         <div>
                             No wallet connected

@@ -38,11 +38,13 @@ const CreateNFT: NextPage = () => {
         numberOfNFT: null,
     });
 
-    const contractLoyaltyAddress = "0x19b6899300823149a5f4916d6ec00418f91f4302";
+    const contractLoyaltyAddress = "0xcda5f0137325c8a156b7b50d8bbdbc6ba762a6f7";
+    const objectCounter = "0xfae938f64718df6187ea7c1c17e8aa0bed3df2ad";
     // connect to local RPC server
     const provider = new JsonRpcProvider(Network.DEVNET);
     const { wallet } = ethos.useWallet();
     const [nftObjectId, setNftObjectId] = useState(null);
+    const [marketCapID, setMarketCapID] = useState(null);
     const [collectionName, setCollectionName] = useState(null);
 
     const confirmDialog = useDialogState();
@@ -90,16 +92,21 @@ const CreateNFT: NextPage = () => {
                     kind: "moveCall" as const,
                     data: {
                         packageObjectId: contractLoyaltyAddress,
-                        module: "loyalty_nft",
+                        module: "whitelist_nft",
                         function: "mint",
                         typeArguments: [],
-                        arguments: [collectionObjectID],
+                        arguments: [
+                            "0xb4da910ea94f33755bccbc859e6ffc80af5e0a2b",
+                            objectCounter,
+                            // "0x61ef6308d197de547f5af73480603d4e2a9ba589",
+                            // "update_name2222",
+                        ],
                         gasBudget: 10000,
                     },
                 };
 
                 const response = await wallet.signAndExecuteTransaction(signableTransaction);
-                console.log(response);
+                console.log("UPDATE SYSTEM", response);
 
                 if (response?.effects?.events) {
                     const { newObject } = response.effects.events.find((e) => e.newObject);
