@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import Image from "next/image";
 import Layout from "components/Layout";
 import { ethos } from "ethos-connect";
-import { JsonRpcProvider, Network } from "@mysten/sui.js";
+import { JsonRpcProvider, Network, getObjectFields } from "@mysten/sui.js";
 import { useRouter } from "next/router";
 import ASSETS from "assets";
 
@@ -15,6 +15,7 @@ const Waitlist: NextPage = () => {
     const { wallet } = ethos.useWallet();
     const [nftObjectId, setNftObjectId] = useState(null);
     const [claimXpAddress, setClaimXpAddress] = useState(null);
+    const [freeClaimXp, setFreeClaimXP] = useState(null);
     const [totalMinted, setTotalMinted] = useState(false);
 
     const contractReferalSystem = "0xf702135a64a91689365686975b65c93dc6893d9c";
@@ -53,6 +54,7 @@ const Waitlist: NextPage = () => {
     const getObjects = useCallback(async () => {
         if (!wallet) return;
         try {
+            // claim xp button
             const response = await provider.getObjectsOwnedByAddress(wallet.address);
             console.log("Objects form address", response);
             response.map((value) => {
@@ -62,10 +64,21 @@ const Waitlist: NextPage = () => {
                 }
             });
 
+            // total minted
             const object = await provider.getObject(contractLoyaltyStore);
-            console.log("STORE", object);
-            console.log("Total Minted", object.details.data.fields.size);
-            setTotalMinted(object.details.data.fields.size);
+            setTotalMinted(getObjectFields(object).size);
+
+            const store_objects = await provider.getObjectsOwnedByObject(contractLoyaltyStore);
+            store_objects.map(async (value) => {
+                const store_dynamic_fields = await provider.getObject(value.objectId);
+                const store_dynamic_field_owner = getObjectFields(store_dynamic_fields).value;
+
+                const claim_xp_object = await provider.getObject(store_dynamic_field_owner);
+                const claim_xp_field = getObjectFields(claim_xp_object);
+                if (claim_xp_field.owner === wallet.address) {
+                    setFreeClaimXP(claim_xp_field.claimable_exp);
+                }
+            });
         } catch (error) {
             console.log(error);
         }
@@ -133,7 +146,7 @@ const Waitlist: NextPage = () => {
                     <div className="flex flex-col items-center min-h-full justify-center pb-3 bg-purple-400 rounded-lg">
                         <div className="flex gap-10 justify-between">
                             <div>
-                                <p>Object ID: {nftObjectId}</p>
+                                {/* <p>Object ID: {nftObjectId}</p> */}
                                 {claimXpAddress ? (
                                     <button
                                         className="secondary-button w-full"
@@ -141,7 +154,7 @@ const Waitlist: NextPage = () => {
                                             await claimXP(claimXpAddress);
                                         }}
                                     >
-                                        Claim XP
+                                        Claim {freeClaimXp || 0} XP
                                     </button>
                                 ) : (
                                     <button
