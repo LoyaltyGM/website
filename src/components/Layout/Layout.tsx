@@ -8,9 +8,16 @@ interface ILayoutProps {
     children: React.ReactNode;
     className?: string;
     isMinHeightTurnOff?: boolean;
+    footer?: boolean;
 }
 
-export default function Layout({ children, className, isMinHeightTurnOff = false, ...props }: ILayoutProps) {
+export default function Layout({
+    children,
+    className,
+    isMinHeightTurnOff = false,
+    footer = true,
+    ...props
+}: ILayoutProps) {
     return (
         <>
             <HeadInfo />
@@ -20,7 +27,7 @@ export default function Layout({ children, className, isMinHeightTurnOff = false
                     {children}
                 </main>
             </div>
-            <Footer />
+            {footer ? <Footer /> : <></>}
         </>
     );
 }
