@@ -58,23 +58,22 @@ const Waitlist: NextPage = () => {
         try {
             // claim xp button
             const wallet_objects = await provider.getObjectsOwnedByAddress(wallet.address);
-            // console.log("Objects form address", walletObjects);
+            // current xp and ref count
             wallet_objects.map(async (value) => {
                 if (value.type === fullType) {
-                    //console.log(value);
                     setClaimXpAddress(value.objectId);
                     const nft_object = await provider.getObject(value.objectId);
                     const nft_object_fields = getObjectFields(nft_object);
-                    console.log(nft_object_fields);
                     setCurrentXP(nft_object_fields.current_exp);
                     setRefCount(nft_object_fields.ref_counter);
                 }
             });
 
             // total minted
-            const object = await provider.getObject(contractLoyaltyStore);
-            setTotalMinted(getObjectFields(object).size);
+            const store_object = await provider.getObject(contractLoyaltyStore);
+            setTotalMinted(getObjectFields(store_object).size);
 
+            // claim xp
             const store_objects = await provider.getObjectsOwnedByObject(contractLoyaltyStore);
             store_objects.map(async (value) => {
                 const store_dynamic_fields = await provider.getObject(value.objectId);
@@ -127,11 +126,11 @@ const Waitlist: NextPage = () => {
                     },
                 };
                 const response = await wallet.signAndExecuteTransaction(singTransaction);
-                console.log("RESPONSE", response);
+                //console.log("RESPONSE", response);
 
                 if (response?.effects?.events) {
                     const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
-                    console.log("Object NFT", moveEvent.fields.token_id);
+                    //console.log("Object NFT", moveEvent.fields.token_id);
                 }
             } catch (error) {
                 console.log(error);
@@ -146,9 +145,9 @@ const Waitlist: NextPage = () => {
 
     return (
         <div>
-            <Layout className="layout-base h-full pb-2" footer={false} isMinHeightTurnOff={true}>
+            <Layout className="layout-base h-full pb-0" footer={false} isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
-                    <div className="flex flex-col items-center min-h-full justify-center pb-3 bg-purple-400 rounded-lg">
+                    <div className="flex flex-col items-center min-h-full justify-center bg-purple-400 rounded-lg">
                         <div className="flex gap-10 justify-between">
                             <div>
                                 {/* <p>Object ID: {nftObjectId}</p> */}
