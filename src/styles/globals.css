@@ -101,7 +101,11 @@
 
     /* TEXT */
     .text-highlighter {
-        @apply font-normal my-2 lg:text-5xl text-3xl text-base-content;
+        @apply font-bold my-2 lg:text-5xl text-3xl text-base-content;
+    }
+
+    .sub-text {
+        @apply font-normal my-2 lg:text-4xl text-2xl text-base-content;
     }
 
     .input-label {

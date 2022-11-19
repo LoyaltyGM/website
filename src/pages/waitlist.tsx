@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { NextPage } from "next";
 import Image from "next/image";
 import Layout from "components/Layout";
+import { CopyTextButton } from "components/";
 import { ethos } from "ethos-connect";
 import { JsonRpcProvider, Network, getObjectFields } from "@mysten/sui.js";
 import { useRouter } from "next/router";
@@ -147,23 +148,38 @@ const Waitlist: NextPage = () => {
         <div>
             <Layout className="layout-base h-full pb-0" footer={false} isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
-                    <div className="flex flex-col items-center min-h-full justify-center bg-purple-400 rounded-lg">
-                        <div className="flex gap-10 justify-between">
-                            <div>
-                                {/* <p>Object ID: {nftObjectId}</p> */}
+                    <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-400 rounded-lg">
+                        <div className="flex gap-10 justify-between w-full">
+                            <div className="w-3/4 ml-4">
+                                <h1 className="text-highlighter text-white inset-y-0 left-0 pl-4 pt-10">LoyaltyGM</h1>
+                                {/* <div className="pl-4">
+                                    <Image src={ASSETS.gmLogo} height={60} width={400} />
+                                </div> */}
+
+                                <div className="sub-text text-white pl-4 pt-2 pb-10">
+                                    NFT LOYALTY REWARD PLATFORM FOR YOUR FAVOURITE WEB3.0 PROJECT
+                                </div>
                                 {claimXpAddress ? (
-                                    <>
+                                    <div className="border-2 border-white text-white rounded-xl ml-4 px-4 ">
+                                        <p className="ml-4 mt-10 text-xl">Your Loyalty NFT Stats (full on-chain)</p>
+                                        <p className="w-full ml-4 mt-6">Current XP: {currentXP || 0}</p>
+                                        <p className="w-full ml-4">Refferal Count: {refCount || 0}</p>
+                                        <div className="w-full ml-4 gap-2 text-white">
+                                            Refferal Link:
+                                            <CopyTextButton
+                                                copyText={`https://loyaltyGM.com/waitlist?refAddress=${claimXpAddress}`}
+                                            />
+                                        </div>
                                         <button
-                                            className="secondary-button w-full"
+                                            className="secondary-button w-full mt-4 mb-10"
                                             onClick={async () => {
                                                 await claimXP(claimXpAddress);
                                             }}
+                                            disabled={freeClaimXp === 0 ? true : false}
                                         >
                                             Claim {freeClaimXp || 0} XP
                                         </button>
-                                        <p>Current XP: {currentXP || 0}</p>
-                                        <p>Refferal Count: {refCount || 0}</p>
-                                    </>
+                                    </div>
                                 ) : (
                                     <button
                                         className="secondary-button w-full"
@@ -175,14 +191,29 @@ const Waitlist: NextPage = () => {
                                     </button>
                                 )}
                             </div>
-                            <div>
-                                <Image src={ASSETS.gifMockup} height={400} width={400} />
-                                <button className="secondary-button w-1/2">Total Minted: {totalMinted || 0}</button>
+                            <div className="w-1/2 mr-4">
+                                <Image src={ASSETS.loyaltycardMockup} height={400} width={400} />
+                                <button className="w-full border-none text-white rounded-sm font-bold pointer-none">
+                                    Total Minted: {totalMinted || 0}
+                                </button>
                             </div>
                         </div>
-                        <div className="bottom-0 flex gap-4">
-                            <p>Twitter</p>
-                            <p>Discord</p>
+                        <div className="flex text-white gap-24 mb-6 absolute bottom-0">
+                            <div className="flex gap-24">
+                                <a
+                                    href="https://twitter.com/Loyalty_GM"
+                                    target="_blank"
+                                    className="hover:decoration-solid "
+                                >
+                                    Twitter
+                                </a>
+                                <p>Discord</p>
+                                <p>info@loyaltygm.com</p>
+                            </div>
+                            <div className="flex pl-14">
+                                <p>Support by</p>
+                                <Image src={ASSETS.ethosLogo} height={30} width={120} />
+                            </div>
                         </div>
                     </div>
                 </section>
