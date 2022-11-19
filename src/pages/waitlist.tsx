@@ -161,7 +161,7 @@ const Waitlist: NextPage = () => {
                                 </div>
                                 {claimXpAddress ? (
                                     <div className="border-2 border-white text-white rounded-xl ml-4 px-4 ">
-                                        <p className="ml-4 mt-10 text-xl">Your Loyalty NFT Stats (full on-chain)</p>
+                                        <p className="ml-4 mt-10 text-xl">Your Loyalty NFT Stats (fully on-chain)</p>
                                         <p className="w-full ml-4 mt-6">Current XP: {currentXP || 0}</p>
                                         <p className="w-full ml-4">Refferal Count: {refCount || 0}</p>
                                         <div className="w-full ml-4 gap-2 text-white">
