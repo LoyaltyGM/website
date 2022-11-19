@@ -13,10 +13,12 @@ const Waitlist: NextPage = () => {
 
     const provider = new JsonRpcProvider(Network.DEVNET);
     const { wallet } = ethos.useWallet();
-    const [nftObjectId, setNftObjectId] = useState(null);
+
     const [claimXpAddress, setClaimXpAddress] = useState(null);
     const [freeClaimXp, setFreeClaimXP] = useState(null);
-    const [totalMinted, setTotalMinted] = useState(false);
+    const [totalMinted, setTotalMinted] = useState(null);
+    const [currentXP, setCurrentXP] = useState(null);
+    const [refCount, setRefCount] = useState(null);
 
     const contractReferalSystem = "0xf702135a64a91689365686975b65c93dc6893d9c";
     const fullType = `${contractReferalSystem}::token::Token`;
@@ -55,12 +57,17 @@ const Waitlist: NextPage = () => {
         if (!wallet) return;
         try {
             // claim xp button
-            const response = await provider.getObjectsOwnedByAddress(wallet.address);
-            console.log("Objects form address", response);
-            response.map((value) => {
+            const wallet_objects = await provider.getObjectsOwnedByAddress(wallet.address);
+            // console.log("Objects form address", walletObjects);
+            wallet_objects.map(async (value) => {
                 if (value.type === fullType) {
-                    console.log(value);
+                    //console.log(value);
                     setClaimXpAddress(value.objectId);
+                    const nft_object = await provider.getObject(value.objectId);
+                    const nft_object_fields = getObjectFields(nft_object);
+                    console.log(nft_object_fields);
+                    setCurrentXP(nft_object_fields.current_exp);
+                    setRefCount(nft_object_fields.ref_counter);
                 }
             });
 
@@ -92,7 +99,6 @@ const Waitlist: NextPage = () => {
                 console.log("RESPONSE", response);
                 if (response?.effects?.events) {
                     const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
-                    setNftObjectId(moveEvent.fields.token_id);
                     console.log("Object NFT", moveEvent.fields.token_id);
                 }
             } catch (error) {
@@ -125,7 +131,6 @@ const Waitlist: NextPage = () => {
 
                 if (response?.effects?.events) {
                     const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
-                    setNftObjectId(moveEvent.fields.token_id);
                     console.log("Object NFT", moveEvent.fields.token_id);
                 }
             } catch (error) {
@@ -148,14 +153,18 @@ const Waitlist: NextPage = () => {
                             <div>
                                 {/* <p>Object ID: {nftObjectId}</p> */}
                                 {claimXpAddress ? (
-                                    <button
-                                        className="secondary-button w-full"
-                                        onClick={async () => {
-                                            await claimXP(claimXpAddress);
-                                        }}
-                                    >
-                                        Claim {freeClaimXp || 0} XP
-                                    </button>
+                                    <>
+                                        <button
+                                            className="secondary-button w-full"
+                                            onClick={async () => {
+                                                await claimXP(claimXpAddress);
+                                            }}
+                                        >
+                                            Claim {freeClaimXp || 0} XP
+                                        </button>
+                                        <p>Current XP: {currentXP || 0}</p>
+                                        <p>Refferal Count: {refCount || 0}</p>
+                                    </>
                                 ) : (
                                     <button
                                         className="secondary-button w-full"
