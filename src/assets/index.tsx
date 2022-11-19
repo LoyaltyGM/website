@@ -8,24 +8,41 @@ import imageIcon from "assets/icons/image.png";
 import smartContractIcon from "assets/icons/smartContract.png";
 import viewAllIcon from "assets/icons/viewAll.png";
 
-import defaultToken from "assets/chains/emptyToken.webp";
+// video
+
+import loyaltycardMockup from "assets/gif/LoyaltyGM_Mockup.png";
+
 // tokens
 import Ethereum from "assets/chains/Ethereum.png";
 import Polygon from "assets/chains/Polygon.png";
+import defaultToken from "assets/chains/emptyToken.webp";
+
+// logo
+import ethosLogo from "assets/logo/ethos_logo.png";
+import gmLogo from "assets/logo/gm_logo.png";
 
 const ASSETS = {
     // mockups
     daoLogoMock: daoLogoMock,
     NFTmock: NFTmock,
+
     // icons
     backIcon: backIcon,
     imageIcon: imageIcon,
     smartContractIcon: smartContractIcon,
     viewAllIcon: viewAllIcon,
+
+    // video
+    loyaltycardMockup: loyaltycardMockup,
+
     // tokens
     defaultToken: defaultToken,
     Ethereum: Ethereum,
     Polygon: Polygon,
+
+    // logos
+    ethosLogo: ethosLogo,
+    gmLogo: gmLogo,
 };
 
 export default ASSETS;
