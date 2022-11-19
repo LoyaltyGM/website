@@ -18,11 +18,11 @@ export const CopyTextButton = ({ copyText }) => {
 
     return (
         <div
-            className={"flex text-base-content items-center hover:text-base-content/50 hover:cursor-pointer"}
+            className={"flex text-white gap-2 items-center hover:text-base-content/50 hover:cursor-pointer"}
             onClick={handleClick}
         >
-            {formatAddress(copyText)}
             {isCopied ? <CheckIcon className="h-6" /> : <ClipboardIcon className="h-6" />}
+            {copyText}
         </div>
     );
 };
