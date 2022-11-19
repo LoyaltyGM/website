@@ -30,7 +30,7 @@
     "daisyui": "^2.31.0",
     "eslint": "^8.25.0",
     "esm": "^3.2.25",
-    "ethos-connect": "^0.0.25",
+    "ethos-connect": "^0.0.33",
     "firebase": "^9.12.1",
     "heroicons": "^2.0.12",
     "ipfs-http-client": "^58.0.1",

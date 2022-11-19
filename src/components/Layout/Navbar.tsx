@@ -23,16 +23,14 @@ const Navbar = () => {
             <div className={"flex gap-3"}>
                 <>
                     {status === EthosConnectStatus.Loading ? (
-                        // <div>Loading...</div>
-                        <SignInButton />
+                        // Loading...
+                        <ethos.components.AddressWidget />
                     ) : status === EthosConnectStatus.NoConnection ? (
-                        <div>
-                            No wallet connected
-                            <SignInButton />
-                        </div>
+                        // <SignInButton />
+                        <ethos.components.AddressWidget />
                     ) : (
                         // status is EthosConnectStatus.Connected
-                        <div>{wallet.address}</div>
+                        <ethos.components.AddressWidget buttonColor="#000000" />
                     )}
                 </>
                 <label className="swap swap-rotate text-xs text-neutral">
