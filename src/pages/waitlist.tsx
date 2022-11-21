@@ -3,7 +3,6 @@ import { NextPage } from "next";
 import Image from "next/image";
 import Layout from "components/Layout";
 import { CopyTextButton, CustomDialog } from "components/";
-import { ethos } from "ethos-connect";
 import { getObjectFields, JsonRpcProvider, Network } from "@mysten/sui.js";
 import { useRouter } from "next/router";
 import ASSETS from "assets";
@@ -12,6 +11,7 @@ import { DISCORD_LINK, FOLLOW_TWITTER_LINK, RETWEET_LINK } from "../utils";
 import { useBoolean } from "usehooks-ts";
 import classNames from "classnames";
 import toast from "react-hot-toast";
+import { ethos, SignInButton, EthosConnectStatus } from "ethos-connect";
 
 const Waitlist: NextPage = () => {
     const { query } = useRouter();
@@ -159,9 +159,9 @@ const Waitlist: NextPage = () => {
 
     return (
         <div>
-            <Layout className="layout-base h-full pb-0" footer={false} isMinHeightTurnOff={true}>
+            <Layout className="layout-base  bg-purple-500 h-full pb-0" footer={false} isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
-                    <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-400 rounded-lg">
+                    <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-500 rounded-lg">
                         <div className="flex gap-10 justify-between w-full">
                             <div className="w-3/4 ml-4">
                                 <h1 className="text-highlighter text-white inset-y-0 left-0 pl-4 pt-10">LoyaltyGM</h1>
@@ -193,17 +193,26 @@ const Waitlist: NextPage = () => {
                                             Claim {freeClaimXp || 0} XP
                                         </button>
                                     </div>
-                                ) : (
-                                    <button className="secondary-button w-full" onClick={socialsDialog.toggle}>
+                                ) : wallet?.address ? (
+                                    <button
+                                        className="secondary-button w-full border-white"
+                                        onClick={socialsDialog.toggle}
+                                    >
                                         {refAddress ? "Mint with refferal address" : "Mint"}
                                     </button>
+                                ) : (
+                                    <SignInButton className="secondary-button ml-4">Connect Wallet</SignInButton>
                                 )}
                             </div>
                             <div className="w-1/2 mr-4">
-                                <Image src={ASSETS.loyaltyGMgif_Original} height={420} width={420} />
-                                <button className="w-full border-none text-white rounded-sm font-bold pointer-none">
-                                    Total Minted: {totalMinted || 0}
-                                </button>
+                                <Image src={ASSETS.loyaltyGMgif_Original} height={650} width={650} />
+                                {wallet?.address ? (
+                                    <button className="w-full border-none text-white rounded-sm font-bold pointer-none">
+                                        Total Minted: {totalMinted || 0}
+                                    </button>
+                                ) : (
+                                    <></>
+                                )}
                             </div>
                         </div>
                         <div className="flex text-white gap-24 mb-6 absolute bottom-0">
