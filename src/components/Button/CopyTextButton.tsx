@@ -3,7 +3,7 @@ import { CheckIcon, ClipboardIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { useBoolean, useCopyToClipboard } from "usehooks-ts";
 
-export const CopyTextButton = ({ copyText }) => {
+export const CopyTextButton = ({ copyText, color }) => {
     const { value: isCopied, setTrue, setFalse } = useBoolean();
     const [, copy] = useCopyToClipboard();
 
@@ -18,7 +18,7 @@ export const CopyTextButton = ({ copyText }) => {
 
     return (
         <div
-            className={"flex text-white gap-2 items-center hover:text-base-content/50 hover:cursor-pointer"}
+            className={"flex gap-2 items-center hover:text-base-content/50 hover:cursor-pointer" + color}
             onClick={handleClick}
         >
             {isCopied ? <CheckIcon className="h-6" /> : <ClipboardIcon className="h-6" />}

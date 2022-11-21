@@ -10,7 +10,7 @@ module.exports = {
 
         extend: {
             fontFamily: {
-                sans: [""],
+                libreFrankBlack: ["LibreFranklin-Black.ttf", "Black"],
             },
         },
     },

@@ -1,23 +1,28 @@
 import * as React from "react";
 import { DiscordIcon, TwitterIcon } from "components";
+import ASSETS from "assets";
+import Image from "next/image";
 
 const Footer = () => {
     return (
-        <footer className="footer footer-center grid-flow-row md:grid-flow-col py-4 px-8 border-t border-primary/80">
+        <footer className="footer footer-center bg-purple-500 text-white grid-flow-row md:grid-flow-col py-4 px-8">
             <div className="grid md:grid-flow-col md:justify-self-start gap-10">
-                <div className="flex justify-center sm:justify-start rounded-2xl p-2">
-                    <p className="text-sm">info@loyaltyGM.com</p>
+                <div className="flex justify-center sm:justify-start gap-10 rounded-2xl p-2">
+                    <a href="https://twitter.com/Loyalty_GM" target="_blank" className="hover:decoration-solid ">
+                        Twitter
+                    </a>
+                    <a href="mailto: info@loyaltygm.com?subject=Hey LoyaltyGM! let's make collaboration">
+                        info@loyaltygm.com
+                    </a>
                 </div>
             </div>
 
             <div className="grid grid-flow-col gap-4 md:justify-self-end">
-                <button className="grid place-items-center cursor-not-allowed w-[50px] h-[50px] bg-base-200 rounded-full hover:bg-primary/75 ">
-                    <DiscordIcon height="25" width="25" />
-                </button>
-                <a href="https://twitter.com/Loyalty_GM" target="_blank" rel="noreferrer">
-                    <button className="w-[50px] h-[50px] grid place-items-center bg-base-200 rounded-full hover:bg-primary/75">
-                        <TwitterIcon height="25" width="25" />
-                    </button>
+                <a href="https://ethoswallet.xyz/" target="_blank">
+                    <div className="flex gap-2">
+                        <p className="flex justify-center items-center">Support by</p>
+                        <Image src={ASSETS.ethosLogo} height={30} width={90} />
+                    </div>
                 </a>
             </div>
         </footer>

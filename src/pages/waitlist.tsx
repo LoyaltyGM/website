@@ -163,12 +163,14 @@ const Waitlist: NextPage = () => {
 
     return (
         <div>
-            <Layout className="layout-base  bg-purple-500 h-full pb-0" footer={false} isMinHeightTurnOff={true}>
+            <Layout className="layout-base  bg-purple-500 h-full pb-0" isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
                     <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-500 rounded-lg">
                         <div className="flex gap-10 justify-between w-full">
                             <div className="w-3/4 ml-4">
-                                <h1 className="text-highlighter text-white inset-y-0 left-0 pl-4 pt-10">LoyaltyGM</h1>
+                                <h1 className="text-highlighter text-[#FADC4B] inset-y-0 left-0 pl-4 pt-10">
+                                    LoyaltyGM
+                                </h1>
                                 {/* <div className="pl-4">
                                     <Image src={ASSETS.gmLogo} height={60} width={400} />
                                 </div> */}
@@ -177,18 +179,21 @@ const Waitlist: NextPage = () => {
                                     NFT LOYALTY REWARD PLATFORM FOR YOUR FAVOURITE WEB3.0 PROJECT
                                 </div>
                                 {claimXpAddress ? (
-                                    <div className="border-2 border-white text-white rounded-xl ml-4 px-4 ">
-                                        <p className="ml-4 mt-10 text-xl">Your Loyalty NFT Stats (fully on-chain)</p>
-                                        <p className="w-full ml-4 mt-6">Current XP: {currentXP || 0}</p>
-                                        <p className="w-full ml-4">Refferal Count: {refCount || 0}</p>
-                                        <div className="w-full ml-4 gap-2 text-white">
+                                    <div className="border-2 border-white bg-white/90 text-[#383838] rounded-xl ml-4 px-4 ">
+                                        <p className="ml-4 mt-6 text-xl font-mono">
+                                            Your Loyalty NFT Stats (fully on-chain)
+                                        </p>
+                                        <p className="w-full ml-4 mt-6 font-mono">Current XP: {currentXP || 0}</p>
+                                        <p className="w-full ml-4 font-mono">Refferal Count: {refCount || 0}</p>
+                                        <div className="w-full ml-4 gap-2 font-mono ">
                                             Refferal Link:
                                             <CopyTextButton
                                                 copyText={`https://${APP_URL}/waitlist?refAddress=${claimXpAddress}`}
+                                                color={""}
                                             />
                                         </div>
                                         <button
-                                            className="secondary-button w-full mt-4 mb-10"
+                                            className="secondary-button w-full mt-4 mb-10 font-mono"
                                             onClick={async () => {
                                                 await claimXP(claimXpAddress);
                                             }}
@@ -205,39 +210,24 @@ const Waitlist: NextPage = () => {
                                         {refAddress ? "Mint with refferal address" : "Mint"}
                                     </button>
                                 ) : (
-                                    <SignInButton className="secondary-button ml-4">Connect Wallet</SignInButton>
+                                    <SignInButton className="secondary-button ml-4 bg-white">
+                                        Connect Wallet
+                                    </SignInButton>
                                 )}
                             </div>
                             <div className="w-1/2 mr-4">
                                 <Image src={ASSETS.loyaltyGMgif_Original} height={650} width={650} />
                                 {wallet?.address ? (
-                                    <button className="w-full border-none text-white rounded-sm font-bold pointer-none">
+                                    <button
+                                        className="w-full bg-[#383838] py-2 text-white rounded-2xl font-bold pointer-none font-mono"
+                                        onClick={() => emojisplosion()}
+                                    >
                                         Total Minted: {totalMinted || 0}
                                     </button>
                                 ) : (
                                     <></>
                                 )}
                             </div>
-                        </div>
-                        <div className="flex text-white gap-24 mb-6 absolute bottom-0">
-                            <div className="flex gap-24">
-                                <a
-                                    href="https://twitter.com/Loyalty_GM"
-                                    target="_blank"
-                                    className="hover:decoration-solid "
-                                >
-                                    Twitter
-                                </a>
-                                <a href="mailto: info@loyaltygm.com?subject=Hey LoyaltyGM! let's make collaboration">
-                                    info@loyaltygm.com
-                                </a>
-                            </div>
-                            <a href="https://ethoswallet.xyz/" target="_blank">
-                                <div className="flex pl-14 gap-2">
-                                    <p>Support by</p>
-                                    <Image src={ASSETS.ethosLogo} height={30} width={90} />
-                                </div>
-                            </a>
                         </div>
                     </div>
 
