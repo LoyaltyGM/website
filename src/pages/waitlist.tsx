@@ -168,14 +168,14 @@ const Waitlist: NextPage = () => {
                     <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-500 rounded-lg">
                         <div className="flex gap-10 justify-between w-full">
                             <div className="w-3/4 ml-4">
-                                <h1 className="text-highlighter text-[#FADC4B] inset-y-0 left-0 pl-4 pt-10">
+                                <h1 className="text-highlighter fredoka-font text-[#FADC4B] inset-y-0 left-0 pl-4 pt-10">
                                     LoyaltyGM
                                 </h1>
                                 {/* <div className="pl-4">
                                     <Image src={ASSETS.gmLogo} height={60} width={400} />
                                 </div> */}
 
-                                <div className="sub-text text-white pl-4 pt-2 pb-10">
+                                <div className="sub-text fredoka-font text-white pl-4 pt-2 pb-10">
                                     NFT LOYALTY REWARD PLATFORM FOR YOUR FAVOURITE WEB3.0 PROJECT
                                 </div>
                                 {claimXpAddress ? (
