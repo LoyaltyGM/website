@@ -9,7 +9,7 @@ import smartContractIcon from "assets/icons/smartContract.png";
 import viewAllIcon from "assets/icons/viewAll.png";
 
 // video
-
+import loyaltyGMgif_Original from "assets/gif/LGM_Original_Size_7mb.gif";
 import loyaltycardMockup from "assets/gif/LoyaltyGM_Mockup.png";
 
 // tokens
@@ -34,6 +34,7 @@ const ASSETS = {
 
     // video
     loyaltycardMockup: loyaltycardMockup,
+    loyaltyGMgif_Original: loyaltyGMgif_Original,
 
     // tokens
     defaultToken: defaultToken,
