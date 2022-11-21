@@ -5,8 +5,8 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 /** @type {import("next").NextConfig} */
 const nextConfig = {
     i18n: {
-        locales: ["en"],
-        defaultLocale: "en",
+        // locales: ["en"],
+        // defaultLocale: "en",
     },
     images: {
         domains: ["newconnection.infura-ipfs.io"],
