@@ -12,7 +12,7 @@
 
     html,
     body {
-        @apply bg-base-100 text-base-content h-full;
+        @apply bg-purple-500 text-base-content h-full;
     }
 
     .font-exo {
@@ -39,7 +39,7 @@
     }
 
     .header {
-        @apply flex top-0 z-50 fixed w-full rounded-b-2xl items-center justify-between gap-10 text-base-content backdrop-blur-md;
+        @apply flex top-0 z-50 fixed w-full bg-purple-500 items-center justify-between gap-10 text-base-content backdrop-blur-md;
         padding-inline: clamp(0.5rem, 2.5vw, 2rem);
         padding-block: clamp(1rem, 2.5vh, 2rem);
     }

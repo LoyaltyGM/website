@@ -30,7 +30,7 @@ const Navbar = () => {
                         <ethos.components.AddressWidget />
                     ) : (
                         // status is EthosConnectStatus.Connected
-                        <ethos.components.AddressWidget buttonColor="#000000" />
+                        <ethos.components.AddressWidget buttonColor="#9D4CF0" />
                     )}
                 </>
                 {/*<label className="swap swap-rotate text-xs text-neutral">*/}
