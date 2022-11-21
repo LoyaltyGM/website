@@ -12,6 +12,7 @@ import { useBoolean } from "usehooks-ts";
 import classNames from "classnames";
 import toast from "react-hot-toast";
 import { ethos, SignInButton, EthosConnectStatus } from "ethos-connect";
+import { emojisplosion } from "emojisplosion";
 
 const Waitlist: NextPage = () => {
     const { query } = useRouter();
@@ -111,7 +112,10 @@ const Waitlist: NextPage = () => {
                 if (response?.effects?.events) {
                     const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
                     console.log("Object NFT", moveEvent.fields.token_id);
-                    moveEvent?.fields?.token_id && setMinted();
+                    if (moveEvent?.fields?.token_id) {
+                        for (let i = 0; i < 5; i++) emojisplosion();
+                        setMinted();
+                    }
                 }
             } catch (error) {
                 console.log(error);
@@ -298,13 +302,6 @@ const Waitlist: NextPage = () => {
                                 )
                             )}
                         </div>
-
-                        {/*<button*/}
-                        {/*    className="flex mt-10 ml-auto mr-auto justify-center btn btn-ghost rounded-full border-2"*/}
-                        {/*    onClick={() => socialsDialog.hide()}*/}
-                        {/*>*/}
-                        {/*    Close*/}
-                        {/*</button>*/}
                     </CustomDialog>
                 </section>
             </Layout>
