@@ -21,7 +21,7 @@ const Waitlist: NextPage = () => {
     const [currentXP, setCurrentXP] = useState(null);
     const [refCount, setRefCount] = useState(null);
 
-    const tokenObjectId = process.env.NEXT_PUBLIC_TOKEN_ID;
+    const tokenObjectId = process.env.NEXT_PUBLIC_PACKAGE_ID;
     const dataTableObjectId = process.env.NEXT_PUBLIC_DATA_TABLE_ID ;
 
     const fullType = `${tokenObjectId}::token::Token`;
