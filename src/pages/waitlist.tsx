@@ -212,10 +212,12 @@ const Waitlist: NextPage = () => {
                                     info@loyaltygm.com
                                 </a>
                             </div>
-                            <div className="flex pl-14 gap-2">
-                                <p>Support by</p>
-                                <Image src={ASSETS.ethosLogo} height={30} width={90} />
-                            </div>
+                            <a href="https://ethoswallet.xyz/" target="_blank">
+                                <div className="flex pl-14 gap-2">
+                                    <p>Support by</p>
+                                    <Image src={ASSETS.ethosLogo} height={30} width={90} />
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </section>
