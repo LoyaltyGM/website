@@ -1,6 +1,7 @@
 // IPFS MODULE
 import { create } from "ipfs-http-client";
 
+export const APP_URL = process.env.NEXT_PUBLIC_APP_URL
 export const IPFS = "ipfs://";
 export const INFURA_IPFS_GATEWAY = process.env.NEXT_PUBLIC_IPFS_DEDICATED_GATEWAY_SUBDOMAIN;
 export const ipfsClient = create({

@@ -7,11 +7,11 @@ import { getObjectFields, JsonRpcProvider, Network } from "@mysten/sui.js";
 import { useRouter } from "next/router";
 import ASSETS from "assets";
 import { useDialogState } from "ariakit";
-import { DISCORD_LINK, FOLLOW_TWITTER_LINK, RETWEET_LINK } from "../utils";
+import { APP_URL, DISCORD_LINK, FOLLOW_TWITTER_LINK, RETWEET_LINK } from "../utils";
 import { useBoolean } from "usehooks-ts";
 import classNames from "classnames";
 import toast from "react-hot-toast";
-import { ethos, SignInButton, EthosConnectStatus } from "ethos-connect";
+import { ethos, SignInButton } from "ethos-connect";
 import { emojisplosion } from "emojisplosion";
 
 const Waitlist: NextPage = () => {
@@ -184,7 +184,7 @@ const Waitlist: NextPage = () => {
                                         <div className="w-full ml-4 gap-2 text-white">
                                             Refferal Link:
                                             <CopyTextButton
-                                                copyText={`https://loyaltyGM.com/waitlist?refAddress=${claimXpAddress}`}
+                                                copyText={`https://${APP_URL}/waitlist?refAddress=${claimXpAddress}`}
                                             />
                                         </div>
                                         <button
