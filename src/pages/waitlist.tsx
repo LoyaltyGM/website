@@ -173,7 +173,7 @@ const Waitlist: NextPage = () => {
 
     return (
         <div>
-            <Layout className="layout-base  bg-purple-500 h-full pb-0" isMinHeightTurnOff={true}>
+            <Layout className="layout-base bg-purple-500 h-full pb-0" isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
                     <div
                         className="relative flex flex-col items-center min-h-full justify-center bg-purple-500 rounded-lg">

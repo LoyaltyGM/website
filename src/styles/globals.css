@@ -35,11 +35,11 @@
     }
 
     .layout-base {
-        @apply app-section mx-auto mt-14 flex w-full flex-col items-center space-y-6 pb-8 bg-base-100;
+        @apply app-section mx-auto mt-16 flex w-full flex-col items-center space-y-6 pb-8 bg-base-100;
     }
 
     .header {
-        @apply flex top-0 z-50 fixed w-full bg-purple-500 items-center justify-between gap-10 text-base-content backdrop-blur-md;
+        @apply flex top-0 z-50 h-16 fixed w-full bg-purple-500 items-center justify-between gap-10 text-base-content;
         padding-inline: clamp(0.5rem, 2.5vw, 2rem);
         padding-block: clamp(1rem, 2.5vh, 2rem);
     }
