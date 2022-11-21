@@ -7,7 +7,14 @@ import { getObjectFields, JsonRpcProvider, Network } from "@mysten/sui.js";
 import { useRouter } from "next/router";
 import ASSETS from "assets";
 import { useDialogState } from "ariakit";
-import { APP_URL, DISCORD_LINK, FOLLOW_TWITTER_LINK, RETWEET_LINK } from "../utils";
+import {
+    APP_URL,
+    DISCORD_LINK,
+    FOLLOW_TWITTER_ETHOS_LINK,
+    FOLLOW_TWITTER_GM_LINK,
+    RETWEET_ETHOS_LINK,
+    RETWEET_GM_LINK,
+} from "../utils";
 import { useBoolean } from "usehooks-ts";
 import classNames from "classnames";
 import toast from "react-hot-toast";
@@ -28,8 +35,11 @@ const Waitlist: NextPage = () => {
     const [refCount, setRefCount] = useState(null);
 
     const socialsDialog = useDialogState();
-    const { value: isFollow, setTrue: checkFollow } = useBoolean(false);
-    const { value: isRetweet, setTrue: checkRetweet } = useBoolean(false);
+    const { value: isGmFollow, setTrue: checkGmFollow } = useBoolean(false);
+    const { value: isGmRetweet, setTrue: checkGmRetweet } = useBoolean(false);
+    const { value: isEthosFollow, setTrue: checkEthosFollow } = useBoolean(false);
+    const { value: isEthosRetweet, setTrue: checkEthosRetweet } = useBoolean(false);
+
     const { value: isMinted, setTrue: setMinted } = useBoolean(false);
 
     const packageObjectId = process.env.NEXT_PUBLIC_PACKAGE_ID;
@@ -165,7 +175,8 @@ const Waitlist: NextPage = () => {
         <div>
             <Layout className="layout-base  bg-purple-500 h-full pb-0" isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
-                    <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-500 rounded-lg">
+                    <div
+                        className="relative flex flex-col items-center min-h-full justify-center bg-purple-500 rounded-lg">
                         {/* Main Features */}
                         <div className="flex justify-around w-full pb-8 text-white font-mono">
                             <div className="flex">
@@ -196,7 +207,8 @@ const Waitlist: NextPage = () => {
                                     NFT LOYALTY REWARD PLATFORM FOR YOUR FAVOURITE WEB3.0 PROJECT
                                 </div>
                                 {claimXpAddress ? (
-                                    <div className="border-2 border-white bg-white/90 text-[#383838] rounded-xl ml-4 px-4 ">
+                                    <div
+                                        className="border-2 border-white bg-white/90 text-[#383838] rounded-xl ml-4 px-4 ">
                                         <p className="ml-4 mt-6 text-xl font-mono">
                                             Your Loyalty NFT Stats (fully on-chain)
                                         </p>
@@ -249,29 +261,45 @@ const Waitlist: NextPage = () => {
                     </div>
 
                     <CustomDialog dialog={socialsDialog} className={""} isClose={false}>
-                        {(!isFollow || !isRetweet) && (
+                        {(!isGmFollow || !isGmRetweet || !isEthosFollow || !isEthosRetweet) && (
                             <div className={"flex flex-col gap-6"}>
                                 <div className={"flex text-2xl justify-center"}>Don't forget to follow & retweet</div>
                                 <a
-                                    href={FOLLOW_TWITTER_LINK}
-                                    onClick={checkFollow}
+                                    href={FOLLOW_TWITTER_GM_LINK}
+                                    onClick={checkGmFollow}
                                     target={"_blank"}
-                                    className={classNames("main-button", isFollow && "bg-success border-none")}
+                                    className={classNames("main-button", isGmFollow && "bg-success border-none")}
                                 >
-                                    Follow us
+                                    Follow us on Twitter
                                 </a>
                                 <a
-                                    href={RETWEET_LINK}
-                                    onClick={checkRetweet}
+                                    href={RETWEET_GM_LINK}
+                                    onClick={checkGmRetweet}
                                     target={"_blank"}
-                                    className={classNames("main-button", isRetweet && "bg-success border-none")}
+                                    className={classNames("main-button", isGmRetweet && "bg-success border-none")}
                                 >
-                                    Retweet
+                                    Retweet us
+                                </a>
+                                <a
+                                    href={FOLLOW_TWITTER_ETHOS_LINK}
+                                    onClick={checkEthosFollow}
+                                    target={"_blank"}
+                                    className={classNames("main-button", isEthosFollow && "bg-success border-none")}
+                                >
+                                    Follow Ethos on Twitter
+                                </a>
+                                <a
+                                    href={RETWEET_ETHOS_LINK}
+                                    onClick={checkEthosRetweet}
+                                    target={"_blank"}
+                                    className={classNames("main-button", isEthosRetweet && "bg-success border-none")}
+                                >
+                                    Retweet Ethos
                                 </a>
                             </div>
                         )}
                         <div>
-                            {isFollow && isRetweet && !isMinted ? (
+                            {isGmFollow && isGmRetweet && isEthosFollow && isEthosRetweet && !isMinted ? (
                                 <div>
                                     <div className={"flex text-2xl mb-6 justify-center"}>
                                         Mint Soulbound LoyaltyGM Token
