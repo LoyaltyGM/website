@@ -10,15 +10,16 @@ import { EthosConnectProvider } from "ethos-connect";
 
 function App({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(() => new QueryClient());
-    const { isDarkMode: localStorageTheme } = useDarkMode();
-    const { value: isDarkTheme, setTrue, setFalse } = useBoolean(false);
+    // const { isDarkMode: localStorageTheme } = useDarkMode();
+    // const { value: isDarkTheme, setTrue, setFalse } = useBoolean(false);
 
-    useEffect(() => {
-        localStorageTheme ? setTrue() : setFalse();
-    }, [localStorageTheme]);
+    // useEffect(() => {
+    //     localStorageTheme ? setTrue() : setFalse();
+    // }, [localStorageTheme]);
 
     return (
-        <div data-theme={isDarkTheme ? DARK_THEME : LIGHT_THEME}>
+        // <div data-theme={isDarkTheme ? DARK_THEME : LIGHT_THEME}>
+        <div data-theme={LIGHT_THEME}>
             <Script
                 strategy="lazyOnload"
                 src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
