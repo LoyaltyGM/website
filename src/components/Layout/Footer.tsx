@@ -20,7 +20,7 @@ const Footer = () => {
             <div className="grid grid-flow-col gap-4 md:justify-self-end">
                 <a href="https://ethoswallet.xyz/" target="_blank">
                     <div className="flex gap-2">
-                        <p className="flex justify-center items-center font-mono">Support by</p>
+                        <p className="flex justify-center items-center font-mono">Supported by</p>
                         <Image src={ASSETS.ethosLogo} height={30} width={90} />
                     </div>
                 </a>
