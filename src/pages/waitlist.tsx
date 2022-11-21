@@ -12,6 +12,7 @@ import { DISCORD_LINK, FOLLOW_TWITTER_LINK, RETWEET_LINK } from "../utils";
 import { useBoolean } from "usehooks-ts";
 import classNames from "classnames";
 import toast from "react-hot-toast";
+import { emojisplosion } from "emojisplosion";
 
 const Waitlist: NextPage = () => {
     const { query } = useRouter();
@@ -111,7 +112,10 @@ const Waitlist: NextPage = () => {
                 if (response?.effects?.events) {
                     const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
                     console.log("Object NFT", moveEvent.fields.token_id);
-                    moveEvent?.fields?.token_id && setMinted();
+                    if (moveEvent?.fields?.token_id) {
+                        for (let i = 0; i < 5; i++) emojisplosion();
+                        setMinted();
+                    }
                 }
             } catch (error) {
                 console.log(error);
@@ -161,7 +165,8 @@ const Waitlist: NextPage = () => {
         <div>
             <Layout className="layout-base h-full pb-0" footer={false} isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
-                    <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-400 rounded-lg">
+                    <div
+                        className="relative flex flex-col items-center min-h-full justify-center bg-purple-400 rounded-lg">
                         <div className="flex gap-10 justify-between w-full">
                             <div className="w-3/4 ml-4">
                                 <h1 className="text-highlighter text-white inset-y-0 left-0 pl-4 pt-10">LoyaltyGM</h1>
@@ -289,13 +294,6 @@ const Waitlist: NextPage = () => {
                                 )
                             )}
                         </div>
-
-                        {/*<button*/}
-                        {/*    className="flex mt-10 ml-auto mr-auto justify-center btn btn-ghost rounded-full border-2"*/}
-                        {/*    onClick={() => socialsDialog.hide()}*/}
-                        {/*>*/}
-                        {/*    Close*/}
-                        {/*</button>*/}
                     </CustomDialog>
                 </section>
             </Layout>
