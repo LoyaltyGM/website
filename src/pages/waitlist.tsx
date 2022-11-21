@@ -161,8 +161,7 @@ const Waitlist: NextPage = () => {
         <div>
             <Layout className="layout-base h-full pb-0" footer={false} isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
-                    <div
-                        className="relative flex flex-col items-center min-h-full justify-center bg-purple-400 rounded-lg">
+                    <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-400 rounded-lg">
                         <div className="flex gap-10 justify-between w-full">
                             <div className="w-3/4 ml-4">
                                 <h1 className="text-highlighter text-white inset-y-0 left-0 pl-4 pt-10">LoyaltyGM</h1>
@@ -271,14 +270,21 @@ const Waitlist: NextPage = () => {
                                 isMinted && (
                                     <div className={"flex flex-col gap-6"}>
                                         <div className={"flex text-2xl justify-center"}>Congratulations! 🥳</div>
-                                        <div className={"flex text-xl justify-center"}>Discord link:</div>
-                                        <a
-                                            href={DISCORD_LINK}
-                                            className={"flex text-xl btn-link justify-center"}
-                                            target={"_blank"}
-                                        >
-                                            {DISCORD_LINK}
-                                        </a>
+
+                                        {totalMinted < 8192 ? (
+                                            <div>
+                                                <div className={"flex text-xl justify-center"}>Ethos discord link:</div>
+                                                <a
+                                                    href={DISCORD_LINK}
+                                                    className={"flex text-xl btn-link justify-center"}
+                                                    target={"_blank"}
+                                                >
+                                                    {DISCORD_LINK}
+                                                </a>
+                                            </div>
+                                        ) : (
+                                            <></>
+                                        )}
                                     </div>
                                 )
                             )}
