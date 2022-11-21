@@ -1,5 +1,5 @@
 @import url("https://rsms.me/inter/inter.css");
-
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -102,6 +102,10 @@
     /* TEXT */
     .text-highlighter {
         @apply font-bold my-2 lg:text-5xl text-3xl text-base-content;
+    }
+
+    .fredoka-font {
+        font-family: "Fredoka One", sans-serif;
     }
 
     .sub-text {
