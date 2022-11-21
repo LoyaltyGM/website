@@ -1,15 +1,20 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { NextPage } from "next";
 import Image from "next/image";
 import Layout from "components/Layout";
-import { CopyTextButton } from "components/";
+import { CopyTextButton, CustomDialog } from "components/";
 import { ethos } from "ethos-connect";
-import { JsonRpcProvider, Network, getObjectFields } from "@mysten/sui.js";
+import { getObjectFields, JsonRpcProvider, Network } from "@mysten/sui.js";
 import { useRouter } from "next/router";
 import ASSETS from "assets";
+import { useDialogState } from "ariakit";
+import { DISCORD_LINK, FOLLOW_TWITTER_LINK, RETWEET_LINK } from "../utils";
+import { useBoolean } from "usehooks-ts";
+import classNames from "classnames";
+import toast from "react-hot-toast";
 
 const Waitlist: NextPage = () => {
-    const { query, isReady } = useRouter();
+    const { query } = useRouter();
     const { refAddress } = query;
 
     const provider = new JsonRpcProvider(Network.DEVNET);
@@ -20,6 +25,11 @@ const Waitlist: NextPage = () => {
     const [totalMinted, setTotalMinted] = useState(null);
     const [currentXP, setCurrentXP] = useState(null);
     const [refCount, setRefCount] = useState(null);
+
+    const socialsDialog = useDialogState();
+    const { value: isFollow, setTrue: checkFollow } = useBoolean(false);
+    const { value: isRetweet, setTrue: checkRetweet } = useBoolean(false);
+    const { value: isMinted, setTrue: setMinted } = useBoolean(false);
 
     const packageObjectId = process.env.NEXT_PUBLIC_PACKAGE_ID;
     const dataTableObjectId = process.env.NEXT_PUBLIC_DATA_TABLE_ID;
@@ -56,7 +66,7 @@ const Waitlist: NextPage = () => {
     };
 
     const getObjects = useCallback(async () => {
-        if (!wallet) return;
+        if (!wallet?.address) return;
         try {
             // claim xp button
             const wallet_objects = await provider.getObjectsOwnedByAddress(wallet.address);
@@ -101,9 +111,11 @@ const Waitlist: NextPage = () => {
                 if (response?.effects?.events) {
                     const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
                     console.log("Object NFT", moveEvent.fields.token_id);
+                    moveEvent?.fields?.token_id && setMinted();
                 }
             } catch (error) {
                 console.log(error);
+                toast.error("Mint failed");
             }
         },
         [wallet]
@@ -131,7 +143,7 @@ const Waitlist: NextPage = () => {
                 //console.log("RESPONSE", response);
 
                 if (response?.effects?.events) {
-                    const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
+                    // const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
                     //console.log("Object NFT", moveEvent.fields.token_id);
                 }
             } catch (error) {
@@ -142,14 +154,15 @@ const Waitlist: NextPage = () => {
     );
 
     useEffect(() => {
-        getObjects();
+        getObjects().then();
     });
 
     return (
         <div>
             <Layout className="layout-base h-full pb-0" footer={false} isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
-                    <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-400 rounded-lg">
+                    <div
+                        className="relative flex flex-col items-center min-h-full justify-center bg-purple-400 rounded-lg">
                         <div className="flex gap-10 justify-between w-full">
                             <div className="w-3/4 ml-4">
                                 <h1 className="text-highlighter text-white inset-y-0 left-0 pl-4 pt-10">LoyaltyGM</h1>
@@ -176,18 +189,13 @@ const Waitlist: NextPage = () => {
                                             onClick={async () => {
                                                 await claimXP(claimXpAddress);
                                             }}
-                                            disabled={freeClaimXp === 0 ? true : false}
+                                            disabled={freeClaimXp === 0}
                                         >
                                             Claim {freeClaimXp || 0} XP
                                         </button>
                                     </div>
                                 ) : (
-                                    <button
-                                        className="secondary-button w-full"
-                                        onClick={async () => {
-                                            refAddress ? await mint(mintCallWithRef) : await mint(mintCall);
-                                        }}
-                                    >
+                                    <button className="secondary-button w-full" onClick={socialsDialog.toggle}>
                                         {refAddress ? "Mint with refferal address" : "Mint"}
                                     </button>
                                 )}
@@ -218,6 +226,69 @@ const Waitlist: NextPage = () => {
                             </div>
                         </div>
                     </div>
+
+                    <CustomDialog dialog={socialsDialog} className={""} isClose={false}>
+                        {(!isFollow || !isRetweet) && (
+                            <div className={"flex flex-col gap-6"}>
+                                <div className={"flex text-2xl justify-center"}>Don't forget to follow & retweet</div>
+                                <a
+                                    href={FOLLOW_TWITTER_LINK}
+                                    onClick={checkFollow}
+                                    target={"_blank"}
+                                    className={classNames("main-button", isFollow && "bg-success border-none")}
+                                >
+                                    Follow us
+                                </a>
+                                <a
+                                    href={RETWEET_LINK}
+                                    onClick={checkRetweet}
+                                    target={"_blank"}
+                                    className={classNames("main-button", isRetweet && "bg-success border-none")}
+                                >
+                                    Retweet
+                                </a>
+                            </div>
+                        )}
+                        <div>
+                            {isFollow && isRetweet && !isMinted ? (
+                                <div>
+                                    <div className={"flex text-2xl mb-6 justify-center"}>
+                                        Mint Soulbound LoyaltyGM Token
+                                    </div>
+
+                                    <button
+                                        className="secondary-button w-full"
+                                        onClick={async () => {
+                                            refAddress ? await mint(mintCallWithRef) : await mint(mintCall);
+                                        }}
+                                    >
+                                        {refAddress ? "Mint with referral address" : "Mint"}
+                                    </button>
+                                </div>
+                            ) : (
+                                isMinted && (
+                                    <div className={"flex flex-col gap-6"}>
+                                        <div className={"flex text-2xl justify-center"}>Congratulations! 🥳</div>
+                                        <div className={"flex text-xl justify-center"}>Discord link:</div>
+                                        <a
+                                            href={DISCORD_LINK}
+                                            className={"flex text-xl btn-link justify-center"}
+                                            target={"_blank"}
+                                        >
+                                            {DISCORD_LINK}
+                                        </a>
+                                    </div>
+                                )
+                            )}
+                        </div>
+
+                        {/*<button*/}
+                        {/*    className="flex mt-10 ml-auto mr-auto justify-center btn btn-ghost rounded-full border-2"*/}
+                        {/*    onClick={() => socialsDialog.hide()}*/}
+                        {/*>*/}
+                        {/*    Close*/}
+                        {/*</button>*/}
+                    </CustomDialog>
                 </section>
             </Layout>
         </div>
