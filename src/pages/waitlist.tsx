@@ -21,19 +21,20 @@ const Waitlist: NextPage = () => {
     const [currentXP, setCurrentXP] = useState(null);
     const [refCount, setRefCount] = useState(null);
 
-    const contractReferalSystem = "0xf702135a64a91689365686975b65c93dc6893d9c";
-    const fullType = `${contractReferalSystem}::token::Token`;
-    const contractLoyaltyStore = "0x8872e7fd4d91ff43488343603374d4fe3d8e4247";
+    const packageObjectId = process.env.NEXT_PUBLIC_PACKAGE_ID;
+    const dataTableObjectId = process.env.NEXT_PUBLIC_DATA_TABLE_ID ;
+
+    const fullType = `${packageObjectId}::token::SoulboundToken`;
 
     const mintCall = {
         kind: "moveCall" as const,
         data: {
-            packageObjectId: contractReferalSystem,
+            packageObjectId: packageObjectId,
             module: "token",
             function: "mint",
             typeArguments: [],
             arguments: [
-                contractLoyaltyStore, //store
+                dataTableObjectId, //store
             ],
             gasBudget: 10000,
         },
@@ -42,13 +43,13 @@ const Waitlist: NextPage = () => {
     const mintCallWithRef = {
         kind: "moveCall" as const,
         data: {
-            packageObjectId: contractReferalSystem,
+            packageObjectId: packageObjectId,
             module: "token",
             function: "mint_with_ref",
             typeArguments: [],
             arguments: [
                 refAddress, // ref address
-                contractLoyaltyStore, //store
+                dataTableObjectId, //store
             ],
             gasBudget: 10000,
         },
@@ -71,11 +72,11 @@ const Waitlist: NextPage = () => {
             });
 
             // total minted
-            const store_object = await provider.getObject(contractLoyaltyStore);
+            const store_object = await provider.getObject(dataTableObjectId);
             setTotalMinted(getObjectFields(store_object).size);
 
             // claim xp
-            const store_objects = await provider.getObjectsOwnedByObject(contractLoyaltyStore);
+            const store_objects = await provider.getObjectsOwnedByObject(dataTableObjectId);
             store_objects.map(async (value) => {
                 const store_dynamic_fields = await provider.getObject(value.objectId);
                 const store_dynamic_field_owner = getObjectFields(store_dynamic_fields).value;
@@ -115,13 +116,13 @@ const Waitlist: NextPage = () => {
                 const singTransaction = {
                     kind: "moveCall" as const,
                     data: {
-                        packageObjectId: contractReferalSystem,
+                        packageObjectId: packageObjectId,
                         module: "token",
                         function: "claim_exp",
                         typeArguments: [],
                         arguments: [
                             tokenAddress, // token to update
-                            contractLoyaltyStore, //store
+                            dataTableObjectId, //store
                         ],
                         gasBudget: 10000,
                     },
@@ -175,7 +176,7 @@ const Waitlist: NextPage = () => {
                                             onClick={async () => {
                                                 await claimXP(claimXpAddress);
                                             }}
-                                            disabled={freeClaimXp === 0 ? true : false}
+                                            disabled={freeClaimXp === 0}
                                         >
                                             Claim {freeClaimXp || 0} XP
                                         </button>
