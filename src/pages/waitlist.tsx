@@ -192,7 +192,7 @@ const Waitlist: NextPage = () => {
                                 )}
                             </div>
                             <div className="w-1/2 mr-4">
-                                <Image src={ASSETS.loyaltycardMockup} height={400} width={400} />
+                                <Image src={ASSETS.loyaltyGMgif_Original} height={420} width={420} />
                                 <button className="w-full border-none text-white rounded-sm font-bold pointer-none">
                                     Total Minted: {totalMinted || 0}
                                 </button>
@@ -207,12 +207,13 @@ const Waitlist: NextPage = () => {
                                 >
                                     Twitter
                                 </a>
-                                <p>Discord</p>
-                                <p>info@loyaltygm.com</p>
+                                <a href="mailto: info@loyaltygm.com?subject=Hey LoyaltyGM! let's make collaboration">
+                                    info@loyaltygm.com
+                                </a>
                             </div>
-                            <div className="flex pl-14">
+                            <div className="flex pl-14 gap-2">
                                 <p>Support by</p>
-                                <Image src={ASSETS.ethosLogo} height={30} width={120} />
+                                <Image src={ASSETS.ethosLogo} height={30} width={90} />
                             </div>
                         </div>
                     </div>
