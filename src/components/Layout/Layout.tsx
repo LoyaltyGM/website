@@ -27,7 +27,7 @@ export default function Layout({
                     {children}
                 </main>
             </div>
-            {footer ? <Footer /> : <></>}
+            {footer && <Footer />}
         </>
     );
 }

@@ -4,7 +4,7 @@ import { useDarkMode } from "usehooks-ts";
 import { ethos, SignInButton, EthosConnectStatus } from "ethos-connect";
 
 const Navbar = () => {
-    const { toggle } = useDarkMode();
+    // const { toggle } = useDarkMode();
     const { status, wallet } = ethos.useWallet();
 
     return (
@@ -33,11 +33,11 @@ const Navbar = () => {
                         <ethos.components.AddressWidget buttonColor="#000000" />
                     )}
                 </>
-                <label className="swap swap-rotate text-xs text-neutral">
-                    <input type="checkbox" onClick={toggle} />
-                    <SunIcon />
-                    <MoonIcon />
-                </label>
+                {/*<label className="swap swap-rotate text-xs text-neutral">*/}
+                {/*    <input type="checkbox" onClick={toggle} />*/}
+                {/*    <SunIcon />*/}
+                {/*    <MoonIcon />*/}
+                {/*</label>*/}
             </div>
         </>
     );
