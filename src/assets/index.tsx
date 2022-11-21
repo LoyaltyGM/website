@@ -19,7 +19,7 @@ import defaultToken from "assets/chains/emptyToken.webp";
 
 // logo
 import ethosLogo from "assets/logo/ethos_logo.png";
-import gmLogo from "assets/logo/gm_logo.png";
+import gmLogo from "assets/logo/gm-logo.png";
 
 const ASSETS = {
     // mockups
