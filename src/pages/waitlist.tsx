@@ -22,7 +22,7 @@ const Waitlist: NextPage = () => {
     const [refCount, setRefCount] = useState(null);
 
     const packageObjectId = process.env.NEXT_PUBLIC_PACKAGE_ID;
-    const dataTableObjectId = process.env.NEXT_PUBLIC_DATA_TABLE_ID ;
+    const dataTableObjectId = process.env.NEXT_PUBLIC_DATA_TABLE_ID;
 
     const fullType = `${packageObjectId}::token::SoulboundToken`;
 
@@ -176,7 +176,7 @@ const Waitlist: NextPage = () => {
                                             onClick={async () => {
                                                 await claimXP(claimXpAddress);
                                             }}
-                                            disabled={freeClaimXp === 0}
+                                            disabled={freeClaimXp === 0 ? true : false}
                                         >
                                             Claim {freeClaimXp || 0} XP
                                         </button>
