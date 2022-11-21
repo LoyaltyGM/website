@@ -21,6 +21,11 @@ import defaultToken from "assets/chains/emptyToken.webp";
 import ethosLogo from "assets/logo/ethos_logo.png";
 import gmLogo from "assets/logo/gm-logo.png";
 
+// emoji
+import emoji1 from "assets/emoji/Claps.png";
+import emoji2 from "assets/emoji/HandHoldingPencilLeft.png";
+import emoji3 from "assets/emoji/Victory.png";
+
 const ASSETS = {
     // mockups
     daoLogoMock: daoLogoMock,
@@ -44,6 +49,11 @@ const ASSETS = {
     // logos
     ethosLogo: ethosLogo,
     gmLogo: gmLogo,
+
+    // emoji
+    emoji1: emoji1,
+    emoji2: emoji2,
+    emoji3: emoji3,
 };
 
 export default ASSETS;
