@@ -21,15 +21,15 @@ const Waitlist: NextPage = () => {
     const [currentXP, setCurrentXP] = useState(null);
     const [refCount, setRefCount] = useState(null);
 
-    const tokenObjectId = process.env.NEXT_PUBLIC_PACKAGE_ID;
+    const packageObjectId = process.env.NEXT_PUBLIC_PACKAGE_ID;
     const dataTableObjectId = process.env.NEXT_PUBLIC_DATA_TABLE_ID ;
 
-    const fullType = `${tokenObjectId}::token::Token`;
+    const fullType = `${packageObjectId}::token::SoulboundToken`;
 
     const mintCall = {
         kind: "moveCall" as const,
         data: {
-            packageObjectId: tokenObjectId,
+            packageObjectId: packageObjectId,
             module: "token",
             function: "mint",
             typeArguments: [],
@@ -43,7 +43,7 @@ const Waitlist: NextPage = () => {
     const mintCallWithRef = {
         kind: "moveCall" as const,
         data: {
-            packageObjectId: tokenObjectId,
+            packageObjectId: packageObjectId,
             module: "token",
             function: "mint_with_ref",
             typeArguments: [],
@@ -116,7 +116,7 @@ const Waitlist: NextPage = () => {
                 const singTransaction = {
                     kind: "moveCall" as const,
                     data: {
-                        packageObjectId: tokenObjectId,
+                        packageObjectId: packageObjectId,
                         module: "token",
                         function: "claim_exp",
                         typeArguments: [],
