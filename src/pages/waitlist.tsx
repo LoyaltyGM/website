@@ -175,13 +175,14 @@ const Waitlist: NextPage = () => {
         <div>
             <Layout className="layout-base bg-purple-500 h-full pb-0" isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
-                    <div
-                        className="relative flex flex-col items-center min-h-full justify-center bg-purple-500 rounded-lg">
+                    <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-500 rounded-lg">
                         {/* Main Features */}
                         <div className="flex justify-around w-full pb-8 text-white font-mono">
                             <div className="flex">
                                 <Image src={ASSETS.emoji3} width={50} height={50} layout={"fixed"} />
-                                <p className="flex justify-center items-center w-1/2">Loyalty NFT for projects</p>
+                                <p className="flex justify-center items-center w-1/2">
+                                    Loyalty NFT system for projects
+                                </p>
                             </div>
                             <div className="flex">
                                 <Image src={ASSETS.emoji2} width={50} height={50} layout={"fixed"} />
@@ -207,8 +208,7 @@ const Waitlist: NextPage = () => {
                                     NFT LOYALTY REWARD PLATFORM FOR YOUR FAVOURITE WEB3.0 PROJECT
                                 </div>
                                 {claimXpAddress ? (
-                                    <div
-                                        className="border-2 border-white bg-white/90 text-[#383838] rounded-xl ml-4 px-4 ">
+                                    <div className="border-2 border-white bg-white/90 text-[#383838] rounded-xl ml-4 px-4 ">
                                         <p className="ml-4 mt-6 text-xl font-mono">
                                             Your Loyalty NFT Stats (fully on-chain)
                                         </p>
@@ -233,7 +233,7 @@ const Waitlist: NextPage = () => {
                                     </div>
                                 ) : wallet?.address ? (
                                     <button
-                                        className="secondary-button ml-4 w-1/2 bg-white border-white"
+                                        className="secondary-button ml-4 w-1/2 bg-white border-white font-mono"
                                         onClick={socialsDialog.toggle}
                                     >
                                         {refAddress ? "Mint with refferal address" : "Mint"}
