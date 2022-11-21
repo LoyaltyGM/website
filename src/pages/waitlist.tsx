@@ -204,7 +204,7 @@ const Waitlist: NextPage = () => {
                                     </div>
                                 ) : wallet?.address ? (
                                     <button
-                                        className="secondary-button w-full border-white"
+                                        className="secondary-button ml-4 w-1/2 bg-white border-white"
                                         onClick={socialsDialog.toggle}
                                     >
                                         {refAddress ? "Mint with refferal address" : "Mint"}
