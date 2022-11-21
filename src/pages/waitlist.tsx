@@ -80,11 +80,12 @@ const Waitlist: NextPage = () => {
         if (!wallet?.address) return;
         try {
             // claim xp button
+            setClaimXpAddress(wallet.address);
             const wallet_objects = await provider.getObjectsOwnedByAddress(wallet.address);
             // current xp and ref count
             wallet_objects.map(async (value) => {
                 if (value.type === fullType) {
-                    setClaimXpAddress(value.objectId);
+                    // setClaimXpAddress(value.objectId);
                     const nft_object = await provider.getObject(value.objectId);
                     const nft_object_fields = getObjectFields(nft_object);
                     setCurrentXP(nft_object_fields.current_exp);
