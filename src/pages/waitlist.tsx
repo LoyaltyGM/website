@@ -29,6 +29,7 @@ const Waitlist: NextPage = () => {
     const { wallet } = ethos.useWallet();
 
     const [claimXpAddress, setClaimXpAddress] = useState(null);
+    const [walletAddress, setWalletAddress] = useState(null)
     const [freeClaimXp, setFreeClaimXP] = useState(null);
     const [totalMinted, setTotalMinted] = useState(null);
     const [currentXP, setCurrentXP] = useState(null);
@@ -82,6 +83,7 @@ const Waitlist: NextPage = () => {
             // claim xp button
             const wallet_objects = await provider.getObjectsOwnedByAddress(wallet.address);
             // current xp and ref count
+            setWalletAddress(wallet.address)
             wallet_objects.map(async (value) => {
                 if (value.type === fullType) {
                     setClaimXpAddress(value.objectId);
@@ -217,7 +219,7 @@ const Waitlist: NextPage = () => {
                                         <div className="w-full ml-4 gap-2 font-mono ">
                                             Refferal Link:
                                             <CopyTextButton
-                                                copyText={`https://${APP_URL}/waitlist?refAddress=${wallet.address}`}
+                                                copyText={`https://${APP_URL}/waitlist?refAddress=${walletAddress}`}
                                                 color={""}
                                             />
                                         </div>
