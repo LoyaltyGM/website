@@ -4,7 +4,7 @@ import Image from "next/image";
 export const Logo = () => {
     return (
         <div className="flex">
-            <span className="font-bold leading-5 text-white font-libreFrankBlack">LoyaltyGM</span>
+            <span className="font-bold leading-5 text-white font-mono">LoyaltyGM</span>
         </div>
     );
 };
