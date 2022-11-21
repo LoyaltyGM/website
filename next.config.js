@@ -20,3 +20,16 @@ const nextConfig = {
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
+
+// next.config.js
+module.exports = {
+    async redirects() {
+      return [
+        {
+          source: '/',
+          destination: '/waitlist',
+          permanent: true,
+        },
+      ];
+    },
+  };

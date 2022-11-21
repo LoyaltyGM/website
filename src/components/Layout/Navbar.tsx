@@ -11,7 +11,7 @@ const Navbar = () => {
         <>
             <div className={"w-1/2 grid grid-flow-col"}>
                 <div>
-                    <Link href="/" passHref>
+                    <Link href="/waitlist" passHref>
                         <button className="p-1 text-left text-neutral">
                             <span className="sr-only">Navigate to Home Page</span>
                             <Logo />
