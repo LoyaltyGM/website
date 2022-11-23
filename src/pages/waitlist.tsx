@@ -9,7 +9,6 @@ import ASSETS from "assets";
 import { useDialogState } from "ariakit";
 import {
     APP_URL,
-    DISCORD_LINK,
     FOLLOW_TWITTER_ETHOS_LINK,
     FOLLOW_TWITTER_GM_LINK,
     RETWEET_ETHOS_LINK,
@@ -248,6 +247,11 @@ const Waitlist: NextPage = () => {
                             </div>
                             <div className="w-1/2 mr-4">
                                 <Image src={ASSETS.loyaltyGMgif_Original} height={650} width={650} />
+                                <button
+                                    className="w-full mb-6 bg-[#383838] disabled py-2 text-white rounded-2xl font-bold pointer-none font-mono"
+                                >
+                                    Total Minted(before sui redeploy):  &gt;23000
+                                </button>
                                 {wallet?.address ? (
                                     <button
                                         className="w-full bg-[#383838] py-2 text-white rounded-2xl font-bold pointer-none font-mono"
@@ -320,21 +324,20 @@ const Waitlist: NextPage = () => {
                                 isMinted && (
                                     <div className={"flex flex-col gap-6"}>
                                         <div className={"flex text-2xl justify-center"}>Congratulations! 🥳</div>
-
-                                        {totalMinted < 8192 ? (
-                                            <div>
-                                                <div className={"flex text-xl justify-center"}>Ethos discord link:</div>
-                                                <a
-                                                    href={DISCORD_LINK}
-                                                    className={"flex text-xl btn-link justify-center"}
-                                                    target={"_blank"}
-                                                >
-                                                    {DISCORD_LINK}
-                                                </a>
-                                            </div>
-                                        ) : (
-                                            <></>
-                                        )}
+                                        {/*{totalMinted < 8192 ? (*/}
+                                        {/*    <div>*/}
+                                        {/*        <div className={"flex text-xl justify-center"}>Ethos discord link:</div>*/}
+                                        {/*        <a*/}
+                                        {/*            href={DISCORD_LINK}*/}
+                                        {/*            className={"flex text-xl btn-link justify-center"}*/}
+                                        {/*            target={"_blank"}*/}
+                                        {/*        >*/}
+                                        {/*            {DISCORD_LINK}*/}
+                                        {/*        </a>*/}
+                                        {/*    </div>*/}
+                                        {/*) : (*/}
+                                        {/*    <></>*/}
+                                        {/*)}*/}
                                     </div>
                                 )
                             )}
