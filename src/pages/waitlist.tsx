@@ -28,7 +28,7 @@ const Waitlist: NextPage = () => {
     const { wallet } = ethos.useWallet();
 
     const [claimXpAddress, setClaimXpAddress] = useState(null);
-    const [walletAddress, setWalletAddress] = useState(null)
+    const [walletAddress, setWalletAddress] = useState(null);
     const [freeClaimXp, setFreeClaimXP] = useState(null);
     const [totalMinted, setTotalMinted] = useState(null);
     const [currentXP, setCurrentXP] = useState(null);
@@ -37,9 +37,6 @@ const Waitlist: NextPage = () => {
     const socialsDialog = useDialogState();
     const { value: isGmFollow, setTrue: checkGmFollow } = useBoolean(false);
     const { value: isGmRetweet, setTrue: checkGmRetweet } = useBoolean(false);
-    const { value: isEthosFollow, setTrue: checkEthosFollow } = useBoolean(false);
-    const { value: isEthosRetweet, setTrue: checkEthosRetweet } = useBoolean(false);
-
     const { value: isMinted, setTrue: setMinted } = useBoolean(false);
 
     const packageObjectId = process.env.NEXT_PUBLIC_PACKAGE_ID;
@@ -82,7 +79,7 @@ const Waitlist: NextPage = () => {
             // claim xp button
             const wallet_objects = await provider.getObjectsOwnedByAddress(wallet.address);
             // current xp and ref count
-            setWalletAddress(wallet.address)
+            setWalletAddress(wallet.address);
             wallet_objects.map(async (value) => {
                 if (value.type === fullType) {
                     setClaimXpAddress(value.objectId);
@@ -170,7 +167,11 @@ const Waitlist: NextPage = () => {
 
     useEffect(() => {
         getObjects().then();
-    });
+        // const interval = setInterval(() => {
+        //     console.log("This will run every 10 second!");
+        // }, 10000);
+        // return () => clearInterval(interval);
+    }, [wallet.address]);
 
     return (
         <div>
@@ -225,9 +226,10 @@ const Waitlist: NextPage = () => {
                                         <button
                                             className="secondary-button w-full mt-4 mb-10 font-mono"
                                             onClick={async () => {
+                                                console.log("Free Claim XP", freeClaimXp);
                                                 await claimXP(claimXpAddress);
                                             }}
-                                            disabled={freeClaimXp === 0}
+                                            disabled={freeClaimXp === 0 || freeClaimXp === undefined ? true : false}
                                         >
                                             Claim {freeClaimXp || 0} XP
                                         </button>
@@ -247,10 +249,8 @@ const Waitlist: NextPage = () => {
                             </div>
                             <div className="w-1/2 mr-4">
                                 <Image src={ASSETS.loyaltyGMgif_Original} height={650} width={650} />
-                                <button
-                                    className="w-full mb-6 bg-[#383838] disabled py-2 text-white rounded-2xl font-bold pointer-none font-mono"
-                                >
-                                    Total Minted(before sui redeploy):  &gt;23000
+                                <button className="w-full mb-6 bg-[#383838] disabled py-2 text-white rounded-2xl font-bold pointer-none font-mono">
+                                    Total Minted(before sui redeploy): &gt;23000
                                 </button>
                                 {wallet?.address ? (
                                     <button
@@ -267,7 +267,7 @@ const Waitlist: NextPage = () => {
                     </div>
 
                     <CustomDialog dialog={socialsDialog} className={""} isClose={false}>
-                        {(!isGmFollow || !isGmRetweet || !isEthosFollow || !isEthosRetweet) && (
+                        {(!isGmFollow || !isGmRetweet) && (
                             <div className={"flex flex-col gap-6"}>
                                 <div className={"flex text-2xl justify-center"}>Don't forget to follow & retweet</div>
                                 <a
@@ -286,26 +286,10 @@ const Waitlist: NextPage = () => {
                                 >
                                     Retweet us
                                 </a>
-                                <a
-                                    href={FOLLOW_TWITTER_ETHOS_LINK}
-                                    onClick={checkEthosFollow}
-                                    target={"_blank"}
-                                    className={classNames("main-button", isEthosFollow && "bg-success border-none")}
-                                >
-                                    Follow Ethos on Twitter
-                                </a>
-                                <a
-                                    href={RETWEET_ETHOS_LINK}
-                                    onClick={checkEthosRetweet}
-                                    target={"_blank"}
-                                    className={classNames("main-button", isEthosRetweet && "bg-success border-none")}
-                                >
-                                    Retweet Ethos
-                                </a>
                             </div>
                         )}
                         <div>
-                            {isGmFollow && isGmRetweet && isEthosFollow && isEthosRetweet && !isMinted ? (
+                            {isGmFollow && isGmRetweet && !isMinted ? (
                                 <div>
                                     <div className={"flex text-2xl mb-6 justify-center"}>
                                         Mint Soulbound LoyaltyGM Token
@@ -324,20 +308,6 @@ const Waitlist: NextPage = () => {
                                 isMinted && (
                                     <div className={"flex flex-col gap-6"}>
                                         <div className={"flex text-2xl justify-center"}>Congratulations! 🥳</div>
-                                        {/*{totalMinted < 8192 ? (*/}
-                                        {/*    <div>*/}
-                                        {/*        <div className={"flex text-xl justify-center"}>Ethos discord link:</div>*/}
-                                        {/*        <a*/}
-                                        {/*            href={DISCORD_LINK}*/}
-                                        {/*            className={"flex text-xl btn-link justify-center"}*/}
-                                        {/*            target={"_blank"}*/}
-                                        {/*        >*/}
-                                        {/*            {DISCORD_LINK}*/}
-                                        {/*        </a>*/}
-                                        {/*    </div>*/}
-                                        {/*) : (*/}
-                                        {/*    <></>*/}
-                                        {/*)}*/}
                                     </div>
                                 )
                             )}
