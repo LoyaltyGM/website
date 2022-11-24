@@ -194,7 +194,7 @@ const Waitlist: NextPage = () => {
                                 <div className="sub-text fredoka-font text-white pl-4 pt-2 pb-10">
                                     NFT LOYALTY REWARD PLATFORM FOR YOUR FAVOURITE WEB3.0 PROJECT
                                 </div>
-                                {address ? (
+                                {claimXpAddress ? (
                                     <div className="border-2 border-white bg-white/90 text-[#383838] rounded-xl ml-4 px-4 ">
                                         <p className="ml-4 mt-6 text-xl font-mono">
                                             Your Loyalty NFT Stats (fully on-chain)
