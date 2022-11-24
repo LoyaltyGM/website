@@ -77,6 +77,7 @@ const Waitlist: NextPage = () => {
             wallet_objects.map(async (value) => {
                 if (value.type === fullType) {
                     setClaimXpAddress(value.objectId);
+                    console.log("claim " + value.objectId);
                     const nft_object = await provider.getObject(value.objectId);
                     const nft_object_fields = getObjectFields(nft_object);
                     setCurrentXP(nft_object_fields.current_exp);
@@ -116,6 +117,7 @@ const Waitlist: NextPage = () => {
                 if (moveEvent?.fields?.token_id) {
                     for (let i = 0; i < 5; i++) emojisplosion();
                     setMinted();
+                    setTimeout(() => getObjects().then(), 1000);
                 }
             }
         } catch (error) {
@@ -154,7 +156,7 @@ const Waitlist: NextPage = () => {
     };
 
     useEffect(() => {
-        console.log("get obj " + address);
+        console.log("get obj for address" + address);
         getObjects().then();
     }, [address]);
 
