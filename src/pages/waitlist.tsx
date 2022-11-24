@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import Image from "next/image";
 import Layout from "components/Layout";
@@ -23,7 +23,6 @@ const Waitlist: NextPage = () => {
     const address = ethos.useAddress();
 
     const [claimXpAddress, setClaimXpAddress] = useState(null);
-    const [walletAddress, setWalletAddress] = useState(null);
     const [freeClaimXp, setFreeClaimXP] = useState(null);
     const [totalMinted, setTotalMinted] = useState(null);
     const [currentXP, setCurrentXP] = useState(null);
@@ -69,13 +68,12 @@ const Waitlist: NextPage = () => {
     };
 
     const getObjects = async () => {
-        if (!wallet?.address) return;
+        if (!address) return;
         try {
             // claim xp button
             console.log("try");
             const wallet_objects = await provider.getObjectsOwnedByAddress(address);
             // current xp and ref count
-            setWalletAddress(wallet.address);
             wallet_objects.map(async (value) => {
                 if (value.type === fullType) {
                     setClaimXpAddress(value.objectId);
@@ -158,7 +156,7 @@ const Waitlist: NextPage = () => {
     useEffect(() => {
         console.log("get obj " + address);
         getObjects().then();
-    }, [wallet?.address]);
+    }, [address]);
 
     return (
         <div>
@@ -218,7 +216,7 @@ const Waitlist: NextPage = () => {
                                                 console.log("Free Claim XP", freeClaimXp);
                                                 await claimXP(claimXpAddress);
                                             }}
-                                            disabled={freeClaimXp === 0 || freeClaimXp === undefined ? true : false}
+                                            disabled={freeClaimXp === 0 || freeClaimXp === undefined}
                                         >
                                             Claim {freeClaimXp || 0} XP
                                         </button>
