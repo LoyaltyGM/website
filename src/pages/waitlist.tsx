@@ -7,14 +7,7 @@ import { getObjectFields, JsonRpcProvider, Network } from "@mysten/sui.js";
 import { useRouter } from "next/router";
 import ASSETS from "assets";
 import { useDialogState } from "ariakit";
-import {
-    APP_URL,
-    DISCORD_LINK,
-    FOLLOW_TWITTER_ETHOS_LINK,
-    FOLLOW_TWITTER_GM_LINK,
-    RETWEET_ETHOS_LINK,
-    RETWEET_GM_LINK,
-} from "../utils";
+import { APP_URL, FOLLOW_TWITTER_GM_LINK, RETWEET_GM_LINK } from "../utils";
 import { useBoolean } from "usehooks-ts";
 import classNames from "classnames";
 import toast from "react-hot-toast";
@@ -29,7 +22,7 @@ const Waitlist: NextPage = () => {
     const { wallet } = ethos.useWallet();
 
     const [claimXpAddress, setClaimXpAddress] = useState(null);
-    const [walletAddress, setWalletAddress] = useState(null)
+    const [walletAddress, setWalletAddress] = useState(null);
     const [freeClaimXp, setFreeClaimXP] = useState(null);
     const [totalMinted, setTotalMinted] = useState(null);
     const [currentXP, setCurrentXP] = useState(null);
@@ -38,9 +31,6 @@ const Waitlist: NextPage = () => {
     const socialsDialog = useDialogState();
     const { value: isGmFollow, setTrue: checkGmFollow } = useBoolean(false);
     const { value: isGmRetweet, setTrue: checkGmRetweet } = useBoolean(false);
-    const { value: isEthosFollow, setTrue: checkEthosFollow } = useBoolean(false);
-    const { value: isEthosRetweet, setTrue: checkEthosRetweet } = useBoolean(false);
-
     const { value: isMinted, setTrue: setMinted } = useBoolean(false);
 
     const packageObjectId = process.env.NEXT_PUBLIC_PACKAGE_ID;
@@ -77,13 +67,13 @@ const Waitlist: NextPage = () => {
         },
     };
 
-    const getObjects = useCallback(async () => {
+    const getObjects = async () => {
         if (!wallet?.address) return;
         try {
             // claim xp button
             const wallet_objects = await provider.getObjectsOwnedByAddress(wallet.address);
             // current xp and ref count
-            setWalletAddress(wallet.address)
+            setWalletAddress(wallet.address);
             wallet_objects.map(async (value) => {
                 if (value.type === fullType) {
                     setClaimXpAddress(value.objectId);
@@ -113,65 +103,59 @@ const Waitlist: NextPage = () => {
         } catch (error) {
             console.log(error);
         }
-    }, [wallet]);
+    };
 
-    const mint = useCallback(
-        async (singTransaction) => {
-            if (!wallet) return;
-            try {
-                const response = await wallet.signAndExecuteTransaction(singTransaction);
-                console.log("RESPONSE", response);
-                if (response?.effects?.events) {
-                    const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
-                    console.log("Object NFT", moveEvent.fields.token_id);
-                    if (moveEvent?.fields?.token_id) {
-                        for (let i = 0; i < 5; i++) emojisplosion();
-                        setMinted();
-                    }
+    const mint = async (singTransaction) => {
+        if (!wallet) return;
+        try {
+            const response = await wallet.signAndExecuteTransaction(singTransaction);
+            console.log("RESPONSE", response);
+            if (response?.effects?.events) {
+                const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
+                console.log("Object NFT", moveEvent.fields.token_id);
+                if (moveEvent?.fields?.token_id) {
+                    for (let i = 0; i < 5; i++) emojisplosion();
+                    setMinted();
                 }
-            } catch (error) {
-                console.log(error);
-                toast.error("Mint failed");
             }
-        },
-        [wallet]
-    );
+        } catch (error) {
+            console.log(error);
+            toast.error("Mint failed");
+        }
+    };
 
-    const claimXP = useCallback(
-        async (tokenAddress) => {
-            if (!wallet) return;
-            try {
-                const singTransaction = {
-                    kind: "moveCall" as const,
-                    data: {
-                        packageObjectId: packageObjectId,
-                        module: "token",
-                        function: "claim_exp",
-                        typeArguments: [],
-                        arguments: [
-                            tokenAddress, // token to update
-                            dataTableObjectId, //store
-                        ],
-                        gasBudget: 10000,
-                    },
-                };
-                const response = await wallet.signAndExecuteTransaction(singTransaction);
-                //console.log("RESPONSE", response);
+    const claimXP = async (tokenAddress: string) => {
+        if (!wallet) return;
+        try {
+            const singTransaction = {
+                kind: "moveCall" as const,
+                data: {
+                    packageObjectId: packageObjectId,
+                    module: "token",
+                    function: "claim_exp",
+                    typeArguments: [],
+                    arguments: [
+                        tokenAddress, // token to update
+                        dataTableObjectId, //store
+                    ],
+                    gasBudget: 10000,
+                },
+            };
+            const response = await wallet.signAndExecuteTransaction(singTransaction);
+            //console.log("RESPONSE", response);
 
-                if (response?.effects?.events) {
-                    // const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
-                    //console.log("Object NFT", moveEvent.fields.token_id);
-                }
-            } catch (error) {
-                console.log(error);
+            if (response?.effects?.events) {
+                // const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
+                //console.log("Object NFT", moveEvent.fields.token_id);
             }
-        },
-        [wallet]
-    );
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
         getObjects().then();
-    });
+    }, [wallet?.address]);
 
     return (
         <div>
@@ -226,9 +210,10 @@ const Waitlist: NextPage = () => {
                                         <button
                                             className="secondary-button w-full mt-4 mb-10 font-mono"
                                             onClick={async () => {
+                                                console.log("Free Claim XP", freeClaimXp);
                                                 await claimXP(claimXpAddress);
                                             }}
-                                            disabled={freeClaimXp === 0}
+                                            disabled={freeClaimXp === 0 || freeClaimXp === undefined ? true : false}
                                         >
                                             Claim {freeClaimXp || 0} XP
                                         </button>
@@ -248,6 +233,9 @@ const Waitlist: NextPage = () => {
                             </div>
                             <div className="w-1/2 mr-4">
                                 <Image src={ASSETS.loyaltyGMgif_Original} height={650} width={650} />
+                                <button className="w-full mb-6 bg-[#383838] disabled py-2 text-white rounded-2xl font-bold pointer-none font-mono">
+                                    Total Minted(before sui redeploy): &gt;23000
+                                </button>
                                 {wallet?.address ? (
                                     <button
                                         className="w-full bg-[#383838] py-2 text-white rounded-2xl font-bold pointer-none font-mono"
@@ -263,7 +251,7 @@ const Waitlist: NextPage = () => {
                     </div>
 
                     <CustomDialog dialog={socialsDialog} className={""} isClose={false}>
-                        {(!isGmFollow || !isGmRetweet || !isEthosFollow || !isEthosRetweet) && (
+                        {(!isGmFollow || !isGmRetweet) && (
                             <div className={"flex flex-col gap-6"}>
                                 <div className={"flex text-2xl justify-center"}>Don't forget to follow & retweet</div>
                                 <a
@@ -282,26 +270,10 @@ const Waitlist: NextPage = () => {
                                 >
                                     Retweet us
                                 </a>
-                                <a
-                                    href={FOLLOW_TWITTER_ETHOS_LINK}
-                                    onClick={checkEthosFollow}
-                                    target={"_blank"}
-                                    className={classNames("main-button", isEthosFollow && "bg-success border-none")}
-                                >
-                                    Follow Ethos on Twitter
-                                </a>
-                                <a
-                                    href={RETWEET_ETHOS_LINK}
-                                    onClick={checkEthosRetweet}
-                                    target={"_blank"}
-                                    className={classNames("main-button", isEthosRetweet && "bg-success border-none")}
-                                >
-                                    Retweet Ethos
-                                </a>
                             </div>
                         )}
                         <div>
-                            {isGmFollow && isGmRetweet && isEthosFollow && isEthosRetweet && !isMinted ? (
+                            {isGmFollow && isGmRetweet && !isMinted ? (
                                 <div>
                                     <div className={"flex text-2xl mb-6 justify-center"}>
                                         Mint Soulbound LoyaltyGM Token
@@ -320,21 +292,6 @@ const Waitlist: NextPage = () => {
                                 isMinted && (
                                     <div className={"flex flex-col gap-6"}>
                                         <div className={"flex text-2xl justify-center"}>Congratulations! 🥳</div>
-
-                                        {totalMinted < 8192 ? (
-                                            <div>
-                                                <div className={"flex text-xl justify-center"}>Ethos discord link:</div>
-                                                <a
-                                                    href={DISCORD_LINK}
-                                                    className={"flex text-xl btn-link justify-center"}
-                                                    target={"_blank"}
-                                                >
-                                                    {DISCORD_LINK}
-                                                </a>
-                                            </div>
-                                        ) : (
-                                            <></>
-                                        )}
                                     </div>
                                 )
                             )}
