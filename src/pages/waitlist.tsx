@@ -203,7 +203,7 @@ const Waitlist: NextPage = () => {
                                         <p className="w-full ml-4 font-mono">Refferal Count: {refCount || 0}</p>
                                         <div className="w-full ml-4 gap-2 font-mono ">
                                             Refferal Link:
-                                            {address && (
+                                            {claimXpAddress && (
                                                 <CopyTextButton
                                                     copyText={`https://${APP_URL}/waitlist?refAddress=${address}`}
                                                     color={""}
