@@ -215,10 +215,9 @@ const Waitlist: NextPage = () => {
                                         <button
                                             className="secondary-button w-full mt-4 mb-10 font-mono"
                                             onClick={async () => {
-                                                console.log("Free Claim XP", freeClaimXp);
                                                 await claimXP(claimXpAddress);
                                             }}
-                                            disabled={freeClaimXp === 0 || freeClaimXp === undefined}
+                                            disabled={freeClaimXp === 0 || freeClaimXp === null}
                                         >
                                             Claim {freeClaimXp || 0} XP
                                         </button>
