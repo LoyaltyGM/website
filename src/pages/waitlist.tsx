@@ -20,6 +20,7 @@ const Waitlist: NextPage = () => {
 
     const provider = new JsonRpcProvider(Network.DEVNET);
     const { wallet } = ethos.useWallet();
+    const address = ethos.useAddress();
 
     const [claimXpAddress, setClaimXpAddress] = useState(null);
     const [walletAddress, setWalletAddress] = useState(null);
@@ -71,7 +72,8 @@ const Waitlist: NextPage = () => {
         if (!wallet?.address) return;
         try {
             // claim xp button
-            const wallet_objects = await provider.getObjectsOwnedByAddress(wallet.address);
+            console.log("try");
+            const wallet_objects = await provider.getObjectsOwnedByAddress(address);
             // current xp and ref count
             setWalletAddress(wallet.address);
             wallet_objects.map(async (value) => {
@@ -96,7 +98,7 @@ const Waitlist: NextPage = () => {
 
                 const claim_xp_object = await provider.getObject(store_dynamic_field_owner);
                 const claim_xp_field = getObjectFields(claim_xp_object);
-                if (claim_xp_field.owner === wallet.address) {
+                if (claim_xp_field.owner === address) {
                     setFreeClaimXP(claim_xp_field.claimable_exp);
                 }
             });
@@ -154,6 +156,7 @@ const Waitlist: NextPage = () => {
     };
 
     useEffect(() => {
+        console.log("get obj " + address);
         getObjects().then();
     }, [wallet?.address]);
 
@@ -193,7 +196,7 @@ const Waitlist: NextPage = () => {
                                 <div className="sub-text fredoka-font text-white pl-4 pt-2 pb-10">
                                     NFT LOYALTY REWARD PLATFORM FOR YOUR FAVOURITE WEB3.0 PROJECT
                                 </div>
-                                {claimXpAddress ? (
+                                {address ? (
                                     <div className="border-2 border-white bg-white/90 text-[#383838] rounded-xl ml-4 px-4 ">
                                         <p className="ml-4 mt-6 text-xl font-mono">
                                             Your Loyalty NFT Stats (fully on-chain)
@@ -202,10 +205,12 @@ const Waitlist: NextPage = () => {
                                         <p className="w-full ml-4 font-mono">Refferal Count: {refCount || 0}</p>
                                         <div className="w-full ml-4 gap-2 font-mono ">
                                             Refferal Link:
-                                            <CopyTextButton
-                                                copyText={`https://${APP_URL}/waitlist?refAddress=${walletAddress}`}
-                                                color={""}
-                                            />
+                                            {address && (
+                                                <CopyTextButton
+                                                    copyText={`https://${APP_URL}/waitlist?refAddress=${address}`}
+                                                    color={""}
+                                                />
+                                            )}
                                         </div>
                                         <button
                                             className="secondary-button w-full mt-4 mb-10 font-mono"
