@@ -35,6 +35,7 @@ const Waitlist: NextPage = () => {
 
     const packageObjectId = process.env.NEXT_PUBLIC_PACKAGE_ID;
     const dataTableObjectId = process.env.NEXT_PUBLIC_DATA_TABLE_ID;
+    const totalMintedBefore = process.env.NEXT_PUBLIC_TOTAL_MINTED;
 
     const fullType = `${packageObjectId}::token::SoulboundToken`;
 
@@ -238,7 +239,7 @@ const Waitlist: NextPage = () => {
                             <div className="w-1/2 mr-4">
                                 <Image src={ASSETS.loyaltyGMgif_Original} height={650} width={650} />
                                 <button className="w-full mb-6 bg-[#383838] disabled py-2 text-white rounded-2xl font-bold pointer-none font-mono">
-                                    Total Minted(before sui redeploy): &gt;23000
+                                    Total Minted(before sui redeploy): &gt;{totalMintedBefore}
                                 </button>
                                 {wallet?.address ? (
                                     <button
