@@ -6,8 +6,9 @@ import ASSETS from "assets";
 import Image from "next/image";
 
 const Lootbox: NextPage = () => {
-    const packageObjectId = "0x17e4fd81d9ec1138ac3056b3c284f0c015e54510";
-    const boxCollectionID = "0x8e0e0481326bc70270a0850db0cffbf306217fa8";
+    const packageObjectId = "0x90b3af3577d0481b5b6a46713330256c2076e871";
+    const boxCollectionID = "0x982ad66c37e99d54cc8b77e7cec1d871c95bbab8";
+    // TODO: Change automatically
     const box_price = "0xa598488141d3667b8826e3e6bd45348c8a35ff30";
     const wallet = useWallet();
 
