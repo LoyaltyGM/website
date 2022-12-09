@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { Logo, MoonIcon, SunIcon } from "components";
 import { useDarkMode } from "usehooks-ts";
-import { ethos, SignInButton, EthosConnectStatus } from "ethos-connect";
+import { ConnectButton } from "@suiet/wallet-kit";
 
 const Navbar = () => {
     // const { toggle } = useDarkMode();
-    const { status, wallet } = ethos.useWallet();
 
     return (
         <>
@@ -21,18 +20,7 @@ const Navbar = () => {
             </div>
 
             <div className={"flex gap-3"}>
-                <>
-                    {status === EthosConnectStatus.Loading ? (
-                        // Loading...
-                        <ethos.components.AddressWidget />
-                    ) : status === EthosConnectStatus.NoConnection ? (
-                        // <SignInButton />
-                        <ethos.components.AddressWidget />
-                    ) : (
-                        // status is EthosConnectStatus.Connected
-                        <ethos.components.AddressWidget buttonColor="#9D4CF0" />
-                    )}
-                </>
+                <ConnectButton />
                 {/*<label className="swap swap-rotate text-xs text-neutral">*/}
                 {/*    <input type="checkbox" onClick={toggle} />*/}
                 {/*    <SunIcon />*/}

@@ -1,9 +1,10 @@
 import * as React from "react";
 import Navbar from "./Navbar";
+import classNames from "classnames";
 
-const Header = () => {
+const Header = (className) => {
     return (
-        <header className={"header"}>
+        <header className={classNames("header", className)}>
             <Navbar />
         </header>
     );

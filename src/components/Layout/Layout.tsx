@@ -8,6 +8,7 @@ interface ILayoutProps {
     children: React.ReactNode;
     className?: string;
     isMinHeightTurnOff?: boolean;
+    headerBackground?: string;
     footer?: boolean;
 }
 
@@ -15,6 +16,7 @@ export default function Layout({
     children,
     className,
     isMinHeightTurnOff = false,
+    headerBackground = " ",
     footer = true,
     ...props
 }: ILayoutProps) {
@@ -22,7 +24,7 @@ export default function Layout({
         <>
             <HeadInfo />
             <div className={isMinHeightTurnOff ? "relative h-[calc(100vh)]" : "relative min-h-screen"}>
-                <Header />
+                <Header className={headerBackground} />
                 <main className={classNames("flex-1", className, footer ? "pb-2" : "")} {...props}>
                     {children}
                 </main>

@@ -8,10 +8,8 @@ module.exports = {
             xl: "1440px",
         },
 
-        extend: {
-            fontFamily: {
-                libreFrankBlack: ["LibreFranklin-Black.ttf", "Black"],
-            },
+        fontFamily: {
+            bungee: ["BungeeShade-Regular", "sans-serif"],
         },
     },
     plugins: [require("@tailwindcss/line-clamp"), require("daisyui")],

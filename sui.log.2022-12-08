@@ -1,0 +1,11 @@
+2022-12-08T20:31:32.796821Z  INFO sui::client_commands: 0xda9cce2e9767bc4974dceeabdf9d4937e5a90d7f
+2022-12-08T20:31:40.432135Z  INFO sui::client_commands:                  Object ID                  |  Gas Value 
+2022-12-08T20:31:40.432216Z  INFO sui::client_commands: ----------------------------------------------------------------------
+2022-12-08T21:19:31.093035Z  WARN sui::client_commands: Client/Server api version mismatch, client api version : 0.18.0, server api version : 0.18.1
+2022-12-08T21:19:31.229295Z  INFO sui::client_commands:                  Object ID                  |  Gas Value 
+2022-12-08T21:19:31.229322Z  INFO sui::client_commands: ----------------------------------------------------------------------
+2022-12-08T21:21:04.456694Z  INFO sui::client_commands: 0xda9cce2e9767bc4974dceeabdf9d4937e5a90d7f
+2022-12-08T21:21:45.762485Z  WARN sui::client_commands: Client/Server api version mismatch, client api version : 0.18.0, server api version : 0.18.1
+2022-12-08T21:21:46.048609Z  INFO sui::client_commands:                  Object ID                  |  Gas Value 
+2022-12-08T21:21:46.048630Z  INFO sui::client_commands: ----------------------------------------------------------------------
+2022-12-08T21:21:46.048634Z  INFO sui::client_commands:  0xaefaabcca3dd1ef5ea3480e917c047dda715d63d |  50000000  

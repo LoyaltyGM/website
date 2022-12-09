@@ -11,7 +11,7 @@ import { APP_URL, FOLLOW_TWITTER_GM_LINK, RETWEET_GM_LINK } from "../utils";
 import { useBoolean } from "usehooks-ts";
 import classNames from "classnames";
 import toast from "react-hot-toast";
-import { ethos, SignInButton } from "ethos-connect";
+import { ethos } from "ethos-connect";
 import { emojisplosion } from "emojisplosion";
 
 const Waitlist: NextPage = () => {
@@ -231,9 +231,7 @@ const Waitlist: NextPage = () => {
                                         {refAddress ? "Mint with refferal address" : "Mint"}
                                     </button>
                                 ) : (
-                                    <SignInButton className="secondary-button ml-4 bg-white">
-                                        Connect Wallet
-                                    </SignInButton>
+                                    <></>
                                 )}
                             </div>
                             <div className="w-1/2 mr-4">

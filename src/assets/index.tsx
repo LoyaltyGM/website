@@ -18,7 +18,10 @@ import defaultToken from "assets/chains/emptyToken.webp";
 
 // logo
 import ethosLogo from "assets/logo/ethos_logo.png";
-import gmLogo from "assets/logo/gm-logo.png";
+
+// lootbox
+import LBOX from "assets/lootbox/LBOX.png";
+import LQUESTION from "assets/lootbox/LQUESTION.png";
 
 // emoji
 import emoji1 from "assets/emoji/Claps.png";
@@ -39,6 +42,10 @@ const ASSETS = {
     // video
     loyaltyGMgif_Original: loyaltyGMgif_Original,
 
+    // lootboxes
+    LBOX: LBOX,
+    LQUESTION: LQUESTION,
+
     // tokens
     defaultToken: defaultToken,
     Ethereum: Ethereum,
@@ -46,7 +53,8 @@ const ASSETS = {
 
     // logos
     ethosLogo: ethosLogo,
-    gmLogo: gmLogo,
+    suietLogo: ethosLogo,
+    suiEcosystemLogo: ethosLogo,
 
     // emoji
     emoji1: emoji1,

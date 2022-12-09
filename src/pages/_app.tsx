@@ -7,6 +7,9 @@ import "styles/globals.css";
 import { useBoolean, useDarkMode } from "usehooks-ts";
 import { DARK_THEME, LIGHT_THEME } from "utils";
 import { EthosConnectProvider } from "ethos-connect";
+import { WalletProvider } from "@suiet/wallet-kit";
+import "@suiet/wallet-kit/style.css";
+import "styles/suiet-wallet-kit-custom.css";
 
 function App({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(() => new QueryClient());
@@ -35,15 +38,17 @@ function App({ Component, pageProps }: AppProps) {
                     });
                 `}
             </Script>
-            <EthosConnectProvider
+            {/* <EthosConnectProvider
                 ethosConfiguration={{
                     hideEmailSignIn: true, // defaults to false
                 }}
-            >
+            > */}
+            <WalletProvider>
                 <QueryClientProvider client={queryClient}>
                     <Component {...pageProps} />
                 </QueryClientProvider>
-            </EthosConnectProvider>
+            </WalletProvider>
+            {/* </EthosConnectProvider> */}
 
             <CustomToast />
         </div>

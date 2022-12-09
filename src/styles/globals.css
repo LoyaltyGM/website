@@ -1,5 +1,5 @@
 @import url("https://rsms.me/inter/inter.css");
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -170,6 +170,14 @@
     animation: anime 6s linear infinite;
 }
 
+.gradient-font {
+    font-size: 3rem;
+    font-weight: bold;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #7343df, #f44f8f, #e5c13f);
+}
+
 @keyframes anime {
     0% {
         background-position: 0 50%;
@@ -181,21 +189,8 @@
         background-position: 0 50%;
     }
 }
-
-/* Web3AUTH in rainbowkit max z-index: 2147483646 */
-#w3a-modal {
-    z-index: 2147483647;
-}
-
-/* RainbowKit Wallet */
-/* [data-rk] .iekbcc0 {
-    z-index: 50;
-} */
-
-@layer utilities {
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+/* Logo Font */
+@font-face {
+    font-family: "BungeeShade-Regular";
+    src: url("/fonts/BungeeShade-Regular.ttf") format("truetype");
 }
