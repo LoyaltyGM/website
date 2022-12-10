@@ -99,9 +99,9 @@ const Lootbox: NextPage = () => {
                 headerBackground="bg-[#1C1D25]"
             >
                 <h1 className="text-[8.2vw] font-bold text-center w-full">
-                    <span className="text-purple-500 whitespace-no-wrap">Be </span>
+                    <span className="text-[#C527D8] whitespace-no-wrap">Be </span>
                     among the
-                    <span className="text-purple-500"> first</span>
+                    <span className="text-[#C527D8]"> first</span>
                 </h1>
                 <div className="flex bg-[#25262F] rounded-2xl px-6 py-1 w-1/2 items-center gap-2 text-[3.2vw]">
                     <p className="gradient-font ">0/30000</p>
