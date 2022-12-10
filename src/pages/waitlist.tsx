@@ -163,28 +163,9 @@ const Waitlist: NextPage = () => {
 
     return (
         <div>
-            <Layout className="layout-base bg-purple-500 h-full pb-0" isMinHeightTurnOff={true}>
+            <Layout className="layout-base bg-[#1C1D25] h-full pb-0" isMinHeightTurnOff={true}>
                 <section className="relative w-full min-h-full justify-between">
-                    <div className="relative flex flex-col items-center min-h-full justify-center bg-purple-500 rounded-lg">
-                        {/* Main Features */}
-                        <div className="flex justify-around w-full pb-8 text-white font-mono">
-                            <div className="flex">
-                                <Image src={ASSETS.emoji3} width={50} height={50} layout={"fixed"} />
-                                <p className="flex justify-center items-center w-1/2">
-                                    Loyalty NFT system for projects
-                                </p>
-                            </div>
-                            <div className="flex">
-                                <Image src={ASSETS.emoji2} width={50} height={50} layout={"fixed"} />
-                                <p className="flex justify-center items-center w-1/2">On-chain levels and xp</p>
-                            </div>
-                            <div className="flex">
-                                <Image src={ASSETS.emoji1} width={50} height={50} layout={"fixed"} />
-                                <p className="flex justify-center items-center w-1/2">
-                                    Complete daily tasks and get rewards
-                                </p>
-                            </div>
-                        </div>
+                    <div className="relative flex flex-col items-center min-h-full justify-center rounded-lg">
                         <div className="flex gap-10 justify-between w-full">
                             <div className="w-3/4 ml-4">
                                 <h1 className="text-highlighter fredoka-font text-[#FADC4B] inset-y-0 left-0 pl-4 pt-10">

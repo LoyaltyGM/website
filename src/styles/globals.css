@@ -39,7 +39,7 @@
     }
 
     .header {
-        @apply flex top-0 z-50 h-16 fixed w-full bg-purple-500 items-center justify-between gap-10 text-base-content;
+        @apply flex top-0 z-50 h-16 fixed w-full bg-[#1C1D25] items-center justify-between gap-10 text-base-content;
         padding-inline: clamp(0.5rem, 2.5vw, 2rem);
         padding-block: clamp(1rem, 2.5vh, 2rem);
     }
@@ -171,7 +171,7 @@
 }
 
 .gradient-font {
-    font-size: 3rem;
+    font-size: 1.5rem;
     font-weight: bold;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
