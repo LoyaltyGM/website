@@ -98,17 +98,24 @@ const Lootbox: NextPage = () => {
                 isMinHeightTurnOff={true}
                 headerBackground="bg-[#1C1D25]"
             >
-                <h1 className="text-[8.2vw] font-bold text-center w-full">
-                    <span className="text-[#C527D8] whitespace-no-wrap">Be </span>
-                    among the
-                    <span className="text-[#C527D8]"> first</span>
-                </h1>
-                <div className="flex bg-[#25262F] rounded-2xl px-6 py-1 w-1/2 items-center gap-2 text-[3.2vw]">
-                    <p className="gradient-font ">0/30000</p>
-                    <p className="gradient-font text-white">total opened</p>
+                <div>
+                    <h1 className="text-[8.2vw] mt-10 font-bold text-center w-full">
+                        <span className="text-[#C527D8] whitespace-no-wrap">Be </span>
+                        among the
+                        <span className="text-[#C527D8]"> first</span>
+                    </h1>
+                    <div className="flex justify-end px-6 py-1 text-right gap-2 text-[3.2vw]">
+                        <div className="flex gap-2 px-6 py-1 rounded-xl bg-[#25262F]">
+                            <p className="gradient-font ">0/30000</p>
+                            <p className="gradient-font text-white">total opened</p>
+                        </div>
+                    </div>
                 </div>
-                <Image src={ASSETS.LBOX} height={225} width={225} />
-                <p className="text-white text-2xl">1. Get Box</p>
+                <div className="items-center">
+                    <Image src={ASSETS.LBOX} height={225} width={225} />
+                    <p className="text-white text-2xl">1.</p>
+                    <p>Get Box</p>
+                </div>
 
                 <Image src={ASSETS.LQUESTION} height={225} width={225} />
                 <p className="text-white text-2xl">2. Open Box</p>
