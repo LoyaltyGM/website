@@ -1,23 +1,24 @@
 import * as React from "react";
-import { DiscordIcon, TwitterIcon } from "components";
 import ASSETS from "assets";
 import Image from "next/image";
 
 const Footer = () => {
     const MainFeatures = () => {
         return (
-            <div className="flex justify-around w-full pb-4 pt-4 rounded-t-3xl text-white bg-[#181A20] font-mono">
-                <div className="flex">
-                    <Image src={ASSETS.emoji3} width={50} height={50} layout={"fixed"} />
-                    <p className="flex justify-center items-center w-1/2">Loyalty NFT system for projects</p>
-                </div>
-                <div className="flex">
-                    <Image src={ASSETS.emoji2} width={50} height={50} layout={"fixed"} />
-                    <p className="flex justify-center items-center w-1/2">On-chain levels and xp</p>
-                </div>
-                <div className="flex">
-                    <Image src={ASSETS.emoji1} width={50} height={50} layout={"fixed"} />
-                    <p className="flex justify-center items-center w-1/2">Complete daily tasks and get rewards</p>
+            <div className={"bg-[#1C1D25]"}>
+                <div className="flex justify-around w-full pb-4 pt-4 rounded-t-3xl text-white bg-[#181A20] font-mono">
+                    <div className="flex">
+                        <Image src={ASSETS.emoji3} width={50} height={50} layout={"fixed"} />
+                        <p className="flex justify-center items-center w-1/2">Loyalty NFT system for projects</p>
+                    </div>
+                    <div className="flex">
+                        <Image src={ASSETS.emoji2} width={50} height={50} layout={"fixed"} />
+                        <p className="flex justify-center items-center w-1/2">On-chain levels and xp</p>
+                    </div>
+                    <div className="flex">
+                        <Image src={ASSETS.emoji1} width={50} height={50} layout={"fixed"} />
+                        <p className="flex justify-center items-center w-1/2">Complete daily tasks and get rewards</p>
+                    </div>
                 </div>
             </div>
         );
