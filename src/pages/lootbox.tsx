@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
-import { getObjectFields, Network, Ed25519Keypair, JsonRpcProvider, RawSigner } from "@mysten/sui.js";
-import { useWallet, useAccountBalance } from "@suiet/wallet-kit";
+import { useWallet } from "@suiet/wallet-kit";
 import Layout from "components/Layout";
 import ASSETS from "assets";
 import Image from "next/image";
+import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 
 const Lootbox: NextPage = () => {
     const packageObjectId = "0xe844685cf48f8705266b9ee973a4d75d97179c9d";
@@ -41,6 +41,7 @@ const Lootbox: NextPage = () => {
                 },
             };
             setButtonStatus("loading");
+            // @ts-ignore
             const response = await wallet.signAndExecuteTransaction(singTransaction);
             console.log("RESPONSE", response);
 
@@ -104,12 +105,17 @@ const Lootbox: NextPage = () => {
                     </div>
                 </div>
                 <button
-                    className="secondary-button bg-white w-1/2 mt-10 mb-24 border-none font-mono hover:bg-[#C527D8]"
+                    className="sliding-btn w-1/4 mt-10 mb-24"
                     onClick={async () => {
                         await buy_lootbox();
                     }}
                 >
-                    Get my box
+                    <div className={"flex gap-5 items-center text-base"}>
+                        <div>
+                            <ArrowRightCircleIcon className={"h-8 w-8"} color={'#C527D8'} />
+                        </div>
+                        <div>Get my box</div>
+                    </div>
                 </button>
             </Layout>
         </div>
