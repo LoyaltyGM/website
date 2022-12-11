@@ -99,7 +99,7 @@ const Lootbox: NextPage = () => {
                 headerBackground="bg-[#1C1D25]"
             >
                 <div>
-                    <h1 className="text-[8.2vw] mt-10 font-bold text-center w-full">
+                    <h1 className="text-[10rem] mt-10 font-bold text-center w-full">
                         <span className="text-[#C527D8] whitespace-no-wrap">Be </span>
                         among the
                         <span className="text-[#C527D8]"> first</span>
@@ -111,16 +111,34 @@ const Lootbox: NextPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="items-center">
-                    <Image src={ASSETS.LBOX} height={225} width={225} />
-                    <p className="text-white text-2xl">1.</p>
-                    <p>Get Box</p>
+                <div className="flex justify-start -mt-16 ml-12">
+                    <div className="relative w-60 h-60">
+                        <Image
+                            src={ASSETS.LBOX}
+                            alt="Description of image"
+                            layout="fill"
+                            objectFit="cover"
+                            className="absolute top-0 left-0 w-full h-full"
+                        />
+                        <p className="absolute bottom-0 left-0 -ml-6 text-[#C527D8] text-2xl font-bold">1.</p>
+                        <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-4xl font-bold">Get Box</p>
+                    </div>
                 </div>
-
-                <Image src={ASSETS.LQUESTION} height={225} width={225} />
-                <p className="text-white text-2xl">2. Open Box</p>
+                <div className="flex justify-end pb-6 -mt-16 mr-12">
+                    <div className="relative w-60 h-60">
+                        <Image
+                            src={ASSETS.LQUESTION}
+                            alt="Description of image"
+                            layout="fill"
+                            objectFit="cover"
+                            className="absolute top-0 left-0 w-full h-full"
+                        />
+                        <p className="absolute bottom-0 left-0 -ml-6 text-[#C527D8] text-2xl font-bold">2.</p>
+                        <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-4xl font-bold">Open Box</p>
+                    </div>
+                </div>
                 <button
-                    className="secondary-button bg-white w-1/2 mt-4 mb-10 border-none font-mono hover:bg-[#C527D8]"
+                    className="secondary-button bg-white w-1/2 mt-10 mb-24 border-none font-mono hover:bg-[#C527D8]"
                     onClick={async () => {
                         await getObjects();
                     }}
