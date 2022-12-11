@@ -1,8 +1,8 @@
 :root {
-    --wkit-accent-hs: 110, 0%;
-    --wkit-on-accent-rgb: 255, 255, 255;
-    --wkit-bg-rgb: 239, 241, 245;
-    --wkit-on-bg-rgb: 10, 14, 34;
+    --wkit-accent-hs: 244, 10%;
+    --wkit-on-accent-rgb: 255, 255, 255; /* Text color */
+    --wkit-bg-rgb: 239, 241, 245; /* BG when wallet connected */
+    --wkit-on-bg-rgb: 28, 29, 37; /* Accent Text color */
     --wkit-font-family: "Inter", sans-serif;
     --wkit-font-family-mono: "IBM Plex Mono", monospace;
     --wkit-font-size-large: 18px;
@@ -14,3 +14,5 @@
     --wkit-button-width: 284px;
     --wkit-border-radius: 16px;
 }
+/* //28, 29, 37 */
+/* //rgba(24, 26, 32, 1) */
