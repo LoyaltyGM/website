@@ -1,10 +1,11 @@
 import { NextPage } from "next";
-import React, { useEffect, useState } from "react";
-import { getObjectFields, Network, Ed25519Keypair, JsonRpcProvider, RawSigner } from "@mysten/sui.js";
-import { useWallet, useAccountBalance } from "@suiet/wallet-kit";
+import React, { useEffect } from "react";
+import { Ed25519Keypair, JsonRpcProvider, Network, RawSigner } from "@mysten/sui.js";
+import { useAccountBalance, useWallet } from "@suiet/wallet-kit";
 import Layout from "components/Layout";
 import ASSETS from "assets";
 import Image from "next/image";
+import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 
 const Lootbox: NextPage = () => {
     const packageObjectId = "0x90b3af3577d0481b5b6a46713330256c2076e871";
@@ -79,6 +80,7 @@ const Lootbox: NextPage = () => {
                     },
                 },
             };
+            // @ts-ignore
             const response = await wallet.signAndExecuteTransaction(singTransaction);
             console.log("RESPONSE", response);
 
@@ -138,12 +140,15 @@ const Lootbox: NextPage = () => {
                     </div>
                 </div>
                 <button
-                    className="secondary-button bg-white w-1/2 mt-10 mb-24 border-none font-mono hover:bg-[#C527D8]"
+                    className="sliding-btn w-1/4 mt-10 mb-24"
                     onClick={async () => {
                         await getObjects();
                     }}
                 >
-                    Get my box
+                    <div className={"flex gap-5 text-xl content-center items-center"}>
+                        <ArrowRightCircleIcon className={"w-8 h-8 child"} color={"#C527D8"} />
+                        <div>Get my box</div>
+                    </div>
                 </button>
             </Layout>
         </div>

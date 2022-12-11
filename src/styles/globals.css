@@ -170,6 +170,15 @@
     animation: anime 6s linear infinite;
 }
 
+.sliding-btn {
+    @apply btn btn-ghost hover:bg-white rounded-full bg-white border-none;
+    box-shadow: inset 0 0 0 0 #C527D8;
+    transition: box-shadow .6s ease-in-out;
+}
+.sliding-btn:hover {
+    box-shadow: inset 100vw 0 0 0 #C527D8;
+}
+
 .gradient-font {
     font-size: 1.5rem;
     font-weight: bold;
