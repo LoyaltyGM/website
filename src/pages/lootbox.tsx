@@ -111,9 +111,7 @@ const Lootbox: NextPage = () => {
                     }}
                 >
                     <div className={"flex gap-5 items-center text-base"}>
-                        <div>
-                            <ArrowRightCircleIcon className={"h-8 w-8"} color={'#C527D8'} />
-                        </div>
+                        <ArrowRightCircleIcon className={"h-8 w-8 rounded-full text-[#C527D8] bg-white"} />
                         <div>Get my box</div>
                     </div>
                 </button>
