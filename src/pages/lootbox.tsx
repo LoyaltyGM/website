@@ -58,6 +58,7 @@ const Lootbox: NextPage = () => {
         }
     };
 
+    // TODO: Create dialog to show loot and rarity
     const open_lootbox = async (lootboxID: string) => {
         if (!wallet) return;
         try {
@@ -110,6 +111,7 @@ const Lootbox: NextPage = () => {
                     </h1>
                     <div className="flex justify-end px-6 py-1 text-right gap-2 text-[3.2vw]">
                         <div className="flex gap-2 px-6 py-1 rounded-xl bg-[#25262F]">
+                            {/* //TODO: Check how many minted left */}
                             <p className="gradient-font ">0/30000</p>
                             <p className="gradient-font text-white">total opened</p>
                         </div>
@@ -141,6 +143,7 @@ const Lootbox: NextPage = () => {
                         <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-4xl font-bold">Open Box</p>
                     </div>
                 </div>
+                {/* //TODO: Create button with loading spinner */}
                 <button
                     className="sliding-btn w-1/4 mt-10 mb-24"
                     onClick={async () => {
