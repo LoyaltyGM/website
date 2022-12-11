@@ -22,7 +22,7 @@ const Lootbox: NextPage = () => {
         if (!wallet.connected) return;
     }, [wallet.connected]);
 
-    const buy_lootbox = async () => {
+    const get_lootbox = async () => {
         if (!wallet) return;
         try {
             const singTransaction = {
@@ -35,6 +35,43 @@ const Lootbox: NextPage = () => {
                         typeArguments: [],
                         arguments: [
                             boxCollectionID, // box collection
+                        ],
+                        gasBudget: 10000,
+                    },
+                },
+            };
+            setButtonStatus("loading");
+            // @ts-ignore
+            const response = await wallet.signAndExecuteTransaction(singTransaction);
+            console.log("RESPONSE", response);
+
+            if (response?.effects?.events) {
+                // const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
+                //console.log("Object NFT", moveEvent.fields.token_id);
+                const status = response?.effects?.status.status;
+                console.log("status", status);
+                setButtonStatus("success");
+            }
+        } catch (error) {
+            console.log(error);
+            setButtonStatus("error");
+        }
+    };
+
+    const open_lootbox = async (lootboxID: string) => {
+        if (!wallet) return;
+        try {
+            const singTransaction = {
+                transaction: {
+                    kind: "moveCall",
+                    data: {
+                        packageObjectId: packageObjectId,
+                        module: "loot_box",
+                        function: "open_box",
+                        typeArguments: [],
+                        arguments: [
+                            boxCollectionID, // box collection
+                            lootboxID, // lootbox id
                         ],
                         gasBudget: 10000,
                     },
@@ -107,12 +144,24 @@ const Lootbox: NextPage = () => {
                 <button
                     className="sliding-btn w-1/4 mt-10 mb-24"
                     onClick={async () => {
-                        await buy_lootbox();
+                        await get_lootbox();
                     }}
                 >
                     <div className={"flex gap-5 items-center text-base"}>
                         <ArrowRightCircleIcon className={"h-8 w-8 rounded-full text-[#C527D8] bg-white"} />
                         <div>Get my box</div>
+                    </div>
+                </button>
+                <button
+                    className="sliding-btn w-1/4 mt-10 mb-24"
+                    onClick={async () => {
+                        //TODO: check ID of box
+                        await open_lootbox("0x2e8c292385c1f39c0c8424489037ec9e231231b3");
+                    }}
+                >
+                    <div className={"flex gap-5 items-center text-base"}>
+                        <ArrowRightCircleIcon className={"h-8 w-8 rounded-full text-[#C527D8] bg-white"} />
+                        <div>Open box</div>
                     </div>
                 </button>
             </Layout>
