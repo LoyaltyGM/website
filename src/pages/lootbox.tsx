@@ -99,7 +99,7 @@ const Lootbox: NextPage = () => {
                 headerBackground="bg-[#1C1D25]"
             >
                 <div>
-                    <h1 className="text-[10rem] mt-10 font-bold text-center w-full">
+                    <h1 className="text-[8.2rem] mt-10 font-bold text-center w-full">
                         <span className="text-[#C527D8] whitespace-no-wrap">Be </span>
                         among the
                         <span className="text-[#C527D8]"> first</span>
@@ -111,7 +111,7 @@ const Lootbox: NextPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-start -mt-16 ml-12">
+                <div className="flex justify-start -mt-24 ml-24">
                     <div className="relative w-60 h-60">
                         <Image
                             src={ASSETS.LBOX}
