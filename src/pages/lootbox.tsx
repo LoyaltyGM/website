@@ -11,8 +11,9 @@ import { INFURA_IPFS_GATEWAY, LOOTBOX_COLLECTION, LOOTBOX_PACKAGE } from "utils"
 import { getCreatedObjects, getExecutionStatusType, getObjectFields, getObjectId, Network } from "@mysten/sui.js";
 import { useEffectOnce } from "usehooks-ts";
 import { SuiSignAndExecuteTransactionInput } from "@mysten/wallet-standard";
-import { CustomDialog } from "../components";
+import { CustomDialog } from "components";
 import { useDialogState } from "ariakit";
+import toast from "react-hot-toast";
 
 type ButtonStateType = {
     status: "idle" | "disabled" | "loading" | "success" | "error";
@@ -23,9 +24,9 @@ type LootRarityType = "Bronze" | "Silver" | "Gold";
 const LootImages: {
     [key in LootRarityType]: string;
 } = {
-    Bronze: `${INFURA_IPFS_GATEWAY}QmcveqhgjHAdirfkGbDSw7AC4o2u7Z9B18zZiA24rxnChY`,
-    Silver: `${INFURA_IPFS_GATEWAY}QmYoHbRAuynBrVfQk5HY3T5gNsYvQpX4WHLrHJZ1RZbad8`,
-    Gold: `${INFURA_IPFS_GATEWAY}QmVJihewqn18jafEJk3CQB232NjNvZR96gJ72oWbFLPNij`,
+    Bronze: `${INFURA_IPFS_GATEWAY}Qma46vSK5UvTaho6NMQ8h1u1coXQ1YcCBUYri2uSJ6PTcT`,
+    Silver: `${INFURA_IPFS_GATEWAY}QmREjYdo9FhkBez3rPwbHypiS4ZrPYqF1rKzWWTnSd1idj`,
+    Gold: `${INFURA_IPFS_GATEWAY}QmRTxSnERk8RrdoPhZWL5qRJwVxyc1t9aGYSwqgyS8HY7Z`,
 };
 
 const Lootbox: NextPage = () => {
@@ -95,9 +96,11 @@ const Lootbox: NextPage = () => {
             console.log(`status ${status}`);
             setButtonStatus(status === "success" ? "success" : "error");
 
+            status === "failure" && toast.error("Transaction failed");
             fetchUserData().then();
         } catch (error) {
             console.log(error);
+            toast.error("Something went wrong");
             setButtonStatus("error");
         }
     };
@@ -133,10 +136,11 @@ const Lootbox: NextPage = () => {
                 const objectId = getCreatedObjects(response)[0].reference.objectId;
                 const type: LootRarityType = getObjectFields(await provider.getObject(objectId)).rarity;
                 setLootType(type);
+                lootDialog.toggle();
             }
 
+            status === "failure" && toast.error("Transaction failed");
             fetchUserData().then();
-            lootDialog.toggle();
         } catch (error) {
             console.log(error);
             setButtonStatus("error");
