@@ -5,6 +5,8 @@ import Layout from "components/Layout";
 import ASSETS from "assets";
 import Image from "next/image";
 import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
+import { motion } from "framer-motion";
+import CircleLoader from "components/Button/CircleLoader";
 
 const Lootbox: NextPage = () => {
     const packageObjectId = "0xe844685cf48f8705266b9ee973a4d75d97179c9d";
@@ -17,6 +19,12 @@ const Lootbox: NextPage = () => {
 
     const wallet = useWallet();
     // const provider = new JsonRpcProvider(Network.DEVNET);
+
+    const spinTransition = {
+        loop: Infinity,
+        ease: "linear",
+        duration: 1,
+    };
 
     useEffect(() => {
         if (!wallet.connected) return;
@@ -144,17 +152,25 @@ const Lootbox: NextPage = () => {
                     </div>
                 </div>
                 {/* //TODO: Create button with loading spinner */}
-                <button
-                    className="sliding-btn w-1/4 mt-10 mb-24"
-                    onClick={async () => {
-                        await get_lootbox();
-                    }}
-                >
-                    <div className={"flex gap-5 items-center text-base"}>
-                        <ArrowRightCircleIcon className={"h-8 w-8 rounded-full text-[#C527D8] bg-white"} />
-                        <div>Get my box</div>
-                    </div>
-                </button>
+                <motion.div layout>
+                    {buttonStatus === "loading" ? (
+                        <button className="bg-white flex-col items-center py-2 rounded-3xl w-1/4" disabled={true}>
+                            <CircleLoader />
+                        </button>
+                    ) : (
+                        <button
+                            className="sliding-btn w-1/4"
+                            onClick={async () => {
+                                await get_lootbox();
+                            }}
+                        >
+                            <div className={"flex gap-5 items-center text-base"}>
+                                <ArrowRightCircleIcon className={"h-8 w-8 rounded-full text-[#C527D8] bg-white"} />
+                                <div>Get my box</div>
+                            </div>
+                        </button>
+                    )}
+                </motion.div>
                 <button
                     className="sliding-btn w-1/4 mt-10 mb-24"
                     onClick={async () => {

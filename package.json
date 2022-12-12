@@ -16,8 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "@heroicons/react": "^2.0.12",
-    "@next/bundle-analyzer": "^12.3.1",
     "@mysten/sui.js": "^0.17.0",
+    "@next/bundle-analyzer": "^12.3.1",
     "@suiet/wallet-kit": "^0.1.10",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -34,6 +34,7 @@
     "esm": "^3.2.25",
     "ethos-connect": "^0.0.33",
     "firebase": "^9.12.1",
+    "framer-motion": "^7.6.19",
     "heroicons": "^2.0.12",
     "ipfs-http-client": "^58.0.1",
     "lodash.merge": "^4.6.2",
