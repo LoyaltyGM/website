@@ -177,7 +177,7 @@ const Lootbox: NextPage = () => {
                 headerBackground="bg-[#1C1D25]"
             >
                 <div>
-                    <h1 className="text-[8.2rem] mt-10 font-bold text-center w-full">
+                    <h1 className="text-5xl md:text-6xl lg:text-9xl mt-10 font-bold text-center w-full">
                         <span className="text-[#C527D8] whitespace-no-wrap">Be </span>
                         among the
                         <span className="text-[#C527D8]"> first</span>
