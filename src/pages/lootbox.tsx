@@ -8,14 +8,16 @@ import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import CircleLoader from "components/Button/CircleLoader";
 import { LOOTBOX_COLLECTION, LOOTBOX_PACKAGE } from "utils";
-import { getObjectFields, getObjectId, Network } from "@mysten/sui.js";
+import { getObjectFields, getObjectId, getCreatedObjects, getExecutionStatusType, Network } from "@mysten/sui.js";
 import { useEffectOnce } from "usehooks-ts";
+import { SuiSignAndExecuteTransactionInput } from "@mysten/wallet-standard";
 
 type ButtonStateType = {
     status: "idle" | "disabled" | "loading" | "success" | "error";
 };
 
 const LootBoxType = `${LOOTBOX_PACKAGE}::loot_box::LootBox`;
+type LootRarityType = "Bronze" | "Silver" | "Gold";
 
 const Lootbox: NextPage = () => {
     const wallet = useWallet();
@@ -23,26 +25,22 @@ const Lootbox: NextPage = () => {
 
     const [totalMinted, setTotalMinted] = useState("0");
     const [userBox, setUserBox] = useState("");
+    const [lootType, setLootType] = useState("");
     const [buttonStatus, setButtonStatus] = useState<ButtonStateType["status"]>("idle");
 
-    const spinTransition = {
-        loop: Infinity,
-        ease: "linear",
-        duration: 1,
-    };
+    async function fetchUserData() {
+        try {
+            console.log("fetch user");
+            const objects = await provider.getObjectsOwnedByAddress(wallet.address);
+            const box = objects.find((obj) => obj.type === LootBoxType);
+            box ? setUserBox(getObjectId(box)) : setUserBox("");
+        } catch (e) {
+            console.log("failed fetch user ", e);
+        }
+    }
 
     useEffect(() => {
         if (!wallet.connected) return;
-
-        async function fetchUserData() {
-            try {
-                const objects = await provider.getObjectsOwnedByAddress(wallet.address);
-                const box = objects.find((obj) => obj.type === LootBoxType);
-                setUserBox(getObjectId(box));
-            } catch (e) {
-                console.log("failed fetch user ", e);
-            }
-        }
 
         fetchUserData().then();
     }, [wallet.connected]);
@@ -77,26 +75,22 @@ const Lootbox: NextPage = () => {
                         gasBudget: 10000,
                     },
                 },
-            };
+            } as SuiSignAndExecuteTransactionInput;
             setButtonStatus("loading");
-            // @ts-ignore
             const response = await wallet.signAndExecuteTransaction(singTransaction);
             console.log("RESPONSE", response);
 
-            if (response?.effects?.events) {
-                // const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
-                //console.log("Object NFT", moveEvent.fields.token_id);
-                const status = response?.effects?.status.status;
-                console.log("status", status);
-                setButtonStatus("success");
-            }
+            const status = getExecutionStatusType(response);
+            console.log(`status ${status}`);
+            setButtonStatus(status === "success" ? "success" : "error");
+
+            fetchUserData().then();
         } catch (error) {
             console.log(error);
             setButtonStatus("error");
         }
     };
 
-    // TODO: Create dialog to show loot and rarity
     const openBox = async () => {
         if (!wallet || !userBox) return;
         try {
@@ -115,19 +109,22 @@ const Lootbox: NextPage = () => {
                         gasBudget: 10000,
                     },
                 },
-            };
+            } as SuiSignAndExecuteTransactionInput;
             setButtonStatus("loading");
-            // @ts-ignore
             const response = await wallet.signAndExecuteTransaction(singTransaction);
             console.log("RESPONSE", response);
 
-            if (response?.effects?.events) {
-                // const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
-                //console.log("Object NFT", moveEvent.fields.token_id);
-                const status = response?.effects?.status.status;
-                console.log("status", status);
-                setButtonStatus("success");
+            const status = getExecutionStatusType(response);
+            console.log(`status ${status}`);
+            setButtonStatus(status === "success" ? "success" : "error");
+
+            if (status === "success") {
+                const objectId = getCreatedObjects(response)[0].reference.objectId;
+                const type: LootRarityType = getObjectFields(await provider.getObject(objectId)).rarity;
+                setLootType(type);
             }
+
+            fetchUserData().then();
         } catch (error) {
             console.log(error);
             setButtonStatus("error");
