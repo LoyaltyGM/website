@@ -35,7 +35,7 @@ const Lootbox: NextPage = () => {
     useEffectOnce(() => {
         async function fetchTotalOpened() {
             const collection = getObjectFields(await provider.getObject(LOOTBOX_COLLECTION));
-            setTotalMinted(collection._box_minted)
+            setTotalMinted(collection._box_minted);
         }
 
         fetchTotalOpened().then();
@@ -123,7 +123,7 @@ const Lootbox: NextPage = () => {
                 headerBackground="bg-[#1C1D25]"
             >
                 <div>
-                    <h1 className="text-[8.2rem] mt-10 font-bold text-center w-full">
+                    <h1 className="text-5xl md:text-6xl lg:text-9xl mt-10 font-bold text-center w-full">
                         <span className="text-[#C527D8] whitespace-no-wrap">Be </span>
                         among the
                         <span className="text-[#C527D8]"> first</span>
@@ -161,7 +161,6 @@ const Lootbox: NextPage = () => {
                         <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-4xl font-bold">Open Box</p>
                     </div>
                 </div>
-                {/* //TODO: Create button with loading spinner */}
                 <motion.div layout>
                     {buttonStatus === "loading" ? (
                         <button className="bg-white flex-col items-center py-2 rounded-3xl w-1/4" disabled={true}>
@@ -185,7 +184,7 @@ const Lootbox: NextPage = () => {
                     className="sliding-btn w-1/4 mt-10 mb-24"
                     onClick={async () => {
                         //TODO: check ID of box
-                        await open_lootbox("0x2e8c292385c1f39c0c8424489037ec9e231231b3");
+                        await open_lootbox("0xe8784c6983c8dca795eea7c8bf9fca563ac8ef43");
                     }}
                 >
                     <div className={"flex gap-5 items-center text-base"}>
