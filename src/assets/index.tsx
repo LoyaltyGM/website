@@ -18,8 +18,8 @@ import defaultToken from "assets/chains/emptyToken.webp";
 
 // logo
 import ethosLogo from "assets/logo/ethos_logo.png";
-import suiEcoLogo from "assets/logo/suiEcosystemLogo.png";
-import suietLogo from "assets/logo/suietLogo.png";
+import suiEcoLogo from "assets/logo/SuiEcosystemLogo.png";
+import suietLogo from "assets/logo/SuietLogo.png";
 
 // lootbox
 import LBOX from "assets/lootbox/LBOX.png";
