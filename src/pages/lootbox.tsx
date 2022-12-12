@@ -1,24 +1,26 @@
 import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
-import { useWallet } from "@suiet/wallet-kit";
+import { useSuiProvider, useWallet } from "@suiet/wallet-kit";
 import Layout from "components/Layout";
 import ASSETS from "assets";
 import Image from "next/image";
 import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import CircleLoader from "components/Button/CircleLoader";
+import { LOOTBOX_COLLECTION, LOOTBOX_PACKAGE } from "utils";
+import { getObjectFields, Network } from "@mysten/sui.js";
+import { useEffectOnce } from "usehooks-ts";
+
+type ButtonStateType = {
+    status: "idle" | "disabled" | "loading" | "success" | "error";
+};
 
 const Lootbox: NextPage = () => {
-    const packageObjectId = "0xe844685cf48f8705266b9ee973a4d75d97179c9d";
-    const boxCollectionID = "0x739cbd1b2cbf934fb30035800fdf61b4d672b64d";
-
-    type ButtonStateType = {
-        status: "idle" | "disabled" | "loading" | "success" | "error";
-    };
-    const [buttonStatus, setButtonStatus] = useState<ButtonStateType["status"]>("idle");
-
     const wallet = useWallet();
-    // const provider = new JsonRpcProvider(Network.DEVNET);
+    const provider = useSuiProvider(Network.DEVNET);
+
+    const [totalMinted, setTotalMinted] = useState("0");
+    const [buttonStatus, setButtonStatus] = useState<ButtonStateType["status"]>("idle");
 
     const spinTransition = {
         loop: Infinity,
@@ -30,6 +32,15 @@ const Lootbox: NextPage = () => {
         if (!wallet.connected) return;
     }, [wallet.connected]);
 
+    useEffectOnce(() => {
+        async function fetchTotalOpened() {
+            const collection = getObjectFields(await provider.getObject(LOOTBOX_COLLECTION));
+            setTotalMinted(collection._box_minted)
+        }
+
+        fetchTotalOpened().then();
+    });
+
     const get_lootbox = async () => {
         if (!wallet) return;
         try {
@@ -37,12 +48,12 @@ const Lootbox: NextPage = () => {
                 transaction: {
                     kind: "moveCall",
                     data: {
-                        packageObjectId: packageObjectId,
+                        packageObjectId: LOOTBOX_PACKAGE,
                         module: "loot_box",
                         function: "buy_box",
                         typeArguments: [],
                         arguments: [
-                            boxCollectionID, // box collection
+                            LOOTBOX_COLLECTION, // box collection
                         ],
                         gasBudget: 10000,
                     },
@@ -74,12 +85,12 @@ const Lootbox: NextPage = () => {
                 transaction: {
                     kind: "moveCall",
                     data: {
-                        packageObjectId: packageObjectId,
+                        packageObjectId: LOOTBOX_PACKAGE,
                         module: "loot_box",
                         function: "open_box",
                         typeArguments: [],
                         arguments: [
-                            boxCollectionID, // box collection
+                            LOOTBOX_COLLECTION, // box collection
                             lootboxID, // lootbox id
                         ],
                         gasBudget: 10000,
@@ -119,9 +130,8 @@ const Lootbox: NextPage = () => {
                     </h1>
                     <div className="flex justify-end px-6 py-1 text-right gap-2 text-[3.2vw]">
                         <div className="flex gap-2 px-6 py-1 rounded-xl bg-[#25262F]">
-                            {/* //TODO: Check how many minted left */}
-                            <p className="gradient-font ">0/30000</p>
-                            <p className="gradient-font text-white">total opened</p>
+                            <p className="gradient-font ">{totalMinted} / 30000</p>
+                            <p className="gradient-font text-white">total minted</p>
                         </div>
                     </div>
                 </div>
