@@ -17,8 +17,8 @@ module.exports = {
         themes: [ 
         {
         light: {
-          primary: "#7343DF",           // PURPLE - Main color
-          "primary-focus": "#5E37B5",   // PURPLE Hover
+          primary: "#c527d8",           // PURPLE - Main color
+          "primary-focus": "#9425a2",   // PURPLE Hover
           neutral: "#000000",           // BLACK - close button and header 
           success: "#54A547",           // GREEN
           warning: "#F8E155",           // YELLOW 
@@ -30,7 +30,7 @@ module.exports = {
         }, 
         dark: {
             ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
-            primary: "#7343DF",          // PURPLE
+            primary: "#c527d8",          // PURPLE
             neutral: "#FFFFFF",          // WHITE
         }},],
     },

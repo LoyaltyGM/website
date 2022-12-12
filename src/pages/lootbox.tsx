@@ -7,19 +7,28 @@ import Image from "next/image";
 import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import CircleLoader from "components/Button/CircleLoader";
-import { INFURA_IPFS_GATEWAY, LOOTBOX_COLLECTION, LOOTBOX_PACKAGE } from "utils";
+import {
+    FOLLOW_TWITTER_GM_LINK,
+    FOLLOW_TWITTER_SE_LINK,
+    FOLLOW_TWITTER_SW_LINK,
+    INFURA_IPFS_GATEWAY,
+    LOOTBOX_COLLECTION,
+    LOOTBOX_PACKAGE,
+} from "utils";
 import { getCreatedObjects, getExecutionStatusType, getObjectFields, getObjectId, Network } from "@mysten/sui.js";
-import { useEffectOnce } from "usehooks-ts";
+import { useBoolean, useEffectOnce } from "usehooks-ts";
 import { SuiSignAndExecuteTransactionInput } from "@mysten/wallet-standard";
 import { CustomDialog } from "components";
 import { useDialogState } from "ariakit";
 import toast from "react-hot-toast";
+import classNames from "classnames";
 
 type ButtonStateType = {
     status: "idle" | "disabled" | "loading" | "success" | "error";
 };
 
 const LootBoxType = `${LOOTBOX_PACKAGE}::loot_box::LootBox`;
+const LootType = `${LOOTBOX_PACKAGE}::loot_box::Loot`;
 type LootRarityType = "Bronze" | "Silver" | "Gold";
 const LootImages: {
     [key in LootRarityType]: string;
@@ -34,7 +43,13 @@ const Lootbox: NextPage = () => {
     const provider = useSuiProvider(Network.DEVNET);
 
     const lootDialog = useDialogState();
+    const socialsDialog = useDialogState();
     const [buttonStatus, setButtonStatus] = useState<ButtonStateType["status"]>("idle");
+
+    const { value: showSocials, setTrue: enableSocials } = useBoolean(false);
+    const { value: isFollowGM, setTrue: checkFollowGM } = useBoolean(false);
+    const { value: isFollowSW, setTrue: checkFollowSW } = useBoolean(false);
+    const { value: isFollowSE, setTrue: checkFollowSE } = useBoolean(false);
 
     const [totalMinted, setTotalMinted] = useState("0");
     const [userBox, setUserBox] = useState("");
@@ -45,7 +60,12 @@ const Lootbox: NextPage = () => {
             console.log("fetch user");
             const objects = await provider.getObjectsOwnedByAddress(wallet.address);
             const box = objects.find((obj) => obj.type === LootBoxType);
+            const loot = objects.find((obj) => obj.type === LootType);
             box ? setUserBox(getObjectId(box)) : setUserBox("");
+
+            if (!box && !loot) {
+                enableSocials();
+            }
         } catch (e) {
             console.log("failed fetch user ", e);
         }
@@ -97,11 +117,13 @@ const Lootbox: NextPage = () => {
             setButtonStatus(status === "success" ? "success" : "error");
 
             status === "failure" && toast.error("Transaction failed");
-            fetchUserData().then();
         } catch (error) {
             console.log(error);
             toast.error("Something went wrong");
             setButtonStatus("error");
+        } finally {
+            fetchUserData().then();
+            socialsDialog.hide();
         }
     };
 
@@ -202,7 +224,7 @@ const Lootbox: NextPage = () => {
                         <button
                             className="sliding-btn w-1/4"
                             onClick={async () => {
-                                userBox ? await openBox() : await buyBox();
+                                userBox ? await openBox() : socialsDialog.toggle();
                             }}
                         >
                             <div className={"flex gap-5 items-center text-base"}>
@@ -212,6 +234,52 @@ const Lootbox: NextPage = () => {
                         </button>
                     )}
                 </motion.div>
+
+                <CustomDialog dialog={socialsDialog} className={""} isClose={false}>
+                    {(!isFollowGM || !isFollowSE || !isFollowSW) && showSocials ? (
+                        <div className={"flex flex-col gap-6"}>
+                            <div className={"flex text-2xl justify-center"}>Don't forget to follow & retweet</div>
+                            <a
+                                href={FOLLOW_TWITTER_GM_LINK}
+                                onClick={checkFollowGM}
+                                target={"_blank"}
+                                className={classNames("main-button", isFollowGM && "bg-success border-none")}
+                            >
+                                Subscribe LoyaltyGM
+                            </a>
+                            <a
+                                href={FOLLOW_TWITTER_SW_LINK}
+                                onClick={checkFollowSW}
+                                target={"_blank"}
+                                className={classNames("main-button", isFollowSW && "bg-success border-none")}
+                            >
+                                Subscribe Suiet Wallet
+                            </a>
+                            <a
+                                href={FOLLOW_TWITTER_SE_LINK}
+                                onClick={checkFollowSE}
+                                target={"_blank"}
+                                className={classNames("main-button", isFollowSE && "bg-success border-none")}
+                            >
+                                Subscribe SuiEcosystem
+                            </a>
+                        </div>
+                    ) : (
+                        <div>
+                            <div className={"flex text-2xl mb-6 justify-center"}>Mint LoyaltyGM LootBox</div>
+
+                            <button
+                                className="sliding-btn w-full"
+                                onClick={async () => {
+                                    await buyBox();
+                                }}
+                                disabled={buttonStatus === "loading"}
+                            >
+                                Buy LootBox
+                            </button>
+                        </div>
+                    )}
+                </CustomDialog>
 
                 <CustomDialog dialog={lootDialog} className={""}>
                     <div className={"flex flex-col items-center gap-2 justify-between w-full"}>
