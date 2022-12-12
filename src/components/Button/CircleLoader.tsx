@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Transition } from "framer-motion";
 
 const circleStyle: Object = {
     display: "block",
@@ -14,8 +14,9 @@ const circleStyle: Object = {
     left: 0,
 };
 
-const spinTransition = {
-    loop: Infinity,
+const spinTransition: Transition = {
+    repeatType: "loop",
+    repeat: Infinity,
     ease: "linear",
     duration: 1,
 };
