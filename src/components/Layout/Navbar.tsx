@@ -8,7 +8,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className={"w-1/2 grid grid-flow-col"}>
+            <div className={"w-3/4 grid grid-flow-col"}>
                 <div>
                     <Link href="/waitlist" passHref>
                         <button className="p-1 text-left text-neutral">

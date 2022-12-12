@@ -5,8 +5,8 @@ import Image from "next/image";
 const Footer = () => {
     const MainFeatures = () => {
         return (
-            <div className={"bg-[#1C1D25]"}>
-                <div className="flex justify-around w-full pb-4 pt-4 rounded-t-3xl text-white bg-[#181A20] font-mono">
+            <div className="bg-[#1C1D25]">
+                <div className="flex justify-around w-full pb-4 pt-10 rounded-t-3xl text-white bg-[#181A20] font-mono">
                     <div className="flex">
                         <Image src={ASSETS.emoji3} width={50} height={50} layout={"fixed"} />
                         <p className="flex justify-center items-center w-1/2">Loyalty NFT system for projects</p>

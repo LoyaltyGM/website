@@ -112,12 +112,10 @@ const Lootbox: NextPage = () => {
             } as SuiSignAndExecuteTransactionInput;
             setButtonStatus("loading");
             const response = await wallet.signAndExecuteTransaction(singTransaction);
-            console.log("RESPONSE", response);
-
             const status = getExecutionStatusType(response);
-            console.log(`status ${status}`);
+            //console.log(`status ${status}`);
             setButtonStatus(status === "success" ? "success" : "error");
-
+            status === "success" && toast.success("Success! Now you can open the box");
             status === "failure" && toast.error("Transaction failed");
         } catch (error) {
             console.log(error);
@@ -174,38 +172,48 @@ const Lootbox: NextPage = () => {
     return (
         <div>
             <Layout
-                className="layout-base bg-[#1C1D25] h-full pb-0"
+                className="layout-base bg-[#1C1D25] h-full"
                 isMinHeightTurnOff={true}
                 headerBackground="bg-[#1C1D25]"
             >
                 <div>
-                    <h1 className="text-5xl md:text-6xl lg:text-9xl mt-10 font-bold text-center w-full">
+                    <h1 className="text-5xl md:text-7xl lg:text-9xl mt-10 font-bold text-center w-full">
                         <span className="text-[#C527D8] whitespace-no-wrap">Be </span>
                         among the
                         <span className="text-[#C527D8]"> first</span>
                     </h1>
-                    <div className="flex justify-end px-6 py-1 text-right gap-2 text-[3.2vw]">
+                    <div className="flex justify-end px-6 py-1 pt-5 text-right gap-2 text-2xl md:text-3xl lg:text-4xl ">
                         <div className="flex gap-2 px-6 py-1 rounded-xl bg-[#25262F]">
                             <p className="gradient-font ">{totalMinted} / 30000</p>
                             <p className="gradient-font text-white">total minted</p>
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-start -mt-24 ml-24">
+                <div className="flex justify-start ml-12 lg:-mt-24 lg:ml-24">
                     <div className="relative w-60 h-60">
                         <Image
                             src={ASSETS.LBOX}
                             alt="Description of image"
                             layout="fill"
-                            objectFit="cover"
                             className="absolute top-0 left-0 w-full h-full"
                         />
-                        <p className="absolute bottom-0 left-0 -ml-6 text-[#C527D8] text-2xl font-bold">1.</p>
-                        <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-4xl font-bold">Get Box</p>
+                        <p className="absolute bottom-0 left-0 -ml-6 text-[#C527D8] text-base md:text-xl lg:text-2xl font-bold">
+                            1.
+                        </p>
+                        <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-xl md:text-2xl lg:text-4xl font-bold">
+                            Get Box
+                        </p>
                     </div>
                 </div>
-                <div className="flex justify-end pb-6 -mt-16 mr-12">
+                <div className="flex justify-end pb-6 mr-12 lg:-mt-16 lg:mr-24 ">
                     <div className="relative w-60 h-60">
+                        <Image
+                            src={ASSETS.LQUESTION}
+                            alt="Description of image"
+                            layout="fill"
+                            objectFit="cover"
+                            className="absolute blur-xl z-0 top-0 left-0 w-full h-full"
+                        />
                         <Image
                             src={ASSETS.LQUESTION}
                             alt="Description of image"
@@ -213,18 +221,22 @@ const Lootbox: NextPage = () => {
                             objectFit="cover"
                             className="absolute top-0 left-0 w-full h-full"
                         />
-                        <p className="absolute bottom-0 left-0 -ml-6 text-[#C527D8] text-2xl font-bold">2.</p>
-                        <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-4xl font-bold">Open Box</p>
+                        <p className="absolute bottom-0 left-0 z-10 -ml-6 text-[#C527D8] text-base md:text-xl lg:text-2xl font-bold">
+                            2.
+                        </p>
+                        <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-xl md:text-2xl lg:text-4xl  font-bold">
+                            Open Box
+                        </p>
                     </div>
                 </div>
-                <motion.div layout className={"flex justify-center mt-10"}>
+                <motion.div layout className="flex justify-center mt-10 pb-10 z-50">
                     {buttonStatus === "loading" ? (
-                        <button className="bg-white flex-col items-center py-2 rounded-3xl w-1/4" disabled={true}>
+                        <button className="bg-white flex-col items-center py-2 rounded-3xl w-60" disabled={true}>
                             <CircleLoader />
                         </button>
                     ) : (
                         <button
-                            className="sliding-btn w-1/4"
+                            className="sliding-btn w-60"
                             onClick={async () => {
                                 userBox ? await openBox() : socialsDialog.toggle();
                             }}
@@ -237,10 +249,12 @@ const Lootbox: NextPage = () => {
                     )}
                 </motion.div>
 
-                <CustomDialog dialog={socialsDialog} className={""} isClose={false}>
+                <CustomDialog dialog={socialsDialog} className={"bg-[#181A20]"} isClose={false}>
                     {(!isFollowGM || !isFollowSE || !isFollowSW || !isRetweet) && showSocials ? (
-                        <div className={"flex flex-col gap-6"}>
-                            <div className={"flex text-2xl justify-center"}>Don't forget to follow & retweet</div>
+                        <div className={"flex flex-col gap-6 py-8 px-4"}>
+                            <div className={"flex text-2xl justify-center text-white"}>
+                                Don't forget to follow & retweet
+                            </div>
                             <a
                                 href={FOLLOW_TWITTER_GM_LINK}
                                 onClick={checkFollowGM}
@@ -275,8 +289,8 @@ const Lootbox: NextPage = () => {
                             </a>
                         </div>
                     ) : (
-                        <div>
-                            <div className={"flex text-2xl mb-6 justify-center"}>Mint LoyaltyGM LootBox</div>
+                        <div className="py-8 px-4">
+                            <div className={"flex text-2xl mb-6 justify-center text-white"}>Mint LoyaltyGM LootBox</div>
 
                             <button
                                 className="sliding-btn w-full"
@@ -291,7 +305,7 @@ const Lootbox: NextPage = () => {
                     )}
                 </CustomDialog>
 
-                <CustomDialog dialog={lootDialog} className={""}>
+                <CustomDialog dialog={lootDialog} className="py-14 px-4 bg-[#181A20]">
                     <div className={"flex flex-col items-center gap-2 justify-between w-full"}>
                         <div>
                             <Image
@@ -299,11 +313,11 @@ const Lootbox: NextPage = () => {
                                 alt="Description of image"
                                 height={300}
                                 width={300}
-                                className={"flex"}
+                                className={"flex rounded-2xl"}
                             />
                         </div>
-                        <div className={"text-xl"}>It's your {lootType} loot!</div>
-                        <button type={"button"} className={"sliding-btn"} onClick={lootDialog.hide}>
+                        <div className={"text-xl text-white"}>It's your {lootType} loot!</div>
+                        <button type={"button"} className={"sliding-btn w-1/2"} onClick={lootDialog.hide}>
                             Got it!
                         </button>
                     </div>
