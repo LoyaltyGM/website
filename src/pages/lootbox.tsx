@@ -8,18 +8,21 @@ import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import CircleLoader from "components/Button/CircleLoader";
 import { LOOTBOX_COLLECTION, LOOTBOX_PACKAGE } from "utils";
-import { getObjectFields, Network } from "@mysten/sui.js";
+import { getObjectFields, getObjectId, Network } from "@mysten/sui.js";
 import { useEffectOnce } from "usehooks-ts";
 
 type ButtonStateType = {
     status: "idle" | "disabled" | "loading" | "success" | "error";
 };
 
+const LootBoxType = `${LOOTBOX_PACKAGE}::loot_box::LootBox`;
+
 const Lootbox: NextPage = () => {
     const wallet = useWallet();
     const provider = useSuiProvider(Network.DEVNET);
 
     const [totalMinted, setTotalMinted] = useState("0");
+    const [userBox, setUserBox] = useState("");
     const [buttonStatus, setButtonStatus] = useState<ButtonStateType["status"]>("idle");
 
     const spinTransition = {
@@ -30,18 +33,34 @@ const Lootbox: NextPage = () => {
 
     useEffect(() => {
         if (!wallet.connected) return;
+
+        async function fetchUserData() {
+            try {
+                const objects = await provider.getObjectsOwnedByAddress(wallet.address);
+                const box = objects.find((obj) => obj.type === LootBoxType);
+                setUserBox(getObjectId(box));
+            } catch (e) {
+                console.log("failed fetch user ", e);
+            }
+        }
+
+        fetchUserData().then();
     }, [wallet.connected]);
 
     useEffectOnce(() => {
         async function fetchTotalOpened() {
-            const collection = getObjectFields(await provider.getObject(LOOTBOX_COLLECTION));
-            setTotalMinted(collection._box_minted)
+            try {
+                const collection = getObjectFields(await provider.getObject(LOOTBOX_COLLECTION));
+                setTotalMinted(collection._box_minted);
+            } catch (e) {
+                console.log("failed fetch collection ", e);
+            }
         }
 
         fetchTotalOpened().then();
     });
 
-    const get_lootbox = async () => {
+    const buyBox = async () => {
         if (!wallet) return;
         try {
             const singTransaction = {
@@ -78,8 +97,8 @@ const Lootbox: NextPage = () => {
     };
 
     // TODO: Create dialog to show loot and rarity
-    const open_lootbox = async (lootboxID: string) => {
-        if (!wallet) return;
+    const openBox = async () => {
+        if (!wallet || !userBox) return;
         try {
             const singTransaction = {
                 transaction: {
@@ -91,7 +110,7 @@ const Lootbox: NextPage = () => {
                         typeArguments: [],
                         arguments: [
                             LOOTBOX_COLLECTION, // box collection
-                            lootboxID, // lootbox id
+                            userBox, // lootbox id
                         ],
                         gasBudget: 10000,
                     },
@@ -161,8 +180,7 @@ const Lootbox: NextPage = () => {
                         <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-4xl font-bold">Open Box</p>
                     </div>
                 </div>
-                {/* //TODO: Create button with loading spinner */}
-                <motion.div layout>
+                <motion.div layout className={"flex justify-center mt-10"}>
                     {buttonStatus === "loading" ? (
                         <button className="bg-white flex-col items-center py-2 rounded-3xl w-1/4" disabled={true}>
                             <CircleLoader />
@@ -171,28 +189,16 @@ const Lootbox: NextPage = () => {
                         <button
                             className="sliding-btn w-1/4"
                             onClick={async () => {
-                                await get_lootbox();
+                                userBox ? await openBox() : await buyBox();
                             }}
                         >
                             <div className={"flex gap-5 items-center text-base"}>
                                 <ArrowRightCircleIcon className={"h-8 w-8 rounded-full text-[#C527D8] bg-white"} />
-                                <div>Get my box</div>
+                                <div>{userBox ? "Open box" : "Get my box"}</div>
                             </div>
                         </button>
                     )}
                 </motion.div>
-                <button
-                    className="sliding-btn w-1/4 mt-10 mb-24"
-                    onClick={async () => {
-                        //TODO: check ID of box
-                        await open_lootbox("0x2e8c292385c1f39c0c8424489037ec9e231231b3");
-                    }}
-                >
-                    <div className={"flex gap-5 items-center text-base"}>
-                        <ArrowRightCircleIcon className={"h-8 w-8 rounded-full text-[#C527D8] bg-white"} />
-                        <div>Open box</div>
-                    </div>
-                </button>
             </Layout>
         </div>
     );
