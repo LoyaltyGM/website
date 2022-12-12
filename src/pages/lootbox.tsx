@@ -7,10 +7,12 @@ import Image from "next/image";
 import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import CircleLoader from "components/Button/CircleLoader";
-import { LOOTBOX_COLLECTION, LOOTBOX_PACKAGE } from "utils";
-import { getObjectFields, getObjectId, getCreatedObjects, getExecutionStatusType, Network } from "@mysten/sui.js";
+import { INFURA_IPFS_GATEWAY, LOOTBOX_COLLECTION, LOOTBOX_PACKAGE } from "utils";
+import { getCreatedObjects, getExecutionStatusType, getObjectFields, getObjectId, Network } from "@mysten/sui.js";
 import { useEffectOnce } from "usehooks-ts";
 import { SuiSignAndExecuteTransactionInput } from "@mysten/wallet-standard";
+import { CustomDialog } from "../components";
+import { useDialogState } from "ariakit";
 
 type ButtonStateType = {
     status: "idle" | "disabled" | "loading" | "success" | "error";
@@ -18,15 +20,24 @@ type ButtonStateType = {
 
 const LootBoxType = `${LOOTBOX_PACKAGE}::loot_box::LootBox`;
 type LootRarityType = "Bronze" | "Silver" | "Gold";
+const LootImages: {
+    [key in LootRarityType]: string;
+} = {
+    Bronze: `${INFURA_IPFS_GATEWAY}QmcveqhgjHAdirfkGbDSw7AC4o2u7Z9B18zZiA24rxnChY`,
+    Silver: `${INFURA_IPFS_GATEWAY}QmYoHbRAuynBrVfQk5HY3T5gNsYvQpX4WHLrHJZ1RZbad8`,
+    Gold: `${INFURA_IPFS_GATEWAY}QmVJihewqn18jafEJk3CQB232NjNvZR96gJ72oWbFLPNij`,
+};
 
 const Lootbox: NextPage = () => {
     const wallet = useWallet();
     const provider = useSuiProvider(Network.DEVNET);
 
+    const lootDialog = useDialogState();
+    const [buttonStatus, setButtonStatus] = useState<ButtonStateType["status"]>("idle");
+
     const [totalMinted, setTotalMinted] = useState("0");
     const [userBox, setUserBox] = useState("");
     const [lootType, setLootType] = useState("");
-    const [buttonStatus, setButtonStatus] = useState<ButtonStateType["status"]>("idle");
 
     async function fetchUserData() {
         try {
@@ -125,6 +136,7 @@ const Lootbox: NextPage = () => {
             }
 
             fetchUserData().then();
+            lootDialog.toggle();
         } catch (error) {
             console.log(error);
             setButtonStatus("error");
@@ -196,6 +208,24 @@ const Lootbox: NextPage = () => {
                         </button>
                     )}
                 </motion.div>
+
+                <CustomDialog dialog={lootDialog} className={""}>
+                    <div className={"flex flex-col items-center gap-2 justify-between w-full"}>
+                        <div>
+                            <Image
+                                src={lootType ? LootImages[lootType] : ASSETS.LQUESTION}
+                                alt="Description of image"
+                                height={300}
+                                width={300}
+                                className={"flex"}
+                            />
+                        </div>
+                        <div className={"text-xl"}>It's your {lootType} loot!</div>
+                        <button type={"button"} className={"sliding-btn"} onClick={lootDialog.hide}>
+                            Got it!
+                        </button>
+                    </div>
+                </CustomDialog>
             </Layout>
         </div>
     );
