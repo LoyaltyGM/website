@@ -7,41 +7,70 @@ import Image from "next/image";
 import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import CircleLoader from "components/Button/CircleLoader";
-import { LOOTBOX_COLLECTION, LOOTBOX_PACKAGE } from "utils";
-import { getObjectFields, Network } from "@mysten/sui.js";
+import { INFURA_IPFS_GATEWAY, LOOTBOX_COLLECTION, LOOTBOX_PACKAGE } from "utils";
+import { getCreatedObjects, getExecutionStatusType, getObjectFields, getObjectId, Network } from "@mysten/sui.js";
 import { useEffectOnce } from "usehooks-ts";
+import { SuiSignAndExecuteTransactionInput } from "@mysten/wallet-standard";
+import { CustomDialog } from "components";
+import { useDialogState } from "ariakit";
+import toast from "react-hot-toast";
 
 type ButtonStateType = {
     status: "idle" | "disabled" | "loading" | "success" | "error";
+};
+
+const LootBoxType = `${LOOTBOX_PACKAGE}::loot_box::LootBox`;
+type LootRarityType = "Bronze" | "Silver" | "Gold";
+const LootImages: {
+    [key in LootRarityType]: string;
+} = {
+    Bronze: `${INFURA_IPFS_GATEWAY}Qma46vSK5UvTaho6NMQ8h1u1coXQ1YcCBUYri2uSJ6PTcT`,
+    Silver: `${INFURA_IPFS_GATEWAY}QmREjYdo9FhkBez3rPwbHypiS4ZrPYqF1rKzWWTnSd1idj`,
+    Gold: `${INFURA_IPFS_GATEWAY}QmRTxSnERk8RrdoPhZWL5qRJwVxyc1t9aGYSwqgyS8HY7Z`,
 };
 
 const Lootbox: NextPage = () => {
     const wallet = useWallet();
     const provider = useSuiProvider(Network.DEVNET);
 
-    const [totalMinted, setTotalMinted] = useState("0");
+    const lootDialog = useDialogState();
     const [buttonStatus, setButtonStatus] = useState<ButtonStateType["status"]>("idle");
 
-    const spinTransition = {
-        loop: Infinity,
-        ease: "linear",
-        duration: 1,
-    };
+    const [totalMinted, setTotalMinted] = useState("0");
+    const [userBox, setUserBox] = useState("");
+    const [lootType, setLootType] = useState("");
+
+    async function fetchUserData() {
+        try {
+            console.log("fetch user");
+            const objects = await provider.getObjectsOwnedByAddress(wallet.address);
+            const box = objects.find((obj) => obj.type === LootBoxType);
+            box ? setUserBox(getObjectId(box)) : setUserBox("");
+        } catch (e) {
+            console.log("failed fetch user ", e);
+        }
+    }
 
     useEffect(() => {
         if (!wallet.connected) return;
+
+        fetchUserData().then();
     }, [wallet.connected]);
 
     useEffectOnce(() => {
         async function fetchTotalOpened() {
-            const collection = getObjectFields(await provider.getObject(LOOTBOX_COLLECTION));
-            setTotalMinted(collection._box_minted);
+            try {
+                const collection = getObjectFields(await provider.getObject(LOOTBOX_COLLECTION));
+                setTotalMinted(collection._box_minted);
+            } catch (e) {
+                console.log("failed fetch collection ", e);
+            }
         }
 
         fetchTotalOpened().then();
     });
 
-    const get_lootbox = async () => {
+    const buyBox = async () => {
         if (!wallet) return;
         try {
             const singTransaction = {
@@ -58,28 +87,26 @@ const Lootbox: NextPage = () => {
                         gasBudget: 10000,
                     },
                 },
-            };
+            } as SuiSignAndExecuteTransactionInput;
             setButtonStatus("loading");
-            // @ts-ignore
             const response = await wallet.signAndExecuteTransaction(singTransaction);
             console.log("RESPONSE", response);
 
-            if (response?.effects?.events) {
-                // const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
-                //console.log("Object NFT", moveEvent.fields.token_id);
-                const status = response?.effects?.status.status;
-                console.log("status", status);
-                setButtonStatus("success");
-            }
+            const status = getExecutionStatusType(response);
+            console.log(`status ${status}`);
+            setButtonStatus(status === "success" ? "success" : "error");
+
+            status === "failure" && toast.error("Transaction failed");
+            fetchUserData().then();
         } catch (error) {
             console.log(error);
+            toast.error("Something went wrong");
             setButtonStatus("error");
         }
     };
 
-    // TODO: Create dialog to show loot and rarity
-    const open_lootbox = async (lootboxID: string) => {
-        if (!wallet) return;
+    const openBox = async () => {
+        if (!wallet || !userBox) return;
         try {
             const singTransaction = {
                 transaction: {
@@ -91,24 +118,29 @@ const Lootbox: NextPage = () => {
                         typeArguments: [],
                         arguments: [
                             LOOTBOX_COLLECTION, // box collection
-                            lootboxID, // lootbox id
+                            userBox, // lootbox id
                         ],
                         gasBudget: 10000,
                     },
                 },
-            };
+            } as SuiSignAndExecuteTransactionInput;
             setButtonStatus("loading");
-            // @ts-ignore
             const response = await wallet.signAndExecuteTransaction(singTransaction);
             console.log("RESPONSE", response);
 
-            if (response?.effects?.events) {
-                // const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
-                //console.log("Object NFT", moveEvent.fields.token_id);
-                const status = response?.effects?.status.status;
-                console.log("status", status);
-                setButtonStatus("success");
+            const status = getExecutionStatusType(response);
+            console.log(`status ${status}`);
+            setButtonStatus(status === "success" ? "success" : "error");
+
+            if (status === "success") {
+                const objectId = getCreatedObjects(response)[0].reference.objectId;
+                const type: LootRarityType = getObjectFields(await provider.getObject(objectId)).rarity;
+                setLootType(type);
+                lootDialog.toggle();
             }
+
+            status === "failure" && toast.error("Transaction failed");
+            fetchUserData().then();
         } catch (error) {
             console.log(error);
             setButtonStatus("error");
@@ -161,7 +193,7 @@ const Lootbox: NextPage = () => {
                         <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-4xl font-bold">Open Box</p>
                     </div>
                 </div>
-                <motion.div layout>
+                <motion.div layout className={"flex justify-center mt-10"}>
                     {buttonStatus === "loading" ? (
                         <button className="bg-white flex-col items-center py-2 rounded-3xl w-1/4" disabled={true}>
                             <CircleLoader />
@@ -170,28 +202,34 @@ const Lootbox: NextPage = () => {
                         <button
                             className="sliding-btn w-1/4"
                             onClick={async () => {
-                                await get_lootbox();
+                                userBox ? await openBox() : await buyBox();
                             }}
                         >
                             <div className={"flex gap-5 items-center text-base"}>
                                 <ArrowRightCircleIcon className={"h-8 w-8 rounded-full text-[#C527D8] bg-white"} />
-                                <div>Get my box</div>
+                                <div>{userBox ? "Open box" : "Get my box"}</div>
                             </div>
                         </button>
                     )}
                 </motion.div>
-                <button
-                    className="sliding-btn w-1/4 mt-10 mb-24"
-                    onClick={async () => {
-                        //TODO: check ID of box
-                        await open_lootbox("0xe8784c6983c8dca795eea7c8bf9fca563ac8ef43");
-                    }}
-                >
-                    <div className={"flex gap-5 items-center text-base"}>
-                        <ArrowRightCircleIcon className={"h-8 w-8 rounded-full text-[#C527D8] bg-white"} />
-                        <div>Open box</div>
+
+                <CustomDialog dialog={lootDialog} className={""}>
+                    <div className={"flex flex-col items-center gap-2 justify-between w-full"}>
+                        <div>
+                            <Image
+                                src={lootType ? LootImages[lootType] : ASSETS.LQUESTION}
+                                alt="Description of image"
+                                height={300}
+                                width={300}
+                                className={"flex"}
+                            />
+                        </div>
+                        <div className={"text-xl"}>It's your {lootType} loot!</div>
+                        <button type={"button"} className={"sliding-btn"} onClick={lootDialog.hide}>
+                            Got it!
+                        </button>
                     </div>
-                </button>
+                </CustomDialog>
             </Layout>
         </div>
     );
