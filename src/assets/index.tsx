@@ -18,6 +18,8 @@ import defaultToken from "assets/chains/emptyToken.webp";
 
 // logo
 import ethosLogo from "assets/logo/ethos_logo.png";
+import suiEcoLogo from "assets/logo/suiEcosystemLogo.png";
+import suietLogo from "assets/logo/suietLogo.png";
 
 // lootbox
 import LBOX from "assets/lootbox/LBOX.png";
@@ -53,8 +55,8 @@ const ASSETS = {
 
     // logos
     ethosLogo: ethosLogo,
-    suietLogo: ethosLogo,
-    suiEcosystemLogo: ethosLogo,
+    suietLogo: suietLogo,
+    suiEcosystemLogo: suiEcoLogo,
 
     // emoji
     emoji1: emoji1,

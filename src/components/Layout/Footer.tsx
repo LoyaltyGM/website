@@ -40,12 +40,16 @@ const Footer = () => {
                 </div>
 
                 <div className="grid grid-flow-col gap-4 md:justify-self-end">
-                    <a href="https://ethoswallet.xyz/" target="_blank">
-                        <div className="flex gap-2">
-                            <p className="flex justify-center items-center font-mono">Supported by</p>
-                            <Image src={ASSETS.ethosLogo} height={30} width={90} />
-                        </div>
-                    </a>
+                    <div className="flex gap-2">
+                        <p className="flex justify-center items-center font-mono">Supported by</p>
+                        <a href="https://suiet.app/" target="_blank">
+                            <Image src={ASSETS.suietLogo} height={40} width={40} />
+                        </a>
+                        <p className="flex justify-center items-center font-mono"> & </p>
+                        <a href="https://twitter.com/SuiEcosystem" target="_blank">
+                            <Image src={ASSETS.suiEcosystemLogo} height={40} width={40} />
+                        </a>
+                    </div>
                 </div>
             </footer>
         </>
