@@ -14,6 +14,7 @@ import {
     INFURA_IPFS_GATEWAY,
     LOOTBOX_COLLECTION,
     LOOTBOX_PACKAGE,
+    RETWEET_LOOTBOX_LINK,
 } from "utils";
 import { getCreatedObjects, getExecutionStatusType, getObjectFields, getObjectId, Network } from "@mysten/sui.js";
 import { useBoolean, useEffectOnce } from "usehooks-ts";
@@ -50,6 +51,7 @@ const Lootbox: NextPage = () => {
     const { value: isFollowGM, setTrue: checkFollowGM } = useBoolean(false);
     const { value: isFollowSW, setTrue: checkFollowSW } = useBoolean(false);
     const { value: isFollowSE, setTrue: checkFollowSE } = useBoolean(false);
+    const { value: isRetweet, setTrue: checkRetweet } = useBoolean(false);
 
     const [totalMinted, setTotalMinted] = useState("0");
     const [userBox, setUserBox] = useState("");
@@ -236,7 +238,7 @@ const Lootbox: NextPage = () => {
                 </motion.div>
 
                 <CustomDialog dialog={socialsDialog} className={""} isClose={false}>
-                    {(!isFollowGM || !isFollowSE || !isFollowSW) && showSocials ? (
+                    {(!isFollowGM || !isFollowSE || !isFollowSW || !isRetweet) && showSocials ? (
                         <div className={"flex flex-col gap-6"}>
                             <div className={"flex text-2xl justify-center"}>Don't forget to follow & retweet</div>
                             <a
@@ -263,6 +265,14 @@ const Lootbox: NextPage = () => {
                             >
                                 Subscribe SuiEcosystem
                             </a>
+                            <a
+                                href={RETWEET_LOOTBOX_LINK}
+                                onClick={checkRetweet}
+                                target={"_blank"}
+                                className={classNames("main-button", isRetweet && "bg-success border-none")}
+                            >
+                                Retweet
+                            </a>
                         </div>
                     ) : (
                         <div>
@@ -275,7 +285,7 @@ const Lootbox: NextPage = () => {
                                 }}
                                 disabled={buttonStatus === "loading"}
                             >
-                                Buy LootBox
+                                Get LootBox
                             </button>
                         </div>
                     )}
