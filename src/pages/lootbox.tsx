@@ -302,7 +302,7 @@ const Lootbox: NextPage = () => {
                     <div className={"flex flex-col items-center gap-2 justify-between w-full"}>
                         <div>
                             <Image
-                                src={lootType ? LootImages[lootType] : ASSETS.LQUESTION}
+                                src={lootType ? LootImages[lootType] : ASSETS.LQUESTION_S}
                                 alt="Description of image"
                                 height={300}
                                 width={300}
