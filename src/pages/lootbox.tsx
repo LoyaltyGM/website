@@ -190,41 +190,34 @@ const Lootbox: NextPage = () => {
                     </div>
                 </div>
                 <div className="flex justify-start ml-12 lg:-mt-24 lg:ml-24">
-                    <div className="relative w-60 h-60">
+                    <div className="relative w-72 h-72">
                         <Image
-                            src={ASSETS.LBOX}
+                            src={ASSETS.LBOX_S}
                             alt="Description of image"
                             layout="fill"
                             className="absolute top-0 left-0 w-full h-full"
                         />
-                        <p className="absolute bottom-0 left-0 -ml-6 text-[#C527D8] text-base md:text-xl lg:text-2xl font-bold">
+                        <p className="absolute bottom-0 left-0 mb-8 ml-4 text-[#C527D8] text-base md:text-xl lg:text-2xl font-bold">
                             1.
                         </p>
-                        <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-xl md:text-2xl lg:text-4xl font-bold">
+                        <p className="absolute bottom-0 left-0 ml-4 text-white text-xl md:text-2xl lg:text-4xl font-bold">
                             Get Box
                         </p>
                     </div>
                 </div>
                 <div className="flex justify-end pb-6 mr-12 lg:-mt-16 lg:mr-24 ">
-                    <div className="relative w-60 h-60">
+                    <div className="relative w-72 h-72">
                         <Image
-                            src={ASSETS.LQUESTION}
-                            alt="Description of image"
-                            layout="fill"
-                            objectFit="cover"
-                            className="absolute blur-xl z-0 top-0 left-0 w-full h-full"
-                        />
-                        <Image
-                            src={ASSETS.LQUESTION}
+                            src={ASSETS.LQUESTION_S}
                             alt="Description of image"
                             layout="fill"
                             objectFit="cover"
                             className="absolute top-0 left-0 w-full h-full"
                         />
-                        <p className="absolute bottom-0 left-0 z-10 -ml-6 text-[#C527D8] text-base md:text-xl lg:text-2xl font-bold">
+                        <p className="absolute bottom-0 z-10 left-0 mb-8 ml-4 text-[#C527D8] text-base md:text-xl lg:text-2xl font-bold">
                             2.
                         </p>
-                        <p className="absolute bottom-0 left-0 -ml-6 -mb-8 text-white text-xl md:text-2xl lg:text-4xl  font-bold">
+                        <p className="absolute bottom-0 left-0 ml-4 text-white text-xl md:text-2xl lg:text-4xl  font-bold">
                             Open Box
                         </p>
                     </div>

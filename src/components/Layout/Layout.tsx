@@ -23,7 +23,7 @@ export default function Layout({
     return (
         <>
             <HeadInfo />
-            <div className={isMinHeightTurnOff ? "relative lg:h-[85vh] md:h-[85vh] h-[85vh]" : "relative min-h-screen"}>
+            <div className={isMinHeightTurnOff ? "relative lg:h-[95vh] md:h-[95vh] h-[90vh]" : "relative min-h-screen"}>
                 <Header className={headerBackground} />
                 <main className={classNames("flex-1", className, footer ? "pb-6" : "")} {...props}>
                     {children}

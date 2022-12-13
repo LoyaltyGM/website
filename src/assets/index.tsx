@@ -21,9 +21,9 @@ import ethosLogo from "assets/logo/ethos_logo.png";
 import suiEcoLogo from "assets/logo/SuiEcosystemLogo.png";
 import suietLogo from "assets/logo/SuietLogo.png";
 
-// lootbox
-import LBOX from "assets/lootbox/LBOX.png";
-import LQUESTION from "assets/lootbox/LQUESTION.png";
+// lootboxes
+import LBOX_S from "assets/lootbox/LBOX_S.png";
+import LQUESTION_S from "assets/lootbox/LQUESTION_S.png";
 
 // emoji
 import emoji1 from "assets/emoji/Claps.png";
@@ -45,8 +45,8 @@ const ASSETS = {
     loyaltyGMgif_Original: loyaltyGMgif_Original,
 
     // lootboxes
-    LBOX: LBOX,
-    LQUESTION: LQUESTION,
+    LBOX_S: LBOX_S,
+    LQUESTION_S: LQUESTION_S,
 
     // tokens
     defaultToken: defaultToken,
