@@ -190,7 +190,7 @@ const Lootbox: NextPage = () => {
                     </div>
                 </div>
                 <div className="flex justify-start ml-12 lg:-mt-24 lg:ml-24">
-                    <div className="relative w-72 h-72">
+                    <div className="relative w-60 h-60 md:w-80 md:h-80 lg:w-96 lg:h-96">
                         <Image
                             src={ASSETS.LBOX_S}
                             alt="Description of image"
@@ -206,7 +206,7 @@ const Lootbox: NextPage = () => {
                     </div>
                 </div>
                 <div className="flex justify-end pb-6 mr-12 lg:-mt-16 lg:mr-24 ">
-                    <div className="relative w-72 h-72">
+                    <div className="relative w-60 h-60 md:w-80 md:h-80 lg:w-96 lg:h-96">
                         <Image
                             src={ASSETS.LQUESTION_S}
                             alt="Description of image"
