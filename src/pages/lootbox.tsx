@@ -249,6 +249,14 @@ const Lootbox: NextPage = () => {
                                 Don't forget to follow & retweet
                             </div>
                             <a
+                                href={RETWEET_LOOTBOX_LINK}
+                                onClick={checkRetweet}
+                                target={"_blank"}
+                                className={classNames("main-button", isRetweet && "bg-success border-none")}
+                            >
+                                Retweet
+                            </a>
+                            <a
                                 href={FOLLOW_TWITTER_GM_LINK}
                                 onClick={checkFollowGM}
                                 target={"_blank"}
@@ -271,14 +279,6 @@ const Lootbox: NextPage = () => {
                                 className={classNames("main-button", isFollowSE && "bg-success border-none")}
                             >
                                 Subscribe SuiEcosystem
-                            </a>
-                            <a
-                                href={RETWEET_LOOTBOX_LINK}
-                                onClick={checkRetweet}
-                                target={"_blank"}
-                                className={classNames("main-button", isRetweet && "bg-success border-none")}
-                            >
-                                Retweet
                             </a>
                         </div>
                     ) : (
