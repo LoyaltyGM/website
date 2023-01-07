@@ -12,7 +12,7 @@
 
     html,
     body {
-        @apply bg-purple-500 text-base-content h-full;
+        @apply bg-[#0F1114] text-base-content h-full;
     }
 
     .font-exo {
