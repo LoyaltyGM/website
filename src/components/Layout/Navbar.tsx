@@ -1,11 +1,8 @@
 import Link from "next/link";
-import { Logo, MoonIcon, SunIcon } from "components";
-import { useDarkMode } from "usehooks-ts";
+import Logo from "./Logo";
 import { ConnectButton } from "@suiet/wallet-kit";
 
 const Navbar = () => {
-    // const { toggle } = useDarkMode();
-
     return (
         <>
             <div className={"w-3/4 grid grid-flow-col"}>
@@ -21,11 +18,6 @@ const Navbar = () => {
 
             <div className={"flex gap-3"}>
                 <ConnectButton />
-                {/*<label className="swap swap-rotate text-xs text-neutral">*/}
-                {/*    <input type="checkbox" onClick={toggle} />*/}
-                {/*    <SunIcon />*/}
-                {/*    <MoonIcon />*/}
-                {/*</label>*/}
             </div>
         </>
     );
