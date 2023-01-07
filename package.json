@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.12",
     "@mysten/sui.js": "^0.17.0",
     "@next/bundle-analyzer": "^12.3.1",
