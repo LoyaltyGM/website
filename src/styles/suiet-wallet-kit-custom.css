@@ -11,18 +11,6 @@
     --wkit-line-height-large: 22px;
     --wkit-line-height-medium: 20px;
     --wkit-line-height-small: 17px;
-    --wkit-button-width: 284px;
+    --wkit-button-width: 224px;
     --wkit-border-radius: 16px;
 }
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --wkit-accent-hs: 292, 91%;
-        --wkit-on-accent-rgb: 255, 255, 255;
-        --wkit-bg-rgb: 40, 40, 40;
-        --wkit-on-bg-rgb: 241, 241, 241;
-        --wkit-button-width: 284px;
-    }
-}
-/* //28, 29, 37 */
-/* //rgba(24, 26, 32, 1) */

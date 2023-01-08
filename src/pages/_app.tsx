@@ -13,15 +13,8 @@ import "styles/suiet-wallet-kit-custom.css";
 
 function App({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(() => new QueryClient());
-    // const { isDarkMode: localStorageTheme } = useDarkMode();
-    // const { value: isDarkTheme, setTrue, setFalse } = useBoolean(false);
-
-    // useEffect(() => {
-    //     localStorageTheme ? setTrue() : setFalse();
-    // }, [localStorageTheme]);
 
     return (
-        // <div data-theme={isDarkTheme ? DARK_THEME : LIGHT_THEME}>
         <div data-theme={LIGHT_THEME}>
             <Script
                 strategy="lazyOnload"
@@ -38,18 +31,11 @@ function App({ Component, pageProps }: AppProps) {
                     });
                 `}
             </Script>
-            {/* <EthosConnectProvider
-                ethosConfiguration={{
-                    hideEmailSignIn: true, // defaults to false
-                }}
-            > */}
             <WalletProvider>
                 <QueryClientProvider client={queryClient}>
                     <Component {...pageProps} />
                 </QueryClientProvider>
             </WalletProvider>
-            {/* </EthosConnectProvider> */}
-
             <CustomToast />
         </div>
     );

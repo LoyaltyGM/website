@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Bars3Icon, CalendarIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "./Logo";
+import { ConnectButton } from "@suiet/wallet-kit";
 
 const navigation = [{ name: "All Companies", href: "#", icon: HomeIcon, current: true }];
 
@@ -15,9 +16,8 @@ export default function Sidebar({ children }) {
     const WalletButton = () => {
         return (
             <div className="ml-2 justify-center content-center">
-                <button className="text-base font-medium text-white border py-2 px-16 rounded-3xl hover:bg-white hover:text-black">
-                    Wallet
-                </button>
+                <ConnectButton />
+
                 <button className="flex gap-1 text-base font-medium text-white py-2 rounded-3xl mt-2 justify-center content-center hover:text-pink-500">
                     <div className="h-5 w-5">
                         <CalendarIcon />
