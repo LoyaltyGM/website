@@ -13,7 +13,7 @@ function classNames(...classes: any[]) {
 export default function Sidebar({ children }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    const WalletButton = () => {
+    const DesktopWalletButton = () => {
         return (
             <div className="ml-2 justify-center content-center">
                 <ConnectButton />
@@ -69,9 +69,7 @@ export default function Sidebar({ children }) {
                 <a href="#" className="group block flex-shrink-0">
                     <div className="flex items-center w-full">
                         <div className="ml-2 w-full">
-                            <button className="text-base font-medium text-white border py-2 px-20 rounded-3xl hover:bg-white hover:text-black">
-                                Wallet
-                            </button>
+                            <ConnectButton />
                             <button className="flex gap-1 text-base font-medium text-white py-2 rounded-3xl mt-2 justify-center content-center hover:text-pink-500">
                                 <div className="h-5 w-5">
                                     <CalendarIcon />
@@ -138,7 +136,7 @@ export default function Sidebar({ children }) {
                     <div className="flex flex-shrink-0 bg-gray-700 p-4">
                         <a href="#" className="group block w-full flex-shrink-0">
                             <div className="flex items-center">
-                                <WalletButton />
+                                <DesktopWalletButton />
                             </div>
                         </a>
                     </div>
@@ -152,7 +150,7 @@ export default function Sidebar({ children }) {
             <main className="flex-1 h-[100vh] bg-[#0F1114]">
                 <div className="py-6 h-[100vh]">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+                        <h1 className="text-2xl font-semibold text-white">All Companies</h1>
                     </div>
                     <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 md:px-8">
                         {/* Replace with your content */}
