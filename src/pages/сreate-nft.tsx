@@ -1,12 +1,5 @@
 import React, { useState, useCallback } from "react";
-import Layout, {
-    Button,
-    CreateNftDialog,
-    DragAndDropImage,
-    InputSupplyOfNFT,
-    InputText,
-    InputTextArea,
-} from "components";
+import Layout, { Button, DragAndDropImage, InputSupplyOfNFT, InputText, InputTextArea } from "components";
 import { NextPage } from "next";
 import { JsonRpcProvider, Network } from "@mysten/sui.js";
 import { ICreateNFT } from "types";
