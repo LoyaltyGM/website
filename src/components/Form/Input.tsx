@@ -1,4 +1,4 @@
-import { InputAmountProps, InputTextProps } from "./types";
+import { InputAmountProps, InputTextProps } from "interfaces/formInterfaces";
 import Image, { StaticImageData } from "next/image";
 import classNames from "classnames";
 import React from "react";

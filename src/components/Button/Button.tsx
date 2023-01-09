@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { ButtonProps } from "../Form/types";
+import { ButtonProps } from "interfaces/formInterfaces";
 
 export const Button = ({ disabled = false, type = "submit", className, children, ...props }: ButtonProps) => {
     return (

@@ -1,7 +1,6 @@
-import { IRadioSelector, IRadioSelectorNFT } from "./types";
+import { IRadioSelector, IRadioSelectorNFT } from "interfaces/formInterfaces";
 import classNames from "classnames";
-import React, { useState } from "react";
-import { NFTCard } from "components";
+import React from "react";
 
 export const RadioSelector = ({ name, labels, className, handleChange }: IRadioSelector) => {
     return (
@@ -52,42 +51,5 @@ export const RadioSelector = ({ name, labels, className, handleChange }: IRadioS
                 </label>
             </div>
         </>
-    );
-};
-
-export const RadioSelectorNFT = (radioSelector: IRadioSelectorNFT) => {
-    const [clickedValue, setClickValue] = useState(null);
-
-    return (
-        <div className={classNames(radioSelector.className, "mt-0")}>
-            {radioSelector.values &&
-                radioSelector.values.map((value, index) => (
-                    <React.Fragment key={index}>
-                        <label htmlFor={"bordered-radio-" + (index + 1)}>
-                            <NFTCard
-                                nftObject={value}
-                                chain={radioSelector.chainId}
-                                className={
-                                    clickedValue === index
-                                        ? "nft-card border-2 border-primary rounded-lg"
-                                        : "nft-card cursor-pointer"
-                                }
-                            />
-                        </label>
-                        <input
-                            id={"bordered-radio-" + (index + 1)}
-                            type="radio"
-                            value={value.title}
-                            name={radioSelector.name}
-                            // name={radioSelector.name}
-                            className="hidden"
-                            onChange={(event) => {
-                                setClickValue(index);
-                                return radioSelector.handleChange(event, value);
-                            }}
-                        />
-                    </React.Fragment>
-                ))}
-        </div>
     );
 };

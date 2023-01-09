@@ -1,6 +1,6 @@
 import { Checkbox } from "ariakit/checkbox";
 import { Group, GroupLabel } from "ariakit/group";
-import { CheckboxProps } from "./types";
+import { CheckboxProps } from "interfaces/formInterfaces";
 import Image, { StaticImageData } from "next/image";
 
 export function CheckboxGroup({
