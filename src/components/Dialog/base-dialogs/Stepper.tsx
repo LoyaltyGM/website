@@ -5,15 +5,7 @@ import classNames from "classnames";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import { useDarkMode } from "usehooks-ts";
 import { DARK_THEME, LIGHT_THEME } from "utils";
-
-interface StepperDialogProps {
-    dialog: DisclosureState;
-    activeStep: number;
-    children?: React.ReactNode;
-    className?: string;
-    steps?: { label: string; description: string }[];
-    isClose?: boolean;
-}
+import { IStepperDialogProps } from "interfaces";
 
 export const SpinnerLoading = () => {
     return (
@@ -121,7 +113,7 @@ export const StepperDialog = ({
     children,
     steps,
     isClose = false,
-}: StepperDialogProps) => {
+}: IStepperDialogProps) => {
     if (!steps) {
         steps = defaultSteps;
     }

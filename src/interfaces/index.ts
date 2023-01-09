@@ -1,3 +1,4 @@
-export * from "./pagesInterfaces";
-export * from "./pageQueriesInterfaces";
-export * from "./formInterfaces";
+export * from "./pagesInterface";
+export * from "./pageQueriesInterface";
+export * from "./formInterface";
+export * from "./dialogInterface";

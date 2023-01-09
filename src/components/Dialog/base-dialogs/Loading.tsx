@@ -2,15 +2,9 @@ import * as React from "react";
 import { DisclosureState } from "ariakit";
 import { Dialog, DialogHeading } from "ariakit/dialog";
 import classNames from "classnames";
+import { ILoadingDialogProps } from "interfaces";
 
-interface LoadingDialogProps {
-    dialog: DisclosureState;
-    title: string | React.ReactNode | null;
-    children: React.ReactNode;
-    className?: string;
-}
-
-export const LoadingDialog = ({ dialog, title, className, children }: LoadingDialogProps) => {
+export const LoadingDialog = ({ dialog, title, className, children }: ILoadingDialogProps) => {
     return (
         <Dialog
             state={dialog}

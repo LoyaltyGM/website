@@ -1,18 +1,11 @@
 import * as React from "react";
-import { DisclosureState } from "ariakit";
+
 import { Dialog } from "ariakit/dialog";
 import classNames from "classnames";
 import { DialogHeader } from "./Header";
+import { ICustomDialogProps } from "interfaces";
 
-interface CustomDialogProps {
-    dialog: DisclosureState;
-    children?: React.ReactNode;
-    header?: boolean;
-    isClose?: boolean;
-    className?: string;
-}
-
-export const CustomDialog = ({ dialog, className, children, isClose = true, header = true }: CustomDialogProps) => {
+export const CustomDialog = ({ dialog, className, children, isClose = true, header = true }: ICustomDialogProps) => {
     // const { isDarkMode } = useDarkMode();
     return (
         <Dialog

@@ -3,15 +3,9 @@ import { DisclosureState } from "ariakit";
 import { Dialog } from "ariakit/dialog";
 import classNames from "classnames";
 import { DialogHeader } from "./Header";
+import { ITextDialogProps } from "interfaces";
 
-interface TextDialogProps {
-    dialog: DisclosureState;
-    title?: string;
-    children?: any;
-    className?: string;
-}
-
-export const TextDialog = ({ dialog, title = "", className, children }: TextDialogProps) => {
+export const TextDialog = ({ dialog, title = "", className, children }: ITextDialogProps) => {
     return (
         <Dialog state={dialog} className={classNames("dialog", className)}>
             <DialogHeader title={title} dialog={dialog} />
