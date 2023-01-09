@@ -27,7 +27,7 @@
 @layer components {
     /* MAIN COMPONETS */
     .app-section {
-        @apply px-2 md:px-[30px] lg:px-[60px] xl:px-[120px];
+        @apply px-2 md:px-[30px] lg:px-[40px] xl:px-[50px];
     }
 
     .app-section > * {
