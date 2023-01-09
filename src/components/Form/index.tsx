@@ -1,4 +1,4 @@
-export * from "./Input";
+export * from "./InputForm";
 export * from "./RadioSelector";
 export * from "./TypeSelector";
 export * from "./DragAndDropImage";

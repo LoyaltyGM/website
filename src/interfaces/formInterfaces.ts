@@ -2,7 +2,7 @@ import * as React from "react";
 import { BaseSyntheticEvent, ChangeEvent } from "react";
 import { INFTVoting } from "interfaces";
 
-export interface InputTextProps {
+export interface ITextInputProps {
     name: string;
     label: string;
     value?: string;
@@ -17,7 +17,7 @@ export interface InputTextProps {
     pattern?: string;
 }
 
-export interface InputAmountProps {
+export interface IAmountInputProps {
     name: string;
     label?: string;
     labelTitle?: string;
@@ -87,7 +87,7 @@ export interface IBackButtonProps {
     className?: string;
 }
 
-export interface CheckboxProps {
+export interface ICheckboxProps {
     label: string;
     description?: string;
     values: string[];

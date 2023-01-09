@@ -1,6 +1,6 @@
 import { Checkbox } from "ariakit/checkbox";
 import { Group, GroupLabel } from "ariakit/group";
-import { CheckboxProps } from "interfaces/formInterfaces";
+import { ICheckboxProps } from "interfaces/formInterfaces";
 import Image, { StaticImageData } from "next/image";
 
 export function CheckboxGroup({
@@ -10,7 +10,7 @@ export function CheckboxGroup({
     enabledValues,
     images = false,
     handleChange,
-}: CheckboxProps) {
+}: ICheckboxProps) {
     let isDisabled;
 
     return (

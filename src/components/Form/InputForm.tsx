@@ -1,4 +1,4 @@
-import { InputAmountProps, InputTextProps } from "interfaces/formInterfaces";
+import { IAmountInputProps, ITextInputProps } from "interfaces/formInterfaces";
 import Image, { StaticImageData } from "next/image";
 import classNames from "classnames";
 import React from "react";
@@ -16,7 +16,7 @@ export const InputAmount = ({
     step,
     isDisabled = false,
     ...props
-}: InputAmountProps) => {
+}: IAmountInputProps) => {
     return (
         <div className={classNames(className, "form-control w-full max-w-xl")}>
             <label className="label">
@@ -60,7 +60,7 @@ export const InputText = ({
     maxLength,
     value,
     ...props
-}: InputTextProps) => {
+}: ITextInputProps) => {
     return (
         <div className={classNames(className, "form-control w-full")}>
             <label className="label">
@@ -96,7 +96,7 @@ export const InputTextArea = ({
     placeholder,
     maxLength,
     ...props
-}: InputTextProps) => {
+}: ITextInputProps) => {
     return (
         <div className={classNames(className, "form-control w-full")}>
             <label className="label">
@@ -132,7 +132,7 @@ export const InputSupplyOfNFT = ({
     step,
     isDisabled = false,
     ...props
-}: InputAmountProps) => {
+}: IAmountInputProps) => {
     return (
         <div className={classNames(className, "form-control w-full")}>
             <div className="relative flex">
