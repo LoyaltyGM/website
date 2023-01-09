@@ -56,14 +56,14 @@ const CreateNFT: NextPage = () => {
                     },
                 };
 
-                const response = await wallet.signAndExecuteTransaction(signableTransaction);
-                //setNftObjectId(response.effects.created[1].reference.objectId);
-                if (response?.effects?.events) {
-                    const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
-                    setNftObjectId(moveEvent.fields.object_id);
-                    handleChangeBasic(moveEvent.fields.object_id, setFormData, "contractAddress");
-                    return moveEvent.fields.object_id;
-                }
+                // const response = await wallet.signAndExecuteTransaction(signableTransaction);
+                // //setNftObjectId(response.effects.created[1].reference.objectId);
+                // if (response?.effects?.events) {
+                //     const { moveEvent } = response.effects.events.find((e) => e.moveEvent);
+                //     setNftObjectId(moveEvent.fields.object_id);
+                //     handleChangeBasic(moveEvent.fields.object_id, setFormData, "contractAddress");
+                //     return moveEvent.fields.object_id;
+                // }
                 return "";
             } catch (error) {
                 console.log(error);
@@ -131,7 +131,7 @@ const CreateNFT: NextPage = () => {
             incrementActiveStep();
 
             const tx = await provider.getObject(String(objectID));
-            setCollectionName(tx.details!.data.fields.name);
+            //setCollectionName(tx.details!.data.fields.name);
             incrementActiveStep();
         } catch (error) {
             handleContractError(error, { dialog: confirmDialog });
@@ -181,7 +181,7 @@ const CreateNFT: NextPage = () => {
                                         key={chain}
                                         label={chain}
                                         name="numberOfNFT"
-                                        image={ASSETS.defaultToken}
+                                        image={ASSETS.defaultTokenIcon}
                                         handleChange={(event) => {
                                             handleTextChange(event, setFormData);
                                         }}
@@ -212,7 +212,7 @@ const CreateNFT: NextPage = () => {
                     Mint Button
                 </Button>
 
-                <CreateNftDialog formData={formData} activeStep={activeStep} dialog={confirmDialog} />
+                {/* <CreateNftDialog formData={formData} activeStep={activeStep} dialog={confirmDialog} /> */}
             </Layout>
         </div>
     );

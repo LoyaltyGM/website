@@ -102,7 +102,7 @@ export default function Sidebar({ children }) {
 
     const DesktopSidebarMenu = () => {
         return (
-            <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+            <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col md:border-r-2 md:border-[#CCCCCC]">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex min-h-0 flex-1 flex-col bg-gray-800">
                     <div className="ml-2 mr-2 flex flex-1 flex-col overflow-y-auto pt-5 pb-4">

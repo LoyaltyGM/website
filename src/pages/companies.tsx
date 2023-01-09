@@ -16,7 +16,7 @@ const Companies = () => {
     const CompaniesHeader = () => {
         return (
             <div className="px-4 py-2 flex h-36 w-full gap-4 items-center content-center">
-                <Image src={ASSETS.Ethereum} alt="Description of image" layout="fixed" className="w-20 h-20" />
+                <Image src={ASSETS.suietLogo} alt="Description of image" layout="fixed" className="w-20 h-20" />
                 <div className="space-y-2 w-full">
                     <div className="justify-between flex content-center items-center">
                         <h1 className="text-3xl text-white">Uniswap Loyalty Card</h1>
