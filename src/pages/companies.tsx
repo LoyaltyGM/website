@@ -5,7 +5,7 @@ import { BackButton, TwitterIcon, DiscordIcon, WebsiteIcon, Tabs } from "compone
 import { LinkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
-import ASSETS from "assets";
+import ASSETS from "assets/image";
 import { useBoolean, useCounter, useLocalStorage } from "usehooks-ts";
 
 const Companies = () => {

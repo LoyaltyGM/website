@@ -1,5 +1,5 @@
 import { FileUploader } from "react-drag-drop-files";
-import ASSETS from "assets/index";
+import ASSETS from "assets/image/index";
 import Image from "next/image";
 import { IDragAndDropProps } from "./types";
 import { useState } from "react";

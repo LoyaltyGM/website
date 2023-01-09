@@ -1,5 +1,5 @@
 import Head from "next/head";
-import FavIcon from "assets/static/Favicon.ico";
+import FavIcon from "assets/image/static/Favicon.ico";
 
 const HeadInfo = () => {
     return (

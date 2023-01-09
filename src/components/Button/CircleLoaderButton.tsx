@@ -21,7 +21,7 @@ const spinTransition: Transition = {
     duration: 1,
 };
 
-export default function CircleLoader() {
+export default function CircleLoaderButton() {
     return (
         <div className="relative w-[2.0rem] h-[2.0rem] box-border">
             <motion.span style={circleStyle} animate={{ rotate: 360 }} transition={spinTransition} />

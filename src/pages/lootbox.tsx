@@ -2,11 +2,11 @@ import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useSuiProvider, useWallet } from "@suiet/wallet-kit";
 import Layout from "components/Layout";
-import ASSETS from "assets";
+import ASSETS from "assets/image";
 import Image from "next/image";
 import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
-import CircleLoader from "components/Button/CircleLoader";
+import CircleLoader from "components/Button/CircleLoaderButton";
 import {
     FOLLOW_TWITTER_GM_LINK,
     FOLLOW_TWITTER_SE_LINK,

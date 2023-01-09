@@ -2,19 +2,13 @@ import React, { useState, useCallback } from "react";
 import Layout, { Button, DragAndDropImage, InputSupplyOfNFT, InputText, InputTextArea } from "components";
 import { NextPage } from "next";
 import { JsonRpcProvider, Network } from "@mysten/sui.js";
-import { ICreateNFT } from "types";
-import {
-    handleChangeBasic,
-    handleContractError,
-    handleImageChange,
-    handleTextChange,
-    storeNFT,
-    validateForm,
-} from "utils";
+import { ICreateNFT } from "interfaces";
+import { handleChangeBasic, handleContractError, handleImageChange, handleTextChange, validateForm } from "utils";
+import { storeNFT } from "services";
 import { useDialogState } from "ariakit";
 import { ethos } from "ethos-connect";
 import { useCounter } from "usehooks-ts";
-import ASSETS from "assets";
+import ASSETS from "assets/image";
 
 const CreateNFT: NextPage = () => {
     const [formData, setFormData] = useState<ICreateNFT>({

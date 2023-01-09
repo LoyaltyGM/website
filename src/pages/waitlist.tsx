@@ -5,7 +5,7 @@ import Layout from "components/Layout";
 import { CopyTextButton, CustomDialog } from "components/";
 import { getObjectFields, JsonRpcProvider, Network } from "@mysten/sui.js";
 import { useRouter } from "next/router";
-import ASSETS from "assets";
+import ASSETS from "assets/image";
 import { useDialogState } from "ariakit";
 import { APP_URL, FOLLOW_TWITTER_GM_LINK, RETWEET_GM_LINK } from "../utils";
 import { useBoolean } from "usehooks-ts";
