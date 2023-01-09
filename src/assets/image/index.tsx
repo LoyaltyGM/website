@@ -1,8 +1,6 @@
-// Mockups
-import basicMockup from "./mockups/basic-image.png";
-
-// Icons
-import imageIcon from "./icons/image.png";
+// utils
+import basicMockup from "./utils/basic-image.png";
+import imageIcon from "./utils/image-icon.png";
 import defaultTokenIcon from "./utils/emptyToken.webp";
 
 // Video/Gif
@@ -22,10 +20,8 @@ import emoji2 from "./emoji/HandHoldingPencilLeft.png";
 import emoji3 from "./emoji/Victory.png";
 
 const ASSETS = {
-    // mockups
+    // utils
     basicMockup: basicMockup,
-
-    // icons
     imageIcon: imageIcon,
     defaultTokenIcon: defaultTokenIcon,
 
