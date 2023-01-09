@@ -147,11 +147,8 @@ export default function Sidebar({ children }) {
 
     const MainBody = () => {
         return (
-            <main className="flex-1 h-[100vh] bg-[#0F1114]">
-                <div className="py-6 h-[100vh]">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-2xl font-semibold text-white">All Companies</h1>
-                    </div>
+            <main className="flex-1 h-full bg-[#0F1114]">
+                <div className="pt-2">
                     <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 md:px-8">
                         {/* Replace with your content */}
                         <div className="py-4">{children}</div>
