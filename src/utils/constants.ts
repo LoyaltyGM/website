@@ -20,6 +20,8 @@ export const ipfsClient = create({
 });
 export const DARK_THEME = "dark";
 export const LIGHT_THEME = "light";
+export const LOYALTYGM_THEME = "ThemeLoyaltyGM";
+export const DEFAULT_THEME = LOYALTYGM_THEME;
 // CryptoCompare
 export const CRYPTOCOMPARE_API_KEY = process.env.NEXT_PUBLIC_CRYPTOCOMPARE_API_KEY;
 

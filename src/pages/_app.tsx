@@ -4,7 +4,7 @@ import { CustomToast } from "components";
 import Script from "next/script";
 import { AppProps } from "next/app";
 import "assets/styles/globals.css";
-import { LIGHT_THEME } from "utils";
+import { DEFAULT_THEME } from "utils";
 import { WalletProvider } from "@suiet/wallet-kit";
 import "@suiet/wallet-kit/style.css";
 import "assets/styles/suiet-wallet-kit-custom.css";
@@ -13,7 +13,7 @@ function App({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(() => new QueryClient());
 
     return (
-        <div data-theme={LIGHT_THEME}>
+        <div data-theme={DEFAULT_THEME}>
             <Script
                 strategy="lazyOnload"
                 src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}

@@ -5,6 +5,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 /** @type {import("next").NextConfig} */
 const nextConfig = {
     images: {
+        // TODO: Change name of the folder to "images" or remove this line
         domains: ["newconnection.infura-ipfs.io"],
     },
     eslint: {
@@ -12,15 +13,6 @@ const nextConfig = {
     },
     typescript: {
         ignoreBuildErrors: true,
-    },
-    redirects: () => {
-        return [
-            {
-                source: "/",
-                destination: "/waitlist",
-                permanent: true,
-            },
-        ];
     },
 };
 

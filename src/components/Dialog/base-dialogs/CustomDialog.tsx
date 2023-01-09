@@ -4,6 +4,7 @@ import { Dialog } from "ariakit/dialog";
 import classNames from "classnames";
 import { HeaderDialog } from "./HeaderDialog";
 import { ICustomDialogProps } from "interfaces";
+import { DEFAULT_THEME } from "utils";
 
 export const CustomDialog = ({ dialog, className, children, isClose = true, header = true }: ICustomDialogProps) => {
     // const { isDarkMode } = useDarkMode();
@@ -11,7 +12,7 @@ export const CustomDialog = ({ dialog, className, children, isClose = true, head
         <Dialog
             hideOnInteractOutside={isClose}
             hideOnEscape={isClose}
-            // data-theme={isDarkMode ? DARK_THEME : LIGHT_THEME}
+            data-theme={DEFAULT_THEME}
             state={dialog}
             className={classNames("dialog", className)}
         >

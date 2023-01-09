@@ -3,7 +3,7 @@ import { Dialog } from "ariakit/dialog";
 import classNames from "classnames";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import { useDarkMode } from "usehooks-ts";
-import { DARK_THEME, LIGHT_THEME } from "utils";
+import { DEFAULT_THEME } from "utils";
 import { IStepperDialogProps } from "interfaces";
 
 export const SpinnerLoading = () => {
@@ -120,7 +120,7 @@ export const StepperDialog = ({
 
     return (
         <Dialog
-            data-theme={isDarkMode ? DARK_THEME : LIGHT_THEME}
+            data-theme={DEFAULT_THEME}
             state={dialog}
             className={classNames("dialog", className)}
             hideOnInteractOutside={isClose}

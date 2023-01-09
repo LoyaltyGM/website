@@ -13,22 +13,24 @@ module.exports = {
         },
     },
     plugins: [require("@tailwindcss/line-clamp"), require("daisyui")],
+    //TODO: Delete custom theme or change
     daisyui: {
         themes: [ 
-        {
-        light: {
-          primary: "#c527d8",           // PURPLE - Main color
-          "primary-focus": "#9425a2",   // PURPLE Hover
-          neutral: "#000000",           // BLACK - close button and header 
-          success: "#54A547",           // GREEN
-          warning: "#F8E155",           // YELLOW 
-          error: "#EB4747",             // RED 
-          "neutral-content": "#F2F3F4", // GRAY (BADGE)
-          "base-100": "#FFFFFF",        // WHITE
-          "base-200": "#F2F3F4"  ,      // GRAY (Bg)
-          "base-300": "#AAAAAA",        // DARK GRAY(For badges on GRAY)
-        },
-        },
+            {
+                ThemeLoyaltyGM: {
+                    primary: "#c527d8",           // PURPLE - Main color
+                    mainBlack: "#0F1114",      
+                    "primary-focus": "#9425a2",   // PURPLE Hover
+                    neutral: "#000000",           // BLACK - close button and header 
+                    success: "#54A547",           // GREEN
+                    warning: "#F8E155",           // YELLOW 
+                    error: "#EB4747",             // RED 
+                    "neutral-content": "#F2F3F4", // GRAY (BADGE)
+                    "base-100": "#FFFFFF",        // WHITE
+                    "base-200": "#F2F3F4"  ,      // GRAY (Bg)
+                    "base-300": "#AAAAAA",        // DARK GRAY(For badges on GRAY)
+                },
+            },
         ],
     },
 };
