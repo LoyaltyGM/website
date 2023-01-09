@@ -1,4 +1,4 @@
-import { IRadioSelector, IRadioSelectorNFT } from "interfaces/formInterfaces";
+import { IRadioSelector } from "interfaces/formInterfaces";
 import classNames from "classnames";
 import React from "react";
 

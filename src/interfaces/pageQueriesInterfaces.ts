@@ -8,7 +8,7 @@ export interface IDaoQuery extends ParsedUrlQuery {
     url: string;
 }
 
-export interface DAOPageProps {
+export interface IDAOPageProps {
     url: string;
 }
 

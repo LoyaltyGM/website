@@ -42,8 +42,6 @@ export interface IProposalDetail extends IProposalPageForm {
     ownerAddress?: string;
 }
 
-
-
 export interface INFTVoting {
     chainId: number;
     title?: string;
@@ -53,7 +51,6 @@ export interface INFTVoting {
     price?: string;
     totalSupply?: string;
     totalMinted?: string;
-
     tokenRequestedByMember?: boolean;
     tokenRequestApproved?: boolean;
     tokenMintedByMember?: number;
@@ -72,12 +69,6 @@ export interface IWhitelistRecord {
     tokenRequestedByMember?: boolean;
 }
 
-export type TabsType = {
-    label: string;
-    index: number;
-    Component: React.FC;
-}[];
-
 export interface IMember {
     governorUrl: string;
     chainId: number;
@@ -88,3 +79,9 @@ export interface IMember {
 }
 
 export type ButtonState = "Mint" | "Loading" | "Success" | "Error";
+
+export type TabsType = {
+    label: string;
+    index: number;
+    Component: React.FC;
+}[];

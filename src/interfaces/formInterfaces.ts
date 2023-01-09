@@ -75,12 +75,16 @@ export interface IDragAndDropProps {
     multipleFiles?: boolean;
 }
 
-export interface ButtonProps {
+export interface IButtonProps {
     disabled?: boolean;
     type?: "submit" | "button";
     className?: string;
     onClick?: () => void;
     children: React.ReactNode;
+}
+
+export interface IBackButtonProps {
+    className?: string;
 }
 
 export interface CheckboxProps {
