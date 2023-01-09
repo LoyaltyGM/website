@@ -1,5 +1,5 @@
 import { Select, SelectArrow, SelectItem, SelectPopover, useSelectState } from "ariakit/select";
-import { ISelectorProps } from "interfaces/formInterfaces";
+import { ISelectorProps } from "interfaces";
 import React from "react";
 
 const types = ["Member", "Design", "VC"];

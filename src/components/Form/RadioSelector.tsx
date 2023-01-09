@@ -1,4 +1,4 @@
-import { IRadioSelector } from "interfaces/formInterfaces";
+import { IRadioSelector } from "interfaces";
 import classNames from "classnames";
 import React from "react";
 

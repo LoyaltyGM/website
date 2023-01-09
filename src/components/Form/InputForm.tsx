@@ -1,4 +1,4 @@
-import { IAmountInputProps, ITextInputProps } from "interfaces/formInterfaces";
+import { IAmountInputProps, ITextInputProps } from "interfaces";
 import Image, { StaticImageData } from "next/image";
 import classNames from "classnames";
 import React from "react";

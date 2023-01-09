@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
-import { IBackButtonProps } from "interfaces/formInterfaces";
+import { IBackButtonProps } from "interfaces";
 
 export const BackButton = ({ className }: IBackButtonProps) => {
     const router = useRouter();
