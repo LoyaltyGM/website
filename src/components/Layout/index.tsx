@@ -1,2 +1,2 @@
-export { default } from "./Layout";
-export * from "./Sidebar";
+export { default } from "./Main/Layout";
+export * from "./Main/Sidebar";

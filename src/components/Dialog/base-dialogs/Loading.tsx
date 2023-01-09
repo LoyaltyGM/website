@@ -1,5 +1,4 @@
 import * as React from "react";
-import { DisclosureState } from "ariakit";
 import { Dialog, DialogHeading } from "ariakit/dialog";
 import classNames from "classnames";
 import { ILoadingDialogProps } from "interfaces";

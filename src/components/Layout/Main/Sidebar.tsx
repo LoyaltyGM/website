@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Bars3Icon, CalendarIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Logo from "./Logo";
+import Logo from "../Header/Logo";
 import { ConnectButton } from "@suiet/wallet-kit";
 
 const navigation = [{ name: "All Companies", href: "#", icon: HomeIcon, current: true }];

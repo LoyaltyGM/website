@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { NextPage } from "next";
-import Sidebar from "components/Layout/Sidebar";
+import Sidebar from "components/Layout/Main/Sidebar";
 import { BackButton, TwitterIcon, DiscordIcon, WebsiteIcon, Tabs } from "components";
 import { LinkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";

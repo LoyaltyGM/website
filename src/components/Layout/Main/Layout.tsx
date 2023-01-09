@@ -1,8 +1,8 @@
 import * as React from "react";
 import classNames from "classnames";
-import Header from "./Header";
-import Footer from "./Footer";
-import HeadInfo from "./HeadInfo";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import HeadInfo from "../Header/HeadInfo";
 import { ILayoutProps } from "interfaces";
 
 export default function Layout({
