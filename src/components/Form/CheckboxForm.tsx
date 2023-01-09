@@ -3,7 +3,7 @@ import { Group, GroupLabel } from "ariakit/group";
 import { ICheckboxProps } from "interfaces";
 import Image, { StaticImageData } from "next/image";
 
-export function CheckboxGroup({
+export function CheckboxForm({
     label,
     description,
     values,

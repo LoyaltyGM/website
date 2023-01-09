@@ -1,19 +1,7 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import classNames from "classnames";
-
-type TabsProps = {
-    tabs: {
-        label: string;
-        index: number;
-        Component: FC<{ index: number }>;
-    }[];
-    selectedTab: number;
-    onClick: (index: number) => void;
-    className?: string;
-    url?: any;
-    isLoaded?: boolean;
-};
+import { TabsProps } from "interfaces";
 
 /**
  * Avalible Props

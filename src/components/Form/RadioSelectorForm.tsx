@@ -2,7 +2,7 @@ import { IRadioSelector } from "interfaces";
 import classNames from "classnames";
 import React from "react";
 
-export const RadioSelector = ({ name, labels, className, handleChange }: IRadioSelector) => {
+export const RadioSelectorForm = ({ name, labels, className, handleChange }: IRadioSelector) => {
     return (
         <>
             <div>

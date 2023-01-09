@@ -1,5 +1,11 @@
 import React, { useState, useCallback } from "react";
-import Layout, { Button, DragAndDropImage, InputSupplyOfNFT, InputText, InputTextArea } from "components";
+import Layout, {
+    SubmitButton,
+    DragAndDropImageForm,
+    InputSupplyForm,
+    InputTextForm,
+    InputTextAreaForm,
+} from "components";
 import { NextPage } from "next";
 import { JsonRpcProvider, Network } from "@mysten/sui.js";
 import { ICreateNFT } from "interfaces";
@@ -143,14 +149,14 @@ const CreateNFT: NextPage = () => {
                         <h1 className="text-highlighter">Create NFT Loyalty Reward Collection</h1>
                         <div className={"grid grid-cols-2"}>
                             <div className={"grid grid-flow-row"}>
-                                <InputText
+                                <InputTextForm
                                     label="Name"
                                     name="name"
                                     className={"max-w-2xl"}
                                     placeholder="Collection Name"
                                     handleChange={(event) => handleTextChange(event, setFormData)}
                                 />
-                                <InputTextArea
+                                <InputTextAreaForm
                                     label="Description"
                                     name="description"
                                     className={"max-w-2xl"}
@@ -158,7 +164,7 @@ const CreateNFT: NextPage = () => {
                                     maxLength={250}
                                     handleChange={(event) => handleTextChange(event, setFormData)}
                                 />
-                                <InputText
+                                <InputTextForm
                                     label="Symbol"
                                     name="symbol"
                                     placeholder="Short NFT name"
@@ -171,7 +177,7 @@ const CreateNFT: NextPage = () => {
                                     <span className="input-label">Collection Supply</span>
                                 </label>
                                 <div className="w-full">
-                                    <InputSupplyOfNFT
+                                    <InputSupplyForm
                                         key={chain}
                                         label={chain}
                                         name="numberOfNFT"
@@ -184,7 +190,7 @@ const CreateNFT: NextPage = () => {
                             </div>
                             <div className={"flex"}>
                                 <div className="divider divider-horizontal" />
-                                <DragAndDropImage
+                                <DragAndDropImageForm
                                     height={"h-full w-3/4"}
                                     label="Image"
                                     name="file"
@@ -193,18 +199,18 @@ const CreateNFT: NextPage = () => {
                             </div>
                         </div>
 
-                        <Button className="mt-5 w-2/3 self-center">Create Contract</Button>
+                        <SubmitButton className="mt-5 w-2/3 self-center">Create Contract</SubmitButton>
                         <div>NFT Object ID: {nftObjectId}</div>
                         <div>Collection Name: {collectionName}</div>
                     </form>
                 </section>
-                <Button
+                <SubmitButton
                     className="mt-5 w-2/3 bg-purple-500 self-center"
                     type="button"
                     onClick={() => mintButton(nftObjectId)}
                 >
                     Mint Button
-                </Button>
+                </SubmitButton>
 
                 {/* <CreateNftDialog formData={formData} activeStep={activeStep} dialog={confirmDialog} /> */}
             </Layout>

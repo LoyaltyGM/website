@@ -2,7 +2,7 @@ import React from "react";
 import { NextPage } from "next";
 import Link from "next/link";
 
-import Layout, { Button } from "components";
+import Layout, { SubmitButton } from "components";
 
 const Page404: NextPage = () => {
     return (
@@ -14,7 +14,9 @@ const Page404: NextPage = () => {
                         <h1 className="text-highlighter">{"We couldn't find this page :("}</h1>
                         <div className="flex items-center justify-center">
                             <Link href="/waitlist">
-                                <Button className="mt-10 lg:w-1/3 w-full h-14 main-button">Back to home</Button>
+                                <SubmitButton className="mt-10 lg:w-1/3 w-full h-14 main-button">
+                                    Back to home
+                                </SubmitButton>
                             </Link>
                         </div>
                     </div>

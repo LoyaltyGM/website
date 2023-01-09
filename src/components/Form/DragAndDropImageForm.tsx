@@ -7,7 +7,7 @@ import classNames from "classnames";
 
 const fileTypes = ["JPEG", "PNG", "JPG"];
 
-export const DragAndDropImage = ({
+export const DragAndDropImageForm = ({
     label,
     name,
     className,

@@ -95,3 +95,16 @@ export interface ICheckboxProps {
     enabledValues?: string[];
     handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
+
+export type TabsProps = {
+    tabs: {
+        label: string;
+        index: number;
+        Component: React.FC<{ index: number }>;
+    }[];
+    selectedTab: number;
+    onClick: (index: number) => void;
+    className?: string;
+    url?: any;
+    isLoaded?: boolean;
+};

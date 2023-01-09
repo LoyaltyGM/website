@@ -3,7 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import classNames from "classnames";
 import React from "react";
 
-export const InputAmount = ({
+export const InputAmountForm = ({
     name,
     label,
     labelTitle,
@@ -48,7 +48,7 @@ export const InputAmount = ({
     );
 };
 
-export const InputText = ({
+export const InputTextForm = ({
     name,
     label,
     labelTitle,
@@ -85,7 +85,7 @@ export const InputText = ({
     );
 };
 
-export const InputTextArea = ({
+export const InputTextAreaForm = ({
     name,
     label,
     labelTitle,
@@ -118,7 +118,7 @@ export const InputTextArea = ({
     );
 };
 
-export const InputSupplyOfNFT = ({
+export const InputSupplyForm = ({
     name,
     label,
     labelTitle,

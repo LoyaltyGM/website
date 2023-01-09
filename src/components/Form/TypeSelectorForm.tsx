@@ -4,7 +4,7 @@ import React from "react";
 
 const types = ["Member", "Design", "VC"];
 
-export const TypeSelector = ({ name, label, className, handleChange }: ISelectorProps) => {
+export const TypeSelectorForm = ({ name, label, className, handleChange }: ISelectorProps) => {
     const select = useSelectState({
         defaultValue: "Member",
         setValueOnMove: true,

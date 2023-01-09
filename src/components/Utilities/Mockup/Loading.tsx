@@ -1,4 +1,3 @@
-import { BlockchainIcon } from "components";
 import * as React from "react";
 
 const getLoadingStrings = (amount: number) => {
@@ -84,7 +83,7 @@ export const MockupLoadingProposals = ({ chain }: { chain: number | string }) =>
                 </div>
                 <div className="flex pt-4 justify-between">
                     <div className="h-2.5 w-14 bg-base-200 rounded"></div>
-                    <BlockchainIcon chain={chain} />
+                    {/* <BlockchainIcon chain={chain} /> */}
                 </div>
             </div>
         </div>
@@ -117,7 +116,7 @@ export const MockupLoadingNFT = ({ chain }: { chain: number | string }) => {
                     </div>
                     <div className="ml-3 flex gap-2">
                         <p className="text-sm font-normal animate-pulse bg-base-200 text-base-content/50">000</p>
-                        <BlockchainIcon chain={chain} />
+                        {/* <BlockchainIcon chain={chain} /> */}
                     </div>
                 </div>
             </div>

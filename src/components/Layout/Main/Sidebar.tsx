@@ -4,12 +4,9 @@ import { Bars3Icon, CalendarIcon, HomeIcon, XMarkIcon } from "@heroicons/react/2
 import Logo from "../Header/Logo";
 import { ConnectButton } from "@suiet/wallet-kit";
 import HeadInfo from "../Header/HeadInfo";
+import classNames from "classnames";
 
 const navigation = [{ name: "All Companies", href: "#", icon: HomeIcon, current: true }];
-
-function classNames(...classes: any[]) {
-    return classes.filter(Boolean).join(" ");
-}
 
 export default function Sidebar({ children }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
