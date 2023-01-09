@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Bars3Icon, CalendarIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../Header/Logo";
 import { ConnectButton } from "@suiet/wallet-kit";
+import HeadInfo from "../Header/HeadInfo";
 
 const navigation = [{ name: "All Companies", href: "#", icon: HomeIcon, current: true }];
 
@@ -177,15 +178,8 @@ export default function Sidebar({ children }) {
 
     return (
         <>
-            {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
             <div>
+                <HeadInfo />
                 <Transition.Root show={sidebarOpen} as={Fragment}>
                     <Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
                         <TransparentBlackout />
