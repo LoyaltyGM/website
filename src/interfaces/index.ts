@@ -1,2 +1,2 @@
-export * from "./pages";
-export * from "./pageQueries";
+export * from "./pagesInterfaces";
+export * from "./pageQueriesInterfaces";
