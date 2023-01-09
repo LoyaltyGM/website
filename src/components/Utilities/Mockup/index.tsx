@@ -1,2 +1,1 @@
-export { MockupTextCard } from "./TextCard";
-export * from "./Loading";
+export * from "./LoadingMockup";

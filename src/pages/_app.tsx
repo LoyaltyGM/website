@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { CustomToast } from "components";
 import Script from "next/script";
 import { AppProps } from "next/app";
 import "assets/styles/globals.css";
-import { useBoolean, useDarkMode } from "usehooks-ts";
-import { DARK_THEME, LIGHT_THEME } from "utils";
-import { EthosConnectProvider } from "ethos-connect";
+import { LIGHT_THEME } from "utils";
 import { WalletProvider } from "@suiet/wallet-kit";
 import "@suiet/wallet-kit/style.css";
 import "assets/styles/suiet-wallet-kit-custom.css";

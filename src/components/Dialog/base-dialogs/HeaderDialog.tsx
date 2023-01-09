@@ -1,7 +1,7 @@
 import { DialogHeading } from "ariakit";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-export const DialogHeader = ({ title, dialog }) => {
+export const HeaderDialog = ({ title, dialog }) => {
     return (
         <DialogHeading className="text-base font-medium leading-6 text-neutral">
             <span>{title}</span>

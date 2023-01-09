@@ -1,3 +1,3 @@
 export * from "./Icons";
 export * from "./Mockup";
-export * from "./Toast/CustomToast";
+export * from "./Alert/CustomToast";
