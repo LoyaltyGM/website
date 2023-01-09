@@ -1,11 +1,7 @@
-import { DisclosureState } from "ariakit";
 // import { errors } from "ethers";
 import toast from "react-hot-toast";
+import { IErrorHandlerOptions } from "interfaces";
 
-interface IErrorHandlerOptions {
-    dialog?: DisclosureState;
-    hideToast?: boolean;
-}
 
 export const handleContractError = (error, option?: IErrorHandlerOptions) => {
     let message: string;

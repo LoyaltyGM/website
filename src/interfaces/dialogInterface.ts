@@ -8,6 +8,11 @@ export interface ICustomDialogProps {
     className?: string;
 }
 
+export interface IErrorHandlerOptions {
+    dialog?: DisclosureState;
+    hideToast?: boolean;
+}
+
 export interface ILoadingDialogProps {
     dialog: DisclosureState;
     title: string | React.ReactNode | null;

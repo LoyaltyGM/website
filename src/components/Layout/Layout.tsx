@@ -3,14 +3,7 @@ import classNames from "classnames";
 import Header from "./Header";
 import Footer from "./Footer";
 import HeadInfo from "./HeadInfo";
-
-interface ILayoutProps {
-    children: React.ReactNode;
-    className?: string;
-    isMinHeightTurnOff?: boolean;
-    headerBackground?: string;
-    footer?: boolean;
-}
+import { ILayoutProps } from "interfaces";
 
 export default function Layout({
     children,

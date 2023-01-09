@@ -1,5 +1,4 @@
 import * as React from "react";
-import { DisclosureState } from "ariakit";
 import { Dialog } from "ariakit/dialog";
 import classNames from "classnames";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";

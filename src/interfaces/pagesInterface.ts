@@ -1,5 +1,13 @@
 import React from "react";
 
+export interface ILayoutProps {
+    children: React.ReactNode;
+    className?: string;
+    isMinHeightTurnOff?: boolean;
+    headerBackground?: string;
+    footer?: boolean;
+}
+
 export interface ICreate {
     name: string;
     description?: string;
