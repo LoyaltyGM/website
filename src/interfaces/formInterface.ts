@@ -16,7 +16,7 @@ export interface ITextInputProps {
     maxLength?: number;
     pattern?: string;
 }
-
+// TODO: DELETE USELESS PROPS
 export interface IAmountInputProps {
     name: string;
     label?: string;

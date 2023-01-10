@@ -21,7 +21,7 @@ export interface ICreateCompany extends ICreate {
     website?: string;
     
 }
-
+// TODO: DELETE USELESS PROPS
 export interface ICreateNFT extends ICreate {
     governorUrl?: string;
     file: object;

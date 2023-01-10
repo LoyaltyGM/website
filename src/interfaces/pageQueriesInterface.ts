@@ -16,7 +16,7 @@ export interface ILoyaltyPageProps {
     url: string;
 }
 
-// TODO:
+// TODO: DELETE USELESS PROPS
 export interface IDetailProposalQuery extends ParsedUrlQuery {
     url: string;
     detailProposal: string;
