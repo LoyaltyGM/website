@@ -9,7 +9,7 @@ import { TabsProps } from "interfaces";
  * @param selectedTab number
  * @param onClick Function to set the active tab
  */
-export const Tabs: FC<TabsProps> = ({ tabs = [], selectedTab = 0, onClick, url, isLoaded }) => {
+export const Tabs: FC<TabsProps> = ({ tabs = [], selectedTab = 0, onClick, isLoaded }) => {
     const Panel = tabs && tabs.find((tab) => tab.index === selectedTab);
     return (
         <div>

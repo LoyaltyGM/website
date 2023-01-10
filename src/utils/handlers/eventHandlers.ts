@@ -101,7 +101,7 @@ export const handleSelectorChange = <T extends ICreate>(
     return true;
 };
 
-export const handleDaoNameUrlChange = <T extends ICreate, E extends HTMLInputElement | HTMLTextAreaElement>(
+export const handleNameUrlChange = <T extends ICreate, E extends HTMLInputElement | HTMLTextAreaElement>(
     event: ChangeEvent<E>,
     set: Dispatch<SetStateAction<T>>,
     field: string

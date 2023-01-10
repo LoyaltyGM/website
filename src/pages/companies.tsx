@@ -36,8 +36,8 @@ const Companies = () => {
         <Sidebar>
             <BackButton className="text-white mb-2" />
             {/* <CompaniesHeader /> */}
-            <section className="dao app-section pt-24 flex h-full flex-1 flex-col gap-[50px]">
-                <div className="dao-header flex flex-col md:flex-row items-center -mt-10">
+            <section className="app-section pt-24 flex h-full flex-1 flex-col gap-[50px]">
+                <div className="flex flex-col md:flex-row items-center -mt-10">
                     <div className="avatar">
                         <div className="w-32 rounded-full">
                             <Image src={ASSETS.suietLogo} height={"175px"} width={"175px"} className="rounded-full" />
@@ -45,8 +45,8 @@ const Companies = () => {
                     </div>
                     <div className={"info flex flex-col w-full gap-8 md:ml-6"}>
                         <div className={"info-row-1 flex flex-col md:flex-row justify-between items-center"}>
-                            <div className={"dao-name"}>
-                                <p className="dao-label capitalize text-white">Suiet Loyalty Card</p>
+                            <div className={"project-title"}>
+                                <p className="capitalize text-white">Suiet Loyalty Card</p>
                             </div>
                             <div className={"member-button"}>
                                 <button className={"main-button"}>Become a member</button>

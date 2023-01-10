@@ -1,17 +1,22 @@
 import { ParsedUrlQuery } from "querystring";
+// The query-string library is a small utility for parsing and stringifying 
+// query strings. When working with React and TypeScript, you may find that 
+// you need to parse the query string of the current URL to extract certain values 
+// or parameters. The query-string library provides an easy way to do this.
 
 export interface IQuery {
     url: string;
 }
 
-export interface IDaoQuery extends ParsedUrlQuery {
+export interface ILoyaltyQuery extends ParsedUrlQuery {
     url: string;
 }
 
-export interface IDAOPageProps {
+export interface ILoyaltyPageProps {
     url: string;
 }
 
+// TODO:
 export interface IDetailProposalQuery extends ParsedUrlQuery {
     url: string;
     detailProposal: string;
@@ -21,12 +26,6 @@ export interface IDetailProposalProps {
     detailProposal: string;
 }
 
-export interface IChatsQuery extends ParsedUrlQuery {
-    url: string;
-    governorAddress: string;
-    chainId: string;
-}
-
 export interface IProposalsQuery extends ParsedUrlQuery {
     governorAddress: string;
     chainId: string;
@@ -34,26 +33,9 @@ export interface IProposalsQuery extends ParsedUrlQuery {
 }
 
 export interface IAddMemberQuery extends ParsedUrlQuery {
-    governorAddress: string;
-    chainId: string;
+    companyAddress: string;
     url: string;
-    blockchains: string[];
 }
 
-export interface IAddNftQuery extends ParsedUrlQuery {
-    url: string;
-    governorAddress: string;
-    blockchain: string;
-}
 
-export interface ICreateProposalQuery extends ParsedUrlQuery {
-    governorAddress: string;
-    url: string;
-    blockchains: string[];
-    chainId: string;
-}
 
-export interface ICreateDaoQuery extends ParsedUrlQuery {
-    tokenAddress: string;
-    enabledBlockchains: string[];
-}

@@ -13,6 +13,15 @@ export interface ICreate {
     description?: string;
 }
 
+export interface ICreateCompany extends ICreate {
+    logo: object;
+    twitter?: string;
+    discord?: string;
+    telegram?: string;
+    website?: string;
+    
+}
+
 export interface ICreateNFT extends ICreate {
     governorUrl?: string;
     file: object;

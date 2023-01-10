@@ -1,6 +1,9 @@
 import toast, { ToastBar, Toaster } from "react-hot-toast";
 import React from "react";
-
+/**
+ * Beautiful notifications to your React app
+ * @Docs https://react-hot-toast.com/docs/toast-bar
+ */
 export const CustomToast = () => {
     return (
         <Toaster>

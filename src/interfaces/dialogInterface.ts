@@ -18,13 +18,6 @@ export interface IErrorHandlerOptions {
     hideToast?: boolean;
 }
 
-export interface ILoadingDialogProps {
-    dialog: DisclosureState;
-    title: string | React.ReactNode | null;
-    children: React.ReactNode;
-    className?: string;
-}
-
 export interface IStepperDialogProps {
     dialog: DisclosureState;
     activeStep: number;
@@ -32,11 +25,4 @@ export interface IStepperDialogProps {
     className?: string;
     steps?: { label: string; description: string }[];
     isClose?: boolean;
-}
-
-export interface ITextDialogProps {
-    dialog: DisclosureState;
-    title?: string;
-    children?: any;
-    className?: string;
 }

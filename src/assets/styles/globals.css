@@ -12,7 +12,7 @@
 
     html,
     body {
-        @apply bg-[#0F1114] text-base-content h-full;
+        @apply bg-[#0F1114] text-white h-full;
     }
 
     .font-exo {
@@ -39,7 +39,7 @@
     }
 
     .header {
-        @apply flex top-0 z-50 h-16 fixed w-full bg-[#1C1D25] items-center justify-between gap-10 text-base-content;
+        @apply flex top-0 z-50 h-16 fixed w-full bg-[#1C1D25] items-center justify-between gap-10 text-white;
         padding-inline: clamp(0.5rem, 2.5vw, 2rem);
         padding-block: clamp(1rem, 2.5vh, 2rem);
     }
@@ -101,7 +101,7 @@
 
     /* TEXT */
     .text-highlighter {
-        @apply font-bold my-2 lg:text-5xl text-3xl text-base-content;
+        @apply font-bold my-2 text-white lg:text-5xl text-3xl;
     }
 
     .fredoka-font {
@@ -109,15 +109,15 @@
     }
 
     .sub-text {
-        @apply font-normal my-2 lg:text-4xl text-2xl text-base-content;
+        @apply font-normal my-2 lg:text-4xl text-2xl text-white;
     }
 
     .input-label {
-        @apply label-text text-base;
+        @apply label-text text-base text-white;
     }
 
-    .dao-label {
-        @apply font-normal text-base-content lg:text-5xl md:text-4xl text-2xl;
+    .project-title {
+        @apply font-normal text-white lg:text-5xl md:text-4xl text-2xl;
     }
 
     /* NFT CARDS */
