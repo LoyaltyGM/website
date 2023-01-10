@@ -1,4 +1,3 @@
-import React from "react";
 import classNames from "classnames";
 
 export const TwitterIcon = ({ width = "23", height = "20", className = "" }) => {

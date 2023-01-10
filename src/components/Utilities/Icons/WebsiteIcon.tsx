@@ -1,5 +1,3 @@
-import React from "react";
-
 export const WebsiteIcon = ({ width = "22", height = "21" }) => {
     return (
         <svg

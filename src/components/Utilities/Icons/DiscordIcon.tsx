@@ -1,5 +1,3 @@
-import React from "react";
-
 export const DiscordIcon = ({ width = "21", height = "17" }) => {
     return (
         <svg
