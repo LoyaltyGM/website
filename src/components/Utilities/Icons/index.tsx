@@ -5,3 +5,4 @@ export * from "./DiscordIcon";
 export * from "./ArrowUpRightIcon";
 export * from "./SunIcon";
 export * from "./MoonIcon";
+export * from "./SpinnerLoadingIcon";

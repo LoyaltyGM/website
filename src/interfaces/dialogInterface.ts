@@ -1,5 +1,10 @@
 import { DisclosureState } from "ariakit";
 
+export interface IHeaderDialogProps {
+    title: string;
+    dialog: DisclosureState;
+}
+
 export interface ICustomDialogProps {
     dialog: DisclosureState;
     children?: React.ReactNode;
