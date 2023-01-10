@@ -1,6 +1,21 @@
 import React from "react";
 import { motion, Transition } from "framer-motion";
 
+/**
+ * Button with framer-motion animation of circle loading
+ *
+ * @returns JSX.Element - button
+ *
+ * */
+export default function CircleLoaderButton() {
+    return (
+        <div className="relative w-[2.0rem] h-[2.0rem] box-border">
+            <motion.span style={circleStyle} animate={{ rotate: 360 }} transition={spinTransition} />
+        </div>
+    );
+}
+// we use here object style instead of tailwind classes
+// because motion.span doesn't support tailwind classes
 const circleStyle: Object = {
     display: "block",
     width: "2.0rem",
@@ -14,17 +29,10 @@ const circleStyle: Object = {
     left: 0,
 };
 
+// animation of circle
 const spinTransition: Transition = {
     repeatType: "loop",
     repeat: Infinity,
     ease: "linear",
     duration: 1,
 };
-
-export default function CircleLoaderButton() {
-    return (
-        <div className="relative w-[2.0rem] h-[2.0rem] box-border">
-            <motion.span style={circleStyle} animate={{ rotate: 360 }} transition={spinTransition} />
-        </div>
-    );
-}

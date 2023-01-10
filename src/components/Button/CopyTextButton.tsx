@@ -1,11 +1,22 @@
+import React from "react";
 import { formatAddress } from "utils";
 import { CheckIcon, ClipboardIcon } from "@heroicons/react/24/outline";
-import React from "react";
 import { useBoolean, useCopyToClipboard } from "usehooks-ts";
 
+/**
+ * Button which copy text to clipboard
+ *
+ * @param copyText - text to copy
+ * @param color - color of button
+ *
+ * @returns JSX.Element - button
+ *
+ * */
 export const CopyTextButton = ({ copyText, color }) => {
     const { value: isCopied, setTrue, setFalse } = useBoolean();
     const [, copy] = useCopyToClipboard();
+
+    const timeToReturnIconBack = 1000; // 1 second
 
     const handleClick = () => {
         setTrue();
@@ -13,7 +24,7 @@ export const CopyTextButton = ({ copyText, color }) => {
 
         setTimeout(() => {
             setFalse();
-        }, 500);
+        }, timeToReturnIconBack);
     };
 
     return (

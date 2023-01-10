@@ -3,7 +3,15 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import { IBackButtonProps } from "interfaces";
 
-export const BackButton = ({ className }: IBackButtonProps) => {
+/**
+ * Button which return to previous page
+ *
+ * @param className - change style of button
+ *
+ * @returns JSX.Element - button
+ *
+ */
+export const BackButton = ({ className }: IBackButtonProps): JSX.Element => {
     const router = useRouter();
     return (
         <button type="button" className={"flex items-center gap-1 " + className} onClick={router.back}>
