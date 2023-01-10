@@ -80,7 +80,7 @@ export const DragAndDropImageForm = ({
                                     <div>
                                         <Image src={ASSETS.imageIcon} width={"50"} height={"50"} />
                                     </div>
-                                    <p className="text-base-content/50 mt-6 text-sm px-4">
+                                    <p className="text-white/95 mt-6 text-sm px-4">
                                         PNG, JPEG and JPG accept. Max 1mb.
                                     </p>
                                 </div>
